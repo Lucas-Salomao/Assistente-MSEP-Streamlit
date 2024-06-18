@@ -1,5 +1,5 @@
 import os
-from PyPDF2 import PdfReader
+import PyPDF2
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import streamlit as st
@@ -21,7 +21,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def get_pdf_text(pdf_docs):
     text = ""
     for pdf in pdf_docs:
-        pdf_reader = PdfReader(pdf)
+        pdf_reader = PyPDF2.PdfReader(pdf)
         for page in pdf_reader.pages:
             text += page.extract_text()
     return text
@@ -103,8 +103,17 @@ def main():
         if st.button("Enviar & Processar"):
             with st.spinner("Processando..."):
                 raw_text = get_pdf_text(pdf_docs)
-                text_chunks = get_text_chunks(raw_text)
-                get_vector_store(text_chunks)
+                print(raw_text)
+
+
+                # Abrindo o arquivo no modo de escrita ("w")
+                with open("meu_arquivo.txt", "w") as arquivo:
+                # Escrevendo o texto no arquivo
+                    arquivo.write(raw_text)
+
+
+                #text_chunks = get_text_chunks(raw_text)
+                #get_vector_store(text_chunks)
                 st.success("Concluído")
         if st.button("Gerar "+tipoDocumento):
             with st.spinner("Processando..."):

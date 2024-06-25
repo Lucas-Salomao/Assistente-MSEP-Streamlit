@@ -17,6 +17,15 @@ os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
+generation_config = {
+  "temperature": 1,
+  "top_p": 0.95,
+  "top_k": 64,
+  "max_output_tokens": 8192,
+  "response_mime_type": "text/plain",
+}
+
+
 # read all pdf files and return text
 def get_pdf_text(pdf_docs):
     text = ""
@@ -26,60 +35,7 @@ def get_pdf_text(pdf_docs):
             text += page.extract_text()
     return text
 
-# split text into chunks
 
-
-def get_text_chunks(text):
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=10000, chunk_overlap=1000)
-    chunks = splitter.split_text(text)
-    return chunks  # list of strings
-
-# get embeddings for each chunk
-
-def get_vector_store(chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001")  # type: ignore
-    vector_store = FAISS.from_texts(chunks, embedding=embeddings)
-    vector_store.save_local("faiss_index")
-
-def get_conversational_chain():
-    prompt_template = """
-    Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas e planos de aula\n\n
-    Context:\n {context}?\n
-    Question: \n{question}\n
-
-    Answer:
-    """
-
-    model = ChatGoogleGenerativeAI(model="gemini-pro",
-                                   client=genai,
-                                   temperature=0.9,
-                                   max_output_tokens=8192,
-                                   )
-    prompt = PromptTemplate(template=prompt_template,
-                            input_variables=["context", "question"])
-    chain = load_qa_chain(llm=model, chain_type="stuff", prompt=prompt)
-    return chain
-
-def clear_chat_history():
-    st.session_state.messages = [
-        {"role": "assistant", "content": "Faça o upload da MSEP e do Plano de Curso desejado"}]
-    
-def user_input(user_question):
-    embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001")  # type: ignore
-
-    new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True) 
-    docs = new_db.similarity_search(user_question)
-
-    chain = get_conversational_chain()
-
-    response = chain(
-        {"input_documents": docs, "question": user_question}, return_only_outputs=True, )
-
-    print(response)
-    return response
 
 def main():
     
@@ -122,7 +78,7 @@ def main():
     # Main content area for displaying chat messages
     st.title("Assistente MSEP")
     st.write("Bem vindo ao assistente do professor!")
-    st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)
+    #st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)
 
     # Chat input
     # Placeholder for chat messages

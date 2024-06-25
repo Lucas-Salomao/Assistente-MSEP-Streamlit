@@ -16,6 +16,8 @@ load_dotenv()
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
+docs_raw=''
+
 
 generation_config = {
   "temperature": 1,
@@ -25,6 +27,25 @@ generation_config = {
   "response_mime_type": "text/plain",
 }
 
+model = genai.GenerativeModel(
+  model_name="gemini-1.5-flash",
+  generation_config=generation_config,
+  # safety_settings = Adjust safety settings
+  # See https://ai.google.dev/gemini-api/docs/safety-settings
+  system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas e planos de aula",
+)
+
+chat_session = model.start_chat(
+  history=[
+  ]
+)
+
+
+
+def get_gemini_reponse(prompt,raw_text):
+    contexto=raw_text
+    response = chat_session.send_message(raw_text+prompt)
+    return response
 
 # read all pdf files and return text
 def get_pdf_text(pdf_docs):
@@ -38,7 +59,7 @@ def get_pdf_text(pdf_docs):
 
 
 def main():
-    
+    global docs_raw
     st.logo(LOGO_URL_LARGE, link=None, icon_image=None)
     st.set_page_config(
         page_title="Assistente MSEP",
@@ -59,6 +80,7 @@ def main():
         if st.button("Enviar & Processar"):
             with st.spinner("Processando..."):
                 raw_text = get_pdf_text(pdf_docs)
+                docs_raw=raw_text
                 print(raw_text)
 
 
@@ -95,18 +117,18 @@ def main():
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.write(prompt)
-
     # Display chat messages and bot response
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Pensando..."):
-                response = user_input(prompt)
+                response = get_gemini_reponse(prompt, docs_raw)
                 placeholder = st.empty()
-                full_response = ''
-                for item in response['output_text']:
-                    full_response += item
-                    placeholder.markdown(full_response)
-                placeholder.markdown(full_response)
+                print(response)
+                # full_response = ''
+                # for item in response['output_text']:
+                #     full_response += item
+                #     placeholder.markdown(full_response)
+                # placeholder.markdown(full_response)
         if response is not None:
             message = {"role": "assistant", "content": full_response}
             st.session_state.messages.append(message)

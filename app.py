@@ -1,7 +1,8 @@
-import os
 import PyPDF2
 import streamlit as st
 import google.generativeai as genai
+import pymupdf
+import fitz
 
 LOGO_VERMELHO='https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'
 LOGO_AZUL='https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'
@@ -45,6 +46,19 @@ def get_pdf_text(pdf_docs):
             text += page.extract_text()
     return text
 
+def get_pdf_text_v2(pdf_docs):
+    print(pdf_docs)
+    # if pdf_docs is not None:
+    # # Leia o arquivo PDF enviado
+    #     with open(pdf_docs, "rb") as f:
+    #         document = pymupdf.open(f)
+    #         print(document)
+    #         # Abrindo o arquivo no modo de escrita ("w")
+    #         with open("meu_arquivo.txt", "w") as arquivo:
+    #             # Escrevendo o texto no arquivo
+    #             arquivo.write(document)
+    # return document
+
 
 
 def main():
@@ -69,9 +83,9 @@ def main():
             qntSituacoesAprendizagem = st.number_input("Quantidade de estratégias de aprendizagem:",min_value=1)
         estrategiaAprendizagem = st.selectbox("Selecione a estratégia de aprendizagem", ("Situação-Problema", "Estudo de Caso", "Projeto Integrador", "Projetos","Pesquisa Aplicada"))
         pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar", type='.pdf',accept_multiple_files=True,help='Faça o upload da MSEP e de um plano de curso que deseja elaborar os documentos de prática docente.')
-        if st.button("Enviar & Processar"):
+        if st.button("Processar documentos"):
             with st.spinner("Processando..."):
-                raw_text = get_pdf_text(pdf_docs)
+                raw_text = get_pdf_text_v2(pdf_docs)
                 docs_raw=raw_text
                 print(raw_text)
 
@@ -84,7 +98,12 @@ def main():
                 st.success("Concluído")
         if st.button("Gerar "+tipoDocumento):
             with st.spinner("Processando..."):
-                 st.success("Concluído")
+                # if(tipoDocumento=='Plano de Aula'):
+
+                # if(tipoDocumento=='Plano de Aula'):
+                # if(tipoDocumento=='Plano de Aula'):
+                
+                st.success("Concluído")
 
     # Main content area for displaying chat messages
     st.title("Assistente MSEP")

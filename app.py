@@ -1,23 +1,12 @@
 import os
 import PyPDF2
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import streamlit as st
 import google.generativeai as genai
-from langchain.vectorstores import FAISS
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.chains.question_answering import load_qa_chain
-from langchain.prompts import PromptTemplate
-from dotenv import load_dotenv
 
-LOGO_URL_LARGE='https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'
-
-load_dotenv()
-os.getenv("GOOGLE_API_KEY")
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+LOGO_VERMELHO='https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'
+LOGO_AZUL='https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'
 
 docs_raw=''
-
 
 generation_config = {
   "temperature": 1,
@@ -28,7 +17,7 @@ generation_config = {
 }
 
 model = genai.GenerativeModel(
-  model_name="gemini-1.5-flash",
+  model_name="gemini-1.5-pro",
   generation_config=generation_config,
   # safety_settings = Adjust safety settings
   # See https://ai.google.dev/gemini-api/docs/safety-settings
@@ -45,7 +34,7 @@ chat_session = model.start_chat(
 def get_gemini_reponse(prompt,raw_text):
     contexto=raw_text
     response = chat_session.send_message(raw_text+prompt)
-    return response
+    return response.text
 
 # read all pdf files and return text
 def get_pdf_text(pdf_docs):
@@ -60,23 +49,26 @@ def get_pdf_text(pdf_docs):
 
 def main():
     global docs_raw
-    st.logo(LOGO_URL_LARGE, link=None, icon_image=None)
+    st.logo(LOGO_AZUL, link=None, icon_image=None)
+    
     st.set_page_config(
         page_title="Assistente MSEP",
         page_icon="🤖",
+        menu_items={'Get Help': 'https://www.extremelycoolapp.com/help','Report a bug': "mailto:lucas.salomao@gmail.com",'About': "SENAI São Paulo - Gerência de Educação\n\nSupervisão de Tecnologias Educacionais - Guilherme Dias\n\nCriado por Lucas Salomão"}
     )
 
     # Sidebar for uploading PDF files
-    st.image(LOGO_URL_LARGE)
+    st.image(LOGO_AZUL,width=200)
     with st.sidebar:
         st.title("Menu:")
+        apiKeyGoogleAiStudio = st.text_input("Chave API Google AI Studio:", "",type='password')
         nomeCurso = st.text_input("Nome do Curso:", "")
         nomeUC = st.text_input("Nome da Unidade Curricular:", "")
         tipoDocumento = st.selectbox("Selecione o tipo de documento", ("Plano de Ensino", "Cronograma", "Plano de Aula"))
         if(tipoDocumento=='Plano de Ensino'):   
             qntSituacoesAprendizagem = st.number_input("Quantidade de estratégias de aprendizagem:",min_value=1)
         estrategiaAprendizagem = st.selectbox("Selecione a estratégia de aprendizagem", ("Situação-Problema", "Estudo de Caso", "Projeto Integrador", "Projetos","Pesquisa Aplicada"))
-        pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar", type='.pdf',accept_multiple_files=True)
+        pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar", type='.pdf',accept_multiple_files=True,help='Faça o upload da MSEP e de um plano de curso que deseja elaborar os documentos de prática docente.')
         if st.button("Enviar & Processar"):
             with st.spinner("Processando..."):
                 raw_text = get_pdf_text(pdf_docs)
@@ -89,9 +81,6 @@ def main():
                 # Escrevendo o texto no arquivo
                     arquivo.write(raw_text)
 
-
-                #text_chunks = get_text_chunks(raw_text)
-                #get_vector_store(text_chunks)
                 st.success("Concluído")
         if st.button("Gerar "+tipoDocumento):
             with st.spinner("Processando..."):
@@ -113,7 +102,8 @@ def main():
         with st.chat_message(message["role"]):
             st.write(message["content"])
 
-    if prompt := st.chat_input():
+    if prompt := st.chat_input(placeholder=''):
+        genai.configure(api_key=apiKeyGoogleAiStudio)
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.write(prompt)
@@ -123,14 +113,24 @@ def main():
             with st.spinner("Pensando..."):
                 response = get_gemini_reponse(prompt, docs_raw)
                 placeholder = st.empty()
-                print(response)
+                placeholder.markdown(response)
+
+                #print(response)
+
+                # # Abrindo o arquivo no modo de escrita ("w")
+                # with open("response.txt", "w") as arquivo:
+                # # Escrevendo o texto no arquivo
+                #     arquivo.write(response)
+
+
                 # full_response = ''
                 # for item in response['output_text']:
                 #     full_response += item
                 #     placeholder.markdown(full_response)
                 # placeholder.markdown(full_response)
+
         if response is not None:
-            message = {"role": "assistant", "content": full_response}
+            message = {"role": "assistant", "content": response}
             st.session_state.messages.append(message)
 
 if __name__ == "__main__":

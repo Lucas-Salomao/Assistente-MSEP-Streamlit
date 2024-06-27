@@ -47,19 +47,15 @@ def get_pdf_text(pdf_docs):
     return text
 
 def get_pdf_text_v2(pdf_docs):
-    print(pdf_docs)
-    # if pdf_docs is not None:
-    # # Leia o arquivo PDF enviado
-    #     with open(pdf_docs, "rb") as f:
-    #         document = pymupdf.open(f)
-    #         print(document)
-    #         # Abrindo o arquivo no modo de escrita ("w")
-    #         with open("meu_arquivo.txt", "w") as arquivo:
-    #             # Escrevendo o texto no arquivo
-    #             arquivo.write(document)
-    # return document
 
-
+    text = ""
+    for pdf in pdf_docs:
+        pdf_bytes = pdf.getvalue()
+        # Open the PDF with PyMuPDF (fitz) using the bytes
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+        for page in doc:
+            text += page.get_text()
+    return text
 
 def main():
     global docs_raw
@@ -87,7 +83,7 @@ def main():
             with st.spinner("Processando..."):
                 raw_text = get_pdf_text_v2(pdf_docs)
                 docs_raw=raw_text
-                print(raw_text)
+                #print(raw_text)
 
 
                 # Abrindo o arquivo no modo de escrita ("w")

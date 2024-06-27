@@ -7,8 +7,6 @@ import fitz
 LOGO_VERMELHO='https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'
 LOGO_AZUL='https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'
 
-docs_raw=''
-
 generation_config = {
   "temperature": 1,
   "top_p": 0.95,
@@ -18,19 +16,24 @@ generation_config = {
 }
 
 model = genai.GenerativeModel(
-  model_name="gemini-1.5-pro",
+  model_name="gemini-1.5-flash",
   generation_config=generation_config,
   # safety_settings = Adjust safety settings
   # See https://ai.google.dev/gemini-api/docs/safety-settings
   system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas e planos de aula",
 )
 
+def getTokens(prompt):
+    return model.count_tokens(prompt)
+
 chat_session = model.start_chat(
   history=[
   ]
 )
 
-
+def clear_chat_history():
+    st.session_state.messages = [
+        {"role": "assistant", "content": "Faça o upload da MSEP e do Plano de Curso desejado"}]
 
 def get_gemini_reponse(prompt,raw_text):
     contexto=raw_text
@@ -58,7 +61,9 @@ def get_pdf_text_v2(pdf_docs):
     return text
 
 def main():
-    global docs_raw
+    if 'docs_raw' not in st.session_state:
+        st.session_state.docs_raw = ''
+
     st.logo(LOGO_AZUL, link=None, icon_image=None)
     
     st.set_page_config(
@@ -81,15 +86,12 @@ def main():
         pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar", type='.pdf',accept_multiple_files=True,help='Faça o upload da MSEP e de um plano de curso que deseja elaborar os documentos de prática docente.')
         if st.button("Processar documentos"):
             with st.spinner("Processando..."):
-                raw_text = get_pdf_text_v2(pdf_docs)
-                docs_raw=raw_text
-                #print(raw_text)
-
+                st.session_state.docs_raw = get_pdf_text(pdf_docs)
 
                 # Abrindo o arquivo no modo de escrita ("w")
-                with open("meu_arquivo.txt", "w") as arquivo:
+                with open("meu_arquivo.txt", "w",encoding="utf-8") as arquivo:
                 # Escrevendo o texto no arquivo
-                    arquivo.write(raw_text)
+                    arquivo.write(st.session_state.docs_raw)
 
                 st.success("Concluído")
         if st.button("Gerar "+tipoDocumento):
@@ -104,7 +106,7 @@ def main():
     # Main content area for displaying chat messages
     st.title("Assistente MSEP")
     st.write("Bem vindo ao assistente do professor!")
-    #st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)
+    st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)
 
     # Chat input
     # Placeholder for chat messages
@@ -122,27 +124,20 @@ def main():
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.write(prompt)
+            st.write(getTokens(prompt+st.session_state.docs_raw))
     # Display chat messages and bot response
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Pensando..."):
-                response = get_gemini_reponse(prompt, docs_raw)
+                
+                response = get_gemini_reponse(prompt, st.session_state.docs_raw)
                 placeholder = st.empty()
                 placeholder.markdown(response)
 
-                #print(response)
-
-                # # Abrindo o arquivo no modo de escrita ("w")
-                # with open("response.txt", "w") as arquivo:
-                # # Escrevendo o texto no arquivo
-                #     arquivo.write(response)
-
-
-                # full_response = ''
-                # for item in response['output_text']:
-                #     full_response += item
-                #     placeholder.markdown(full_response)
-                # placeholder.markdown(full_response)
+                # Abrindo o arquivo no modo de escrita ("w")
+                with open("response.txt", "w",encoding="utf-8") as arquivo:
+                # Escrevendo o texto no arquivo
+                    arquivo.write(response)
 
         if response is not None:
             message = {"role": "assistant", "content": response}

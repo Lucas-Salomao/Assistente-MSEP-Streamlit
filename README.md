@@ -3,7 +3,7 @@
 Este projeto desenvolve um assistente virtual para professores do SENAI São Paulo, que utiliza a metodologia MSEP (Metodologia Senai de Educação Profissional) para auxiliar na criação de documentos pedagógicos.
 
 <p align="center">
-  <img src="../diagram/home_screen.png" alt="Tela Inicial">
+  <img src="./diagram/home_screen.png" alt="Tela Inicial">
 </p>
 
 **Objetivo:**

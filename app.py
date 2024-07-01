@@ -130,31 +130,33 @@ def main():
     st.set_page_config(
         page_title="Assistente Virtual MSEP - Metodologia Senai de Educação Profissional",  # Define o título da página
         page_icon="🤖",  # Define o ícone da página
-        menu_items={'Get Help': 'https://www.extremelycoolapp.com/help',  # Define os itens do menu
-                   'Report a bug': "mailto:lucas.salomao@gmail.com",
+        menu_items={'Get Help': 'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D',  # Define os itens do menu
+                   'Report a bug': "https://forms.office.com/r/xLD92jjss7",
                    'About': "SENAI São Paulo - Gerência de Educação\n\nSupervisão de Tecnologias Educacionais - Guilherme Dias\n\nCriado por Lucas Salomão"}
     )
 
     # Sidebar for uploading PDF files
     st.image(LOGO_AZUL, width=200)  # Exibe o logotipo azul na sidebar
     with st.sidebar:
+        # if (st.button("Ajuda?",href='hhhts:google.com'))
+        st.link_button("Ajuda?",'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D')
         st.title("Menu:")
-        apiKeyGoogleAiStudio = st.text_input("Chave API Google AI Studio:", "", type='password')  # Campo de entrada para a chave API
+        apiKeyGoogleAiStudio = st.text_input("Chave de API Google AI Studio:", "", type='password')  # Campo de entrada para a chave API
         nomeCurso = st.text_input("Nome do Curso:", "")  # Campo de entrada para o nome do curso
         nomeUC = st.text_input("Nome da Unidade Curricular:", "")  # Campo de entrada para o nome da unidade curricular
         tipoDocumento = st.selectbox("Selecione o tipo de documento", ("Plano de Ensino", "Cronograma", "Plano de Aula"))  # Menu dropdown para selecionar o tipo de documento
         if(tipoDocumento=='Plano de Ensino'):
-            qntSituacoesAprendizagem = st.number_input("Quantidade de estratégias de aprendizagem:", min_value=1)  # Campo de entrada numérico para a quantidade de estratégias de aprendizagem
+            qntSituacoesAprendizagem = st.number_input("Quantidade de situações de aprendizagem:", min_value=1)  # Campo de entrada numérico para a quantidade de estratégias de aprendizagem
             estrategiaAprendizagem = st.selectbox("Selecione a estratégia de aprendizagem", ("Situação-Problema", "Estudo de Caso", "Projeto Integrador", "Projetos","Pesquisa Aplicada"))  # Menu dropdown para selecionar a estratégia de aprendizagem
         pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar", type='.pdf', accept_multiple_files=True, help='Faça o upload da MSEP e de um plano de curso que deseja elaborar os documentos de prática docente.')  # Carregador de arquivos PDF
         if st.button("Processar documentos"):
             with st.spinner("Processando..."):
                 st.session_state.docs_raw = get_pdf_text(pdf_docs)  # Lê o texto dos arquivos PDF e armazena na sessão
 
-                # Abrindo o arquivo no modo de escrita ("w")
-                with open("meu_arquivo.txt", "w", encoding="utf-8") as arquivo:
-                    # Escrevendo o texto no arquivo
-                    arquivo.write(st.session_state.docs_raw)
+                # # Abrindo o arquivo no modo de escrita ("w")
+                # with open("meu_arquivo.txt", "w", encoding="utf-8") as arquivo:
+                #     # Escrevendo o texto no arquivo
+                #     arquivo.write(st.session_state.docs_raw)
 
                 st.success("Concluído")  # Exibe uma mensagem de sucesso
 
@@ -162,6 +164,7 @@ def main():
     st.title("Assistente Virtual MSEP - Metodologia Senai de Educação Profissional")  # Título da página
     st.write("Bem vindo ao assistente virtual do professor para auxiliar a elaboração de documentos da prática pedagógica de acordo com a MSEP!")  # Mensagem de boas-vindas
     st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)  # Botão para limpar o histórico do chat
+    st.sidebar.link_button("Reportar Bug",'https://forms.office.com/r/xLD92jjss7')
 
     # Chat input
     # Placeholder for chat messages
@@ -191,9 +194,9 @@ def main():
                 placeholder.markdown(response)  # Exibe a resposta no placeholder
 
                 # Abrindo o arquivo no modo de escrita ("w")
-                with open("response.txt", "w", encoding="utf-8") as arquivo:
+                #with open("response.txt", "w", encoding="utf-8") as arquivo:
                     # Escrevendo o texto no arquivo
-                    arquivo.write(response)
+                    #arquivo.write(response)
 
         if response is not None:
             message = {"role": "assistant", "content": response}

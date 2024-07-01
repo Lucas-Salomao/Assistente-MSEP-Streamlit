@@ -23,6 +23,15 @@ model = genai.GenerativeModel(
   system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas e planos de aula",
 )
 
+def ler_arquivo_txt(nome_do_arquivo):
+  try:
+    with open(nome_do_arquivo, 'r',encoding="utf-8") as arquivo:
+      conteudo = arquivo.read()
+      return conteudo
+  except FileNotFoundError:
+    print(f"Erro: Arquivo '{nome_do_arquivo}' não encontrado.")
+    return None
+
 def getTokens(prompt):
     return model.count_tokens(prompt)
 
@@ -67,7 +76,7 @@ def main():
     st.logo(LOGO_AZUL, link=None, icon_image=None)
     
     st.set_page_config(
-        page_title="Assistente MSEP",
+        page_title="Assistente Virtual MSEP - Metodologia Senai de Educação Profissional",
         page_icon="🤖",
         menu_items={'Get Help': 'https://www.extremelycoolapp.com/help','Report a bug': "mailto:lucas.salomao@gmail.com",'About': "SENAI São Paulo - Gerência de Educação\n\nSupervisão de Tecnologias Educacionais - Guilherme Dias\n\nCriado por Lucas Salomão"}
     )
@@ -94,42 +103,34 @@ def main():
                     arquivo.write(st.session_state.docs_raw)
 
                 st.success("Concluído")
-        if st.button("Gerar "+tipoDocumento):
-            with st.spinner("Processando..."):
-                # if(tipoDocumento=='Plano de Aula'):
-
-                # if(tipoDocumento=='Plano de Aula'):
-                # if(tipoDocumento=='Plano de Aula'):
-                
-                st.success("Concluído")
 
     # Main content area for displaying chat messages
-    st.title("Assistente MSEP")
-    st.write("Bem vindo ao assistente do professor!")
+    st.title("Assistente Virtual MSEP - Metodologia Senai de Educação Profissional")
+    st.write("Bem vindo ao assistente virtual do professor para auxiliar a elaboração de documentos da prática pedagógica de acordo com a MSEP!")
     st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)
 
     # Chat input
     # Placeholder for chat messages
-
     if "messages" not in st.session_state.keys():
-        st.session_state.messages = [
-            {"role": "assistant", "content": "Carregue um plano de curso e elabore o documento desejado."}]
-
+        st.session_state.messages = [{"role": "assistant", "content": "Carregue um plano de curso e elabore o documento desejado de acordo com a MSEP."}]
+    
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.write(message["content"])
-
-    if prompt := st.chat_input(placeholder=''):
-        genai.configure(api_key=apiKeyGoogleAiStudio)
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.write(prompt)
-            st.write(getTokens(prompt+st.session_state.docs_raw))
+    st.session_state.text_btn="Gerar "+tipoDocumento
+    if st.button(st.session_state.text_btn):
+        if (st.session_state.text_btn=="Gerar Plano de Ensino"):
+            print("Gerando Plano de Ensino")
+            # prompt=ler_arquivo_txt('prompt-plano-ensino.txt')
+            prompt="Elabore um plano de ensino conforme a MSEP da unidade curricular de Banco de Dados"
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            with st.chat_message("user"):
+                st.write("Gerar Plano de Ensino")
+                
     # Display chat messages and bot response
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Pensando..."):
-                
                 response = get_gemini_reponse(prompt, st.session_state.docs_raw)
                 placeholder = st.empty()
                 placeholder.markdown(response)

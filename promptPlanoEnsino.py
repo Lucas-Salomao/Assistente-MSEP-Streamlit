@@ -1,40 +1,81 @@
-promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino completo e de qualidade para o curso [Nome do Curso]  da unidade curricular [Nome da Unidade Curricular] com as seguintes características:**
+promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino completo e de qualidade para o curso [Nome do Curso] da unidade curricular [Nome da Unidade Curricular] seguindo o seguinte modelo:**
 
-- **Perfil Profissional:** [Nome do Perfil Profissional]
-- **Nível de Qualificação:** [Nível de Qualificação (ex: Qualificação Profissional, Técnico de Nível Médio, Tecnólogo etc.)]
-- **Área Tecnológica:** [Nome da Área Tecnológica (ex: Automotiva, Mecatrônica etc.)]
-- **Segmento Tecnológico:** [Nome do Segmento Tecnológico (ex: Manutenção, Fabricação etc.)]
-- **Público Alvo:** [Descrição do público-alvo (ex: Jovens e adultos com ou sem vínculo empregatício, profissionais da área etc.)]
-- **Modalidade de ensino:** [Modalidade (ex: Presencial, EaD, Híbrida)]
+- **Título:**[Título da Situação de Aprendizagem]
+- **Curso:** [Nome do Curso]
+- **Unidade Curricular (UC):** [Nome da Unidade Curricular]
 - **Carga horária:** [Carga Horária do Curso]
-- **Objetivo do curso:** [Objetivo geral do curso, incluindo as capacidades a serem desenvolvidas]
+- **Nº de aulas :** [Número de aulas]
+- **Carga horária prevista para o desenvolvimento da Situação de Aprendizagem:** [Carga Horária prevista para o desenvolvimento da Situação de Aprendizagem]
+- **Objetivo da Unidade Curricular:** [Objetivo geral da unidade curricular]
+- **Modalidade de ensino:** [Modalidade (ex: Presencial, EaD, Híbrida)]
 
-**O Plano de Ensino deve conter:**
+- **Capacidades a serem desenvolvidas:** [Básicas( ), Técnicas( ) e Socioemocionais( )]
+    - Nesse campo, precisamos descrever todas as capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
+    - Ao selecionarmos as capacidades que serão desenvolvidas, precisamos cuidar da gradualidade das capacidades, trabalhando com propostas que contemplem capacidades de menor complexidade para maior complexidade.
+    - Importante: não podemos alterar as capacidades previstas no plano de curso.
+    - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
 
-- **Introdução:**
-    - Contextualização do curso
-    - Justificativa da oferta
-    - Público-alvo
-    - Pré-requisitos para o curso
-- **Conteúdo Formativo:**
-    - Capacidades Básicas
-    - Capacidades Técnicas
-    - Capacidades Socioemocionais
-    - Conhecimentos
-- **Estrutura Curricular:**
-    - Módulos: Básico, Introdutório e Específicos (com descrição detalhada de cada módulo, incluindo funções, subfunções e padrões de desempenho)
-    - Unidades Curriculares: organização interna de cada unidade, incluindo conteúdo, objetivo geral, carga horária, métodos e recursos didáticos, ambientes pedagógicos, avaliação (critérios e instrumentos)
-- **Itinerário Formativo:**
-    - Representação gráfica do itinerário do curso, incluindo entradas, saídas intermediárias, saída final e pré-requisitos
-- **Plano de Aula:**
-    - Quantidade de situações de aprendizagem desafiadoras que deveram constar no plano
-    - Situações de Aprendizagem desafiadoras: Descrição detalhada de cada situação (exemplo: situação-problema, estudo de caso, projeto ou pesquisa aplicada)
-    - Estratégias de Ensino: Especificar as estratégias que serão utilizadas para cada situação de aprendizagem (ex: exposição dialogada, trabalho em grupo, atividades práticas etc.)
-    - Recursos Didáticos: Detalhamento dos recursos a serem utilizados em cada situação de aprendizagem (ex: livros, materiais de apoio, softwares, equipamentos, ambiente virtual etc.)
-    - Ambientes Pedagógicos: Detalhe dos ambientes que serão utilizados em cada situação de aprendizagem (ex: sala de aula, laboratório, oficina etc.)
-    - Avaliação: Critérios e instrumentos de avaliação para cada situação de aprendizagem
-    - Critérios Críticos e desejáveis para avaliação das situações de aprendizagem
-    - Tabela de nível de desempenho de 0-100, para avaliar em forma de nota de acordo com os critérios críticos e desejáveis que os alunos atingiram
+- **Conhecimento:**[Conhecimentos de acordo com o plano de curso e unidade curricular necessários para o desenvolvimento da situação de aprendizagem]
+
+- **Estratégia de  aprendizgem desafiadora:** [Situação Problema( ) Estudo de Caso ( ) Pesquisa Aplicada ( ) Projeto integrador( )]
+- **Contextualização:**[Descrição da contextualização da Situação de Aprendizagem]
+    - Nesse campo, a abordagem contextualizada é pensada para construir cenários reais da situação de trabalho que o aluno vai enfrentar. Por isso, é importante que o aluno encontre máquinas, equipamentos, instrumentos, ferramentas, materiais e condições de trabalho bem semelhantes às dos ambientes em que vai atuar. 
+    - Recomendamos abordar a área tecnológica da empresa, nº de funcionários, perfil do cliente interno (técnico ou gestor), do cliente externo, explanar sobre o tipo de serviço prestado pela empresa, dados atuais versus dados pretendidos com a implementação do trabalho proposto, visando ampliar o repertório do aluno.
+    - Para planejarmos a SA(Situação de Aprendizagem), a MSEP sugere que tenhamos respostas para 5 perguntas:
+        - O que? Para que? Como? Com o que? Onde?
+    -Com as respostas às essas perguntas, precisamos considerar 3 requisitos para o planejamento:
+        - Mobilização
+        - Resolução de problemas com tomada de decisão
+        - Máximo de circulação de informalções possíveis. 
+    -Estimulamos as competências de visão sistêmica e de criatividade com a SA?
+- **Desafio:**[Descrição do desafio proposto na Situação de Aprendizagem]
+    - A MSEP recomenda que o desafio da SA precisa ser diferente do que o aluno já realizou, mas isso não significa que precisa ser inédito.
+    - Precisa ser fruto de muita reflexão, tomada de decisão, da realização de uma ou mais atividades. Precisamos ficar atentos ao que chamamos de “resposta pronta”.
+    - Quando as capacidades e conhecimentos requerem análise de dados, comparação ou correlação  de soluções alternativas, como a escola propôs, é interessante abordadr na perspectiva do estudo de caso e os alunos precisam trazer soluções de sucesso ou insucesso.
+    - Indicar a necessidade de inclusão de figuras, esquemas, desenhos, leiaute, formulários, etc.
+- **Resultados Esperados:**[Descrição detalhada dos resultados esperados]
+    - A MSEP nos orienta que, ao redigir a estratégia de aprendizagem desafiadora, o docente deve informar claramente o que espera do aluno como um produto final: relatório, trabalho escrito, projeto, protótipo, produto (bem ou serviço), maquete, softwares, vídeos, manuais, pareceres, leiaute, entre outros. Esses resultados devem ser adequados e proporcionais à contextualização e ao nível de exigência do desafio proposto. (p.138 MSEP)
+
+- **Desbrando p Plano de Ensino (Situação de Aprendizagem) em Plano de Aula:
+    - Tabela contendo como título "Plano de Aula"
+        - Colulas:
+            -Nº horas/aula e data:
+                [Ex. 4 aulas 10/08/2023]
+            -Capacidades a serem desenvolvidas:
+                [ Por exemplo:
+                    - Correlacionar os itens exigidos na legislação, nas normas e notas técnicas ao ramo de atuação e/ou atividade identificadas in loco.
+                    - Cumprir normas e procedimentos de segurança estabelecidos pela empresa para a realização das atividades de inspeção, a fim de garantir a saúde e integridade física.
+                ]
+            -Conhecimentos relacionados:
+                [ Por exemplo:
+                    - Legislação aplicada à saúde, segurança do trabalho e meio ambiente:
+                    - Normas Regulamentadoras do Ministério do Trabalho.
+                    - Notas Técnicas aplicadas à saúde, segurança do trabalho e meio ambiente.
+                ]
+            -Estratégias de ensino e instrumentos de avaliação:
+                [ Por exemplo:
+                    - Exposição dialogada: explorar sobre os principais conhecimentos associados ao mercado no que tange às normas e legislações.
+                    - Simulação: elaboração e aplicação de ficha de análise de investigação de acidentes.
+                    - Dinâmica de grupo: conversando com as famílias das vítimas de acidente de trabalho.
+                ]
+            -Recursos e ambientes pedagógicos:
+            [
+                Computador, internet, notion, Microsoft Teams, Microsoft Learn, Plataforma de Gamificação Quizziz, Forms, Mentimeter, Kahoot
+            ]
+            -Critérios de Avaliação:
+            [
+                Para a formulação dos critérios de avaliação, a MSEP recomenda algumas características estruturais essenciais. São elas: objetividade, mensuração, granularidade e transparência.
+                Quanto ao tipo de critérios de avaliação a serem observados, deve estar direcionado em duas vertentes: processo de execução e produto.
+            ]
+        - Referências:[livros, apostilas, sites, blogs, etc]
+    - Tabela contendo como título "Instrumento de Registro"
+    - Colulas:
+        - Campo para o nome do Aluno:
+        - Campo para a Turma:
+        - Capacidades básicas ou técnicas e socioemocionais
+        - Critérios de Avaliação
+        - Resultado: [Aluno/Docente]
+        - Leganda:[C=Realizou/R=Não Realizou]
 
 **Observações:**
 

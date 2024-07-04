@@ -36,7 +36,20 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
 - **Resultados Esperados:**[Descrição detalhada dos resultados esperados]
     - A MSEP nos orienta que, ao redigir a estratégia de aprendizagem desafiadora, o docente deve informar claramente o que espera do aluno como um produto final: relatório, trabalho escrito, projeto, protótipo, produto (bem ou serviço), maquete, softwares, vídeos, manuais, pareceres, leiaute, entre outros. Esses resultados devem ser adequados e proporcionais à contextualização e ao nível de exigência do desafio proposto. (p.138 MSEP)
 
-- **Desbrando p Plano de Ensino (Situação de Aprendizagem) em Plano de Aula:
+- Tabela contendo como título "Instrumento de Registro"
+        - Primeira Linha:
+            - Coluna com nome do aluno
+            - Coluna com a turma:
+        - Demais Linhas:
+            - Colulas:
+                - Capacidades básicas ou técnicas e socioemocionais
+                - Critérios de Avaliação Críticos e Desejáveis para cada capacidade básica, técnica ou socioemocional. Os critérios críticos garantem que a capacidade foi atendida minimamente e os critérios desejáveis sinalizam um desempenho complementar aos critérios críticos. Iniciar os critérios críticos com "(C)" e os desejáveis com "(D)". Elaborar 2 critérios críticos e 2 critérios desejáveis para cada capacidade.
+                - Resultado:
+                    - Coluna para Aluno
+                    - Coluna para Docente
+        - Legenda:[A=Atingiu/N=Não Atingiu]
+        
+- **Desbrando o Plano de Ensino (Situação de Aprendizagem) em Plano de Aula:
     - Tabela contendo como título "Plano de Aula"
         - Colulas:
             -Nº horas/aula e data:
@@ -66,17 +79,31 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
             [
                 Para a formulação dos critérios de avaliação, a MSEP recomenda algumas características estruturais essenciais. São elas: objetividade, mensuração, granularidade e transparência.
                 Quanto ao tipo de critérios de avaliação a serem observados, deve estar direcionado em duas vertentes: processo de execução e produto.
+                Utilizar os critérios críticos e desejáveis levantados anteriormente, iniciando os critérios críticos com "(C)" e os desejáveis iniciando com "(D)"
+                A célula deve conter todos os crítérios criticos e desejáveis de acordo com as capacidades escolhidas para a avaliação.
             ]
         - Referências:[livros, apostilas, sites, blogs, etc]
-    - Tabela contendo como título "Instrumento de Registro"
-    - Colulas:
-        - Campo para o nome do Aluno:
-        - Campo para a Turma:
-        - Capacidades básicas ou técnicas e socioemocionais
-        - Critérios de Avaliação
-        - Resultado: [Aluno/Docente]
-        - Leganda:[C=Realizou/R=Não Realizou]
-
+        
+    - Tabela contendo como título "Tabela de Nível de Desempenho"
+        -Colunas:
+            - Critérios de Avaliação: (C) Críticos e (D) Desejáveis:
+                - Os critérios críticos e desejáveis devem ficar numa única linha, agrupados em críticos e desejáveis.
+            - Nível de desempenho:
+                - Os níveis de desempenho estão em função da quantidade de critérios críticos e desejáveis.
+                - O nível de desempenho máximo significa que o aluno atingiu todos os critérios críticos e todos os critérios desejáveis.
+                - O nível intermediário significa que o aluno atingiu apenas todos os critérios críticos.
+                - Nos níveis abaixo do intermediário, apenas são considerados os critérios críticos.
+                - Os critérios desejáveis são contabilizados a partir do nível intermediário até o nível máximo.
+                - Por exemplo:
+                    - 10 níveis de desempenho, onde nível 10 representa todos os critérios críticos e desejáveis
+                    - Nível 5 representa apenas todos os níveis críticos
+                    - Nível 1 representa apenas 1 critério crítico atingido
+                    - Entre o nível 5 e 10, pode existir uma combinação de todos os critérios críticos com alguma quantidade de critérios desejáveis.
+                    - O nível de 1 a 10 representa apenas um exemplo e deve ser adequado a quantidade de critérios críticos e desejáveis, possibilitando uma granularidade na nota posteriormente.
+            - Conversão em notas:
+                - A nota é calculada em função dos níveis de desempenho, variando de 0 a 100.
+            
+    
 **Observações:**
 
 - Utilize a linguagem clara e objetiva.

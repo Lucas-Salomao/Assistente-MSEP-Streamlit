@@ -33,7 +33,7 @@ tipoDocumento="UNDEFINED"
 qntSituacoesAprendizagem=0
 estrategiaAprendizagem="UNDEFINED"
 
-def buscaUC():
+def buscaDadosPlano():
     temp_model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",  # Define o modelo de linguagem a ser usado (Gemini 1.5 Flash)
         generation_config=generation_config,  # Define a configuração de geração de texto
@@ -43,8 +43,7 @@ def buscaUC():
     )
     genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
     st.session_state.nomeCurso=temp_model.generate_content(st.session_state.docs_raw+"Qual o nome do curso?").text
-    UCs_string=temp_model.generate_content(st.session_state.docs_raw+"liste apenas as unidades curriculares")
-    st.session_state.UCs_list = UCs_string.text.splitlines()
+    st.session_state.UCs_list=temp_model.generate_content(st.session_state.docs_raw+"liste apenas as unidades curriculares").text.splitlines()
     return None
 
     
@@ -103,7 +102,7 @@ def get_gemini_reponse(prompt='',raw_text=''):
         str: A resposta do modelo Gemini.
     """
     contexto=raw_text
-    response = chat_session.send_message(raw_text+prompt)
+    response = chat_session.send_message(contexto+prompt)
     return response.text
 
 # read all pdf files and return text
@@ -176,11 +175,11 @@ def main():
                 # with open("msep.txt", "w", encoding="utf-8") as arquivo:
                 #     # Escrevendo o texto no arquivo
                     # arquivo.write(st.session_state.docs_raw)
-                buscaUC()
+                buscaDadosPlano()
                 st.success("Concluído")  # Exibe uma mensagem de sucesso
                 
-        st.session_state.nomeCurso = st.text_input("Nome do Curso:", st.session_state.nomeCurso)  # Campo de entrada para o nome do curso
-        st.selectbox("Selecione a Unidade Curricular:",st.session_state.UCs_list)
+        nomeCurso = st.text_input("Nome do Curso:", st.session_state.nomeCurso)  # Campo de entrada para o nome do curso
+        nomeUC=st.selectbox("Selecione a Unidade Curricular:",st.session_state.UCs_list,index=1)
         #nomeUC = st.text_input("Nome da Unidade Curricular:", "")  # Campo de entrada para o nome da unidade curricular
         #tipoDocumento = st.selectbox("Selecione o tipo de documento:", ("Plano de Ensino", "Cronograma", "Plano de Aula"))  # Menu dropdown para selecionar o tipo de documento
         tipoDocumento="Plano de Ensino"
@@ -219,7 +218,8 @@ def main():
             with st.spinner("Pensando..."):
                 genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
                 msep=ler_arquivo_txt('msep.txt')
-                response = get_gemini_reponse(prompt, msep+st.session_state.docs_raw)  # Obtém a resposta do modelo Gemini
+                contexto=msep+st.session_state.docs_raw
+                response = get_gemini_reponse(prompt, contexto)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 placeholder.markdown(response)  # Exibe a resposta no placeholder
 

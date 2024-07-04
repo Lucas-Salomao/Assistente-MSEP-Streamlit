@@ -26,6 +26,8 @@ model = genai.GenerativeModel(
 )
 apiKeyGoogleAiStudio='UNDEFINED'
 nomeCurso='UNDEFINED'
+st.session_state.nomeCurso=""
+st.session_state.UCs_list=("")
 nomeUC="UNDEFINED"
 tipoDocumento="UNDEFINED"
 qntSituacoesAprendizagem=0
@@ -39,10 +41,11 @@ def buscaUC():
         # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
         system_instruction="Execute apenas o que foi solicitado, dando o resultado pedido e nada mais além disso.",  # Define a instrução do sistema para o modelo de linguagem
     )
-    genai.configure(api_key="AIzaSyCtP4Sqh2NGpZOFjdnfTzxBKka7nhKQBIQ")
+    genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
+    st.session_state.nomeCurso=temp_model.generate_content(st.session_state.docs_raw+"Qual o nome do curso?").text
     UCs_string=temp_model.generate_content(st.session_state.docs_raw+"liste apenas as unidades curriculares")
-    UCs_list = UCs_string.text.splitlines()
-    return UCs_list
+    st.session_state.UCs_list = UCs_string.text.splitlines()
+    return None
 
     
 def ler_arquivo_txt(nome_do_arquivo):
@@ -162,7 +165,7 @@ def main():
         # if (st.button("Ajuda?",href='hhhts:google.com'))
         st.link_button("Ajuda?",'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D')
         st.title("Menu:")
-        apiKeyGoogleAiStudio = st.text_input("Chave de API Google AI Studio:", "", type='password',help="Obtenha sua chave de API em https://ai.google.dev/aistudio")  # Campo de entrada para a chave API
+        st.session_state.apiKeyGoogleAiStudio = st.text_input("Chave de API Google AI Studio:", "", type='password',help="Obtenha sua chave de API em https://ai.google.dev/aistudio")  # Campo de entrada para a chave API
         
         pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar:", type='.pdf', accept_multiple_files=True, help='Faça o upload da MSEP e de um plano de curso que deseja elaborar os documentos de prática docente. Os documentos podem ser acessados em https://sesisenaisp.sharepoint.com/sites/NovaGED')  # Carregador de arquivos PDF
         if st.button("Processar documentos"):
@@ -173,11 +176,11 @@ def main():
                 # with open("msep.txt", "w", encoding="utf-8") as arquivo:
                 #     # Escrevendo o texto no arquivo
                     # arquivo.write(st.session_state.docs_raw)
-                UCs_list=buscaUC()
-                st.selectbox("Selecione a Unidade Curricular:",UCs_list)
+                buscaUC()
                 st.success("Concluído")  # Exibe uma mensagem de sucesso
                 
-        nomeCurso = st.text_input("Nome do Curso:", "")  # Campo de entrada para o nome do curso
+        st.session_state.nomeCurso = st.text_input("Nome do Curso:", st.session_state.nomeCurso)  # Campo de entrada para o nome do curso
+        st.selectbox("Selecione a Unidade Curricular:",st.session_state.UCs_list)
         #nomeUC = st.text_input("Nome da Unidade Curricular:", "")  # Campo de entrada para o nome da unidade curricular
         #tipoDocumento = st.selectbox("Selecione o tipo de documento:", ("Plano de Ensino", "Cronograma", "Plano de Aula"))  # Menu dropdown para selecionar o tipo de documento
         tipoDocumento="Plano de Ensino"
@@ -214,7 +217,7 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Pensando..."):
-                genai.configure(api_key=apiKeyGoogleAiStudio)
+                genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
                 msep=ler_arquivo_txt('msep.txt')
                 response = get_gemini_reponse(prompt, msep+st.session_state.docs_raw)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
@@ -239,7 +242,7 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Pensando..."):
-                genai.configure(api_key=apiKeyGoogleAiStudio)
+                genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
                 response = get_gemini_reponse(prompt)
                 placeholder = st.empty()
                 placeholder.markdown(response)  # Exibe a resposta no placeholder

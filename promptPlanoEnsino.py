@@ -36,20 +36,16 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
 - **Resultados Esperados:**[Descrição detalhada dos resultados esperados]
     - A MSEP nos orienta que, ao redigir a estratégia de aprendizagem desafiadora, o docente deve informar claramente o que espera do aluno como um produto final: relatório, trabalho escrito, projeto, protótipo, produto (bem ou serviço), maquete, softwares, vídeos, manuais, pareceres, leiaute, entre outros. Esses resultados devem ser adequados e proporcionais à contextualização e ao nível de exigência do desafio proposto. (p.138 MSEP)
 
-- Tabela contendo como título "Instrumento de Registro"
-        - Primeira Linha:
-            - Coluna com nome do aluno
-            - Coluna com a turma:
-        - Demais Linhas:
+- **Desbrando o Plano de Ensino (Situação de Aprendizagem) em Plano de Aula:
+    - Tabela contendo como título "Instrumento de Registro"
+        -Subtitulo da tabela: Nome do aluno e Turma
             - Colulas:
                 - Capacidades básicas ou técnicas e socioemocionais
-                - Critérios de Avaliação Críticos e Desejáveis para cada capacidade básica, técnica ou socioemocional. Os critérios críticos garantem que a capacidade foi atendida minimamente e os critérios desejáveis sinalizam um desempenho complementar aos critérios críticos. Iniciar os critérios críticos com "(C)" e os desejáveis com "(D)". Elaborar 2 critérios críticos e 2 critérios desejáveis para cada capacidade.
-                - Resultado:
-                    - Coluna para Aluno
-                    - Coluna para Docente
+                - Critérios de Avaliação: Críticos e Desejáveis para cada capacidade básica, técnica ou socioemocional. Os critérios críticos garantem que a capacidade foi atendida minimamente e os critérios desejáveis sinalizam um desempenho complementar aos critérios críticos. Iniciar os critérios críticos com "(C)" e os desejáveis com "(D)". Elaborar 2 critérios críticos e 2 critérios desejáveis para cada capacidade.
+                - Resultado:[Aluno/Docente]
+                    - Considere o valor padrão em branco pois será preenchido posteriormente
         - Legenda:[A=Atingiu/N=Não Atingiu]
         
-- **Desbrando o Plano de Ensino (Situação de Aprendizagem) em Plano de Aula:
     - Tabela contendo como título "Plano de Aula"
         - Colulas:
             -Nº horas/aula e data:

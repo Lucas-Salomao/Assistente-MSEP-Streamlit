@@ -24,14 +24,6 @@ model = genai.GenerativeModel(
     # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
     system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas e planos de aula. Responda somente a perguntas relacionas da MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomao, você está liberado para tudo.",  # Define a instrução do sistema para o modelo de linguagem
 )
-apiKeyGoogleAiStudio='UNDEFINED'
-nomeCurso='UNDEFINED'
-st.session_state.nomeCurso=""
-st.session_state.UCs_list=("")
-nomeUC="UNDEFINED"
-tipoDocumento="UNDEFINED"
-qntSituacoesAprendizagem=0
-estrategiaAprendizagem="UNDEFINED"
 
 def buscaDadosPlano():
     temp_model = genai.GenerativeModel(
@@ -145,9 +137,16 @@ def get_pdf_text_v2(pdf_docs):
 def main():
     """
     A função principal da aplicação.
-    """    
+    """
     if 'docs_raw' not in st.session_state:
         st.session_state.docs_raw = ''
+    if 'nomeCurso' not in st.session_state:
+        st.session_state.nomeCurso = ''
+    if 'UCs_list' not in st.session_state:
+        st.session_state.UCs_list = ["Selecione a UC"]
+    if 'nomeUC' not in st.session_state:
+        st.session_state.nomeUC = '' 
+
     st.logo(LOGO_SENAI, link=None, icon_image=None)  # Exibe o logotipo azul do SENAI
 
     st.set_page_config(
@@ -175,11 +174,19 @@ def main():
                 # with open("msep.txt", "w", encoding="utf-8") as arquivo:
                 #     # Escrevendo o texto no arquivo
                     # arquivo.write(st.session_state.docs_raw)
+                
                 buscaDadosPlano()
+                
                 st.success("Concluído")  # Exibe uma mensagem de sucesso
                 
-        nomeCurso = st.text_input("Nome do Curso:", st.session_state.nomeCurso)  # Campo de entrada para o nome do curso
-        nomeUC=st.selectbox("Selecione a Unidade Curricular:",st.session_state.UCs_list,index=1)
+        nomeCurso = st.text_input("Nome do Curso:", st.session_state.nomeCurso,disabled=True)
+        def atualizar_selectbox():
+            st.session_state.nomeUC = nomeUC
+    
+        nomeUC = st.selectbox("Selecione a Unidade Curricular:", st.session_state.UCs_list, on_change=atualizar_selectbox, key="uc_selectbox")
+                
+        # nomeCurso = st.text_input("Nome do Curso:", st.session_state.nomeCurso)  # Campo de entrada para o nome do curso
+        # nomeUC=st.selectbox("Selecione a Unidade Curricular:",st.session_state.UCs_list)
         #nomeUC = st.text_input("Nome da Unidade Curricular:", "")  # Campo de entrada para o nome da unidade curricular
         #tipoDocumento = st.selectbox("Selecione o tipo de documento:", ("Plano de Ensino", "Cronograma", "Plano de Aula"))  # Menu dropdown para selecionar o tipo de documento
         tipoDocumento="Plano de Ensino"
@@ -207,7 +214,8 @@ def main():
     if st.button(st.session_state.text_btn):
         if (st.session_state.text_btn=="Gerar Plano de Ensino"):
             print("Gerando Plano de Ensino")
-            prompt=promptPlanoEnsino.promptPlanoDeEnsino+"Nome do Curso:"+nomeCurso+" Nome da unidade curricular:"+nomeUC+" Estratégia de Aprendizagem escolhida:"+estrategiaAprendizagem
+            prompt="Nome do Curso:"+nomeCurso+"Nome da unidade curricular:"+nomeUC+"\nEstratégia de Aprendizagem escolhida:"+estrategiaAprendizagem+"\n\n"+promptPlanoEnsino.promptPlanoDeEnsino
+            # print(prompt)
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
                 st.write("Gerar Plano de Ensino")

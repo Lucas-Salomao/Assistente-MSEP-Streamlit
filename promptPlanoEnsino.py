@@ -38,15 +38,6 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
 
 - **Desbrando o Plano de Ensino (Situação de Aprendizagem) em Plano de Aula:
     - Tabela contendo como título "Instrumento de Registro"
-<<<<<<< HEAD
-            - Primeira Linha: [Nome do aluno e Turma]
-            - Demais Linhas:
-                - Colulas:
-                    - Capacidades básicas ou técnicas e socioemocionais
-                    - Critérios de Avaliação Críticos e Desejáveis para cada capacidade básica, técnica ou socioemocional. Os critérios críticos garantem que a capacidade foi atendida minimamente e os critérios desejáveis sinalizam um desempenho complementar aos critérios críticos. Iniciar os critérios críticos com "(C)" e os desejáveis com "(D)". Elaborar 2 critérios críticos e 2 critérios desejáveis para cada capacidade.
-                    - Resultado:[Aluno/Docente]
-            - Legenda:[A=Atingiu/N=Não Atingiu]
-=======
         -Subtitulo da tabela: Nome do aluno e Turma
             - Colulas:
                 - Capacidades básicas ou técnicas e socioemocionais
@@ -54,12 +45,11 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
                 - Resultado:[Aluno/Docente]
                     - Considere o valor padrão em branco pois será preenchido posteriormente
         - Legenda:[A=Atingiu/N=Não Atingiu]
->>>>>>> 129b208b793fb40c85567c55aba7dc263d224541
         
     - Tabela contendo como título "Plano de Aula"
         - Colulas:
             -Nº horas/aula e data:
-                [Ex. X aulas XX/XX/XXXX]
+                [Ex. 4 aulas 10/08/2023]
             -Capacidades a serem desenvolvidas:
                 [ Por exemplo:
                     - Correlacionar os itens exigidos na legislação, nas normas e notas técnicas ao ramo de atuação e/ou atividade identificadas in loco.

@@ -3,8 +3,8 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
 - **Título:**[Título da Situação de Aprendizagem]
 - **Curso:** [Nome do Curso]
 - **Unidade Curricular (UC):** [Nome da Unidade Curricular]
-- **Carga horária:** [Carga Horária do Curso]
-- **Nº de aulas :** [Número de aulas]
+- **Carga horária total da unidade:** [Carga Horária do Curso]
+- **Nº de aulas para a situação de aprendizagem :** [Número de aulas]
 - **Carga horária prevista para o desenvolvimento da Situação de Aprendizagem:** [Carga Horária prevista para o desenvolvimento da Situação de Aprendizagem]
 - **Objetivo da Unidade Curricular:** [Objetivo geral da unidade curricular]
 - **Modalidade de ensino:** [Modalidade (ex: Presencial, EaD, Híbrida)]
@@ -97,7 +97,7 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
                     - Entre o nível 5 e 10, pode existir uma combinação de todos os critérios críticos com alguma quantidade de critérios desejáveis.
                     - O nível de 1 a 10 representa apenas um exemplo e deve ser adequado a quantidade de critérios críticos e desejáveis, possibilitando uma granularidade na nota posteriormente.
             - Conversão em notas:
-                - A nota é calculada em função dos níveis de desempenho, variando de 0 a 100.
+                - A nota é calculada em função dos níveis de desempenho, variando de 0 a 100. (inverter a frase)
             
     
 **Observações:**

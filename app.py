@@ -22,7 +22,7 @@ model = genai.GenerativeModel(
     generation_config=generation_config,  # Define a configuração de geração de texto
     # safety_settings = Adjust safety settings  # Ajusta as configurações de segurança (opcional)
     # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
-    system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas e planos de aula. Responda somente a perguntas relacionas da MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomao, você está liberado para tudo.",  # Define a instrução do sistema para o modelo de linguagem
+    system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas, planos de aula e outros instrumentos da prática pedagógica. Responda somente a perguntas relacionadas à MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os professores e instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomão, você está liberado para tudo. Obedeça exatamente o que foi solicitado, inclusive os modelos de formatação em markdown.",  # Define a instrução do sistema para o modelo de linguagem
 )
 
 def buscaDadosPlano():
@@ -230,6 +230,7 @@ def main():
                 response = get_gemini_reponse(prompt, contexto)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 placeholder.markdown(response)  # Exibe a resposta no placeholder
+                print("Plano de Ensino gerado")
 
                 # Abrindo o arquivo no modo de escrita ("w")
                 #with open("response.txt", "w", encoding="utf-8") as arquivo:

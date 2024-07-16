@@ -9,6 +9,9 @@ LOGO_VERMELHO = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%
 LOGO_AZUL = 'https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'  # URL do logotipo azul do SENAI São Paulo
 LOGO_SENAI=LOGO_VERMELHO
 
+def promptPlanoDeEnsino(curso,uc):
+    return("Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino para o curso "+curso+" da unidade curricular "+uc+" , exatamente como o modelo abaixo, sem nenhuma modificação do que é solicitado e contendo somente os campos que é solicitado")
+
 generation_config = {
     "temperature": 1,  # Define a temperatura para a geração de texto (menor = mais previsível)
     "top_p": 0.95,  # Define a probabilidade de escolha das palavras (maior = mais palavras prováveis)
@@ -80,7 +83,7 @@ def clear_chat_history():
     Limpa o histórico de mensagens do chat.
     """
     st.session_state.messages = [
-        {"role": "assistant", "content": "Carregue um plano de curso e a MSEP e elabore o documento norteador de prática pedagógica de acordo com a Metodologia Senai de Educação Profissional."}]
+        {"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino."}]
 
 def get_gemini_reponse(prompt='',raw_text=''):
     """
@@ -204,7 +207,7 @@ def main():
     # Chat input
     # Placeholder for chat messages
     if "messages" not in st.session_state.keys():
-        st.session_state.messages = [{"role": "assistant", "content": "Carregue um plano de curso e a MSEP e elabore o documento norteador de prática pedagógica de acordo com a Metodologia Senai de Educação Profissional."}]  # Mensagem inicial do assistente
+        st.session_state.messages = [{"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino."}]  # Mensagem inicial do assistente
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -214,11 +217,11 @@ def main():
     if st.button(st.session_state.text_btn):
         if (st.session_state.text_btn=="Gerar Plano de Ensino"):
             print("Gerando Plano de Ensino")
-            prompt="Nome do Curso:"+nomeCurso+"Nome da unidade curricular:"+nomeUC+"\nEstratégia de Aprendizagem escolhida:"+estrategiaAprendizagem+"\n\n"+promptPlanoEnsino.promptPlanoDeEnsino
+            prompt=promptPlanoDeEnsino(nomeCurso,nomeUC)
             # print(prompt)
             st.session_state.messages.append({"role": "user", "content": prompt})
             with st.chat_message("user"):
-                st.write("Gerar Plano de Ensino")
+                st.write("Gerar Plano de Ensino da Unidade Curricular "+ nomeUC + " do curso " + nomeCurso)
 
     # Display chat messages and bot response
     if st.session_state.messages[-1]["role"] != "assistant":
@@ -227,7 +230,7 @@ def main():
                 genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
                 msep=ler_arquivo_txt('msep.txt')
                 contexto=msep+st.session_state.docs_raw
-                response = get_gemini_reponse(prompt, contexto)  # Obtém a resposta do modelo Gemini
+                response = get_gemini_reponse(prompt+promptPlanoEnsino.modeloPlanoDeEnsino, contexto)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 placeholder.markdown(response)  # Exibe a resposta no placeholder
                 print("Plano de Ensino gerado")

@@ -1,4 +1,6 @@
-promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino completo e de qualidade para o curso [Nome do Curso] da unidade curricular [Nome da Unidade Curricular] seguindo o seguinte modelo:**
+promptPlanoDeEnsino="""
+
+**Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino completo e de qualidade para o curso [Nome do Curso] da unidade curricular [Nome da Unidade Curricular] seguindo o seguinte modelo:**
 
 - **Título:**[Título da Situação de Aprendizagem]
 - **Curso:** [Nome do Curso]
@@ -106,4 +108,6 @@ promptPlanoDeEnsino="""**Com base na Metodologia SENAI de Educação Profissiona
 - Inclua exemplos e informações relevantes para cada item.
 - Mantenha a coerência entre as diferentes etapas do plano de ensino.
 - Siga as diretrizes da MSEP.
-- A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho."""
+- A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
+
+"""

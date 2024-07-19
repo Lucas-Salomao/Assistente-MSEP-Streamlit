@@ -124,6 +124,8 @@ modeloPlanoDeEnsino="""
 
 **Unidade Curricular (UC):** [Nome da unidade curricular]
 
+**Módulo:** [Básico ou Específico]
+
 **Carga Horária total na UC:** [Carga horária total do curso]
 
 **Nº de aulas previstas para desenvolver a situação de aprendizagem:** [Número de aulas]
@@ -138,36 +140,38 @@ modeloPlanoDeEnsino="""
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
 
-[Listar as capacidades básicas para o desenvolvimento da situação de aprendizagem] 
+[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta] 
 
 ### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
 
-[Listar as capacidades técnicas, para o desenvolvimento da situação de aprendizagem]
+[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta]
 
 ### 2.2 Capacidades Socioemocionais:
 
-[Listar as capacidades socioemocionais para o desenvolvimento da situação de aprendizagem]
+[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta]
 
 [
     - Nesse campo, precisamos descrever todas as capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
     - Ao selecionarmos as capacidades que serão desenvolvidas, precisamos cuidar da gradualidade das capacidades, trabalhando com propostas que contemplem capacidades de menor complexidade para maior complexidade.
     - Importante: não podemos alterar as capacidades previstas no plano de curso.
     - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
-    - Listar somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem.
+    - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
 ]
 
 ## 3. Conhecimentos:
 
 [
-    - Conhecimentos de acordo com a unidade curricular necessários somente para o desenvolvimento da situação de aprendizagem.
-    - Listar os conhecimentos exatamente como aparecem no plano de curso e na unidade curricular específica, incluindo a numeração exata de cada item, da mesma forma que apresentada no plano de curso.
+    - De acordo com a situação de aprendizagem proposta, escolher do plano de curso somente os conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
+    - Essa lista não pode conter todos os conhecimentos do plano de curso, somente os necessários de acordo com a situação de aprendizagem.
 ]
 
 ## Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
+[Propor uma Situação de Aprendizagem de acordo com as capacidades escolhidas no item 2.]
+
 ### Contextualização:
 
-[
+[ 
     - Descrição da contextualização da Situação de Aprendizagem
     - Nesse campo, a abordagem contextualizada é pensada para construir cenários reais da situação de trabalho que o aluno vai enfrentar. Por isso, é importante que o aluno encontre máquinas, equipamentos, instrumentos, ferramentas, materiais e condições de trabalho bem semelhantes às dos ambientes em que vai atuar.
     - Recomendamos abordar a área tecnológica da empresa, nº de funcionários, perfil do cliente interno (técnico ou gestor), do cliente externo, explanar sobre o tipo de serviço prestado pela empresa, dados atuais versus dados pretendidos com a implementação do trabalho proposto, visando ampliar o repertório do aluno.

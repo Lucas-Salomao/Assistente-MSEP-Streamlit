@@ -140,18 +140,18 @@ modeloPlanoDeEnsino="""
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
 
-[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta] 
+[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Trazer uma lista com a mesma numeração apresentada no plano de curso.] 
 
 ### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
 
-[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta]
+[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Trazer uma lista com a mesma numeração apresentada no plano de curso.]
 
 ### 2.2 Capacidades Socioemocionais:
 
-[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta]
+[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Trazer uma lista com a mesma numeração apresentada no plano de curso.]
 
 [
-    - Nesse campo, precisamos descrever todas as capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
+    - Nesse campo, precisamos selecionar algumas (não todas) capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
     - Ao selecionarmos as capacidades que serão desenvolvidas, precisamos cuidar da gradualidade das capacidades, trabalhando com propostas que contemplem capacidades de menor complexidade para maior complexidade.
     - Importante: não podemos alterar as capacidades previstas no plano de curso.
     - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
@@ -161,8 +161,9 @@ modeloPlanoDeEnsino="""
 ## 3. Conhecimentos:
 
 [
-    - De acordo com a situação de aprendizagem proposta, escolher do plano de curso somente os conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
+    - De acordo com a situação de aprendizagem proposta, selecionar do plano de curso alguns (não todos) conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
     - Essa lista não pode conter todos os conhecimentos do plano de curso, somente os necessários de acordo com a situação de aprendizagem.
+    - Essa lista deve ser numerada de acordo com a numeração do item de conhecimento do plano de ensino.
 ]
 
 ## Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
@@ -212,3 +213,61 @@ modeloPlanoDeEnsino="""
 - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
 
 """
+
+cabecalhoPlano='''
+# Plano de Ensino segundo a MSEP
+
+## 1. Informações do Curso
+
+**Título:** [Titulo da situação de aprendizagem em vermelho(usar a sintaxe :red[**título**])]
+
+**Curso:** [Nome do curso]
+
+**Unidade Curricular (UC):** [Nome da unidade curricular]
+
+**Módulo:** [Básico ou Específico]
+
+**Carga Horária total na UC:** [Carga horária total do curso]
+
+**Nº de aulas previstas para desenvolver a situação de aprendizagem:** [Número de aulas]
+
+**Carga horária prevista para o desenvolvimento da Situação de Aprendizagem:** [Carga horária prevista para o desenvolvimento da Situação de Aprendizagem]
+
+**Objetivo da Unidade Curricular:** [Objetivo geral da unidade curricular de acordo com o plano de curso]
+
+**Modalidade de ensino:** [Presencial, EAD ou Híbrida]
+'''
+
+capacidadesPlano='''
+## 2. Capacidades a serem desenvolvidas:
+
+### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
+
+[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta] 
+
+### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
+
+[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta]
+
+### 2.2 Capacidades Socioemocionais:
+
+[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta]
+
+[
+    - Nesse campo, precisamos selecionar algumas (não todas) capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
+    - Ao selecionarmos as capacidades que serão desenvolvidas, precisamos cuidar da gradualidade das capacidades, trabalhando com propostas que contemplem capacidades de menor complexidade para maior complexidade.
+    - Importante: não podemos alterar as capacidades previstas no plano de curso.
+    - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
+    - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
+]
+'''
+
+conhecimentosPlano='''
+## 3. Conhecimentos:
+
+[
+    - De acordo com a situação de aprendizagem proposta, selecionar do plano de curso alguns (não todos) conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
+    - Essa lista não pode conter todos os conhecimentos do plano de curso, somente os necessários de acordo com a situação de aprendizagem.
+    - Essa lista deve ser numerada de acordo com a numeração do item de conhecimento do plano de ensino.
+]
+'''

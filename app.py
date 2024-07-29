@@ -13,7 +13,7 @@ def promptPlanoDeEnsino(curso,uc,estrategia):
     return("Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino para o curso "+curso+" da unidade curricular "+uc+" utilizando a estratégia de aprendizagem de "+estrategia+" , exatamente como o modelo abaixo, sem nenhuma modificação do que é solicitado e contendo somente os campos que é solicitado")
 
 generation_config = {
-    "temperature": 1,  # Define a temperatura para a geração de texto (menor = mais previsível)
+    "temperature": 0.7,  # Define a temperatura para a geração de texto (menor = mais previsível)
     "top_p": 0.95,  # Define a probabilidade de escolha das palavras (maior = mais palavras prováveis)
     "top_k": 64,  # Define o número de palavras candidatas para escolher (maior = mais opções)
     "max_output_tokens": 8192,  # Define o número máximo de tokens na saída

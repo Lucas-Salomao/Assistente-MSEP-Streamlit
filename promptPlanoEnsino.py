@@ -140,15 +140,15 @@ modeloPlanoDeEnsino="""
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
 
-[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Trazer uma lista com a mesma numeração apresentada no plano de curso.] 
+[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais.] 
 
 ### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
 
-[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Trazer uma lista com a mesma numeração apresentada no plano de curso.]
+[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais.]
 
 ### 2.2 Capacidades Socioemocionais:
 
-[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Trazer uma lista com a mesma numeração apresentada no plano de curso.]
+[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais.]
 
 [
     - Nesse campo, precisamos selecionar algumas (não todas) capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
@@ -161,9 +161,7 @@ modeloPlanoDeEnsino="""
 ## 3. Conhecimentos:
 
 [
-    - De acordo com a situação de aprendizagem proposta, selecionar do plano de curso alguns (não todos) conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
-    - Essa lista não pode conter todos os conhecimentos do plano de curso, somente os necessários de acordo com a situação de aprendizagem.
-    - Essa lista deve ser numerada de acordo com a numeração do item de conhecimento do plano de ensino.
+    - De acordo com a situação de aprendizagem proposta, selecionar do plano de curso alguns (não todos) conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta. Liste somente os conhecimentos selecionados, incluindo os subitens, e nada mais.
 ]
 
 ## Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]

@@ -7,13 +7,17 @@ import promptPlanoEnsino
 
 LOGO_VERMELHO = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'  # URL do logotipo vermelho do SENAI São Paulo
 LOGO_AZUL = 'https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'  # URL do logotipo azul do SENAI São Paulo
-LOGO_SENAI=LOGO_AZUL
+LOGO_SENAI=LOGO_VERMELHO
+
+responseSituaçãoAprendizagem=""
+responseCriteriosAvaliacao=""
+history=""
 
 def promptPlanoDeEnsino(curso,uc,estrategia):
     return("Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino para o curso "+curso+" da unidade curricular "+uc+" utilizando a estratégia de aprendizagem de "+estrategia+" , exatamente como o modelo abaixo, sem nenhuma modificação do que é solicitado e contendo somente os campos que é solicitado")
 
 generation_config = {
-    "temperature": 0.7,  # Define a temperatura para a geração de texto (menor = mais previsível)
+    "temperature": 1.0,  # Define a temperatura para a geração de texto (menor = mais previsível)
     "top_p": 0.95,  # Define a probabilidade de escolha das palavras (maior = mais palavras prováveis)
     "top_k": 64,  # Define o número de palavras candidatas para escolher (maior = mais opções)
     "max_output_tokens": 8192,  # Define o número máximo de tokens na saída

@@ -4,6 +4,10 @@ import google.generativeai as genai  # Importa a biblioteca do Google Generative
 import pymupdf  # Importa a biblioteca PyMuPDF (fitz) para ler arquivos PDF
 import fitz  # Importa a biblioteca fitz para trabalhar com documentos PDF
 import promptPlanoEnsino
+import time
+from pathlib import Path
+import os
+import joblib
 
 LOGO_VERMELHO = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'  # URL do logotipo vermelho do SENAI São Paulo
 LOGO_AZUL = 'https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'  # URL do logotipo azul do SENAI São Paulo
@@ -12,6 +16,19 @@ LOGO_SENAI=LOGO_VERMELHO
 responseSituaçãoAprendizagem=""
 responseCriteriosAvaliacao=""
 history=""
+new_chat_id = f'{time.time()}'
+
+# Create a data/ folder if it doesn't already exist
+try:
+    os.mkdir('data/')
+except:
+    pass
+
+# Load past chats (if available)
+try:
+    past_chats: dict = joblib.load('data/past_chats_list')
+except:
+    past_chats = {}
 
 def promptPlanoDeEnsino(curso,uc,estrategia):
     return("Com base na Metodologia SENAI de Educação Profissional (MSEP), elabore um plano de ensino para o curso "+curso+" da unidade curricular "+uc+" utilizando a estratégia de aprendizagem de "+estrategia+" , exatamente como o modelo abaixo, sem nenhuma modificação do que é solicitado e contendo somente os campos que é solicitado")
@@ -101,7 +118,7 @@ def get_gemini_reponse(prompt='',raw_text=''):
         str: A resposta do modelo Gemini.
     """
     contexto=raw_text
-    response = chat_session.send_message(contexto+prompt)
+    response = chat_session.send_message(contexto+prompt,stream=False)
     return response.text
 
 # read all pdf files and return text
@@ -171,6 +188,32 @@ def main():
         st.link_button("Ajuda?",'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D')
         st.title("Menu:")
         st.session_state.apiKeyGoogleAiStudio = st.text_input("Chave de API Google AI Studio:", "", type='password',help="Obtenha sua chave de API em https://ai.google.dev/aistudio")  # Campo de entrada para a chave API
+        
+        st.write('# Histórico')
+        if st.session_state.get('chat_id') is None:
+            st.session_state.chat_id = st.selectbox(
+                label='Selecione o historico desejado',
+                options=[new_chat_id] + list(past_chats.keys()),
+                format_func=lambda x: past_chats.get(x, 'Novo Chat'),
+                placeholder='_',
+            )
+        else:
+            # This will happen the first time AI response comes in
+            st.session_state.chat_id = st.selectbox(
+                label='Selecione o historico desejado',
+                options=[new_chat_id, st.session_state.chat_id] + list(past_chats.keys()),
+                index=1,
+                format_func=lambda x: past_chats.get(x, 'Novo Chat' if x != st.session_state.chat_id else st.session_state.chat_title),
+                placeholder='_',
+            )
+        # Save new chats after a message has been sent to AI
+        # TODO: Give user a chance to name chat
+        st.session_state.chat_title = f'ChatSession-{st.session_state.chat_id}'
+        
+        
+        
+        
+        
         
         pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar:", type='.pdf', accept_multiple_files=True, help='Faça o upload da MSEP e de um plano de curso que deseja elaborar os documentos de prática docente. Os documentos podem ser acessados em https://sesisenaisp.sharepoint.com/sites/NovaGED')  # Carregador de arquivos PDF
         if st.button("Processar documentos"):

@@ -269,3 +269,61 @@ conhecimentosPlano='''
     - Essa lista deve ser numerada de acordo com a numeração do item de conhecimento do plano de ensino.
 ]
 '''
+
+
+
+import os
+import streamlit as st
+import google.generativeai as genai
+
+# Configurar a API Key do Gemini
+#os.environ["GEMINI_API_KEY"] = st.secrets["GEMINI_API_KEY"]  # Buscar a chave de API do Streamlit Secrets
+genai.configure(api_key="AIzaSyCtP4Sqh2NGpZOFjdnfTzxBKka7nhKQBIQ")
+
+# Configurar o modelo Gemini
+generation_config = {
+    "temperature": 0.7,  # Ajuste este valor para controlar a criatividade (0 a 1)
+    "top_p": 0.95,
+    "top_k": 64,
+    "max_output_tokens": 1024,  # Ajuste este valor para controlar o tamanho da resposta
+    "response_mime_type": "text/plain",
+}
+model = genai.GenerativeModel(model_name="gemini-1.5-flash", generation_config=generation_config)
+
+# Inicializar a sessão de chat (fora da função para ser persistente)
+if "chat_session" not in st.session_state:
+    st.session_state.chat_session = model.start_chat()
+
+# Função para gerar resposta do chatbot
+def generate_response(user_input, chat_session):
+    response = chat_session.send_message(user_input)
+    return response.text
+
+# Interface do Streamlit
+st.title("Chatbot com Gemini e Streamlit")
+
+# Armazenar o histórico da conversa
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Mostrar o histórico da conversa
+for message in st.session_state.messages:
+    if message["role"] == "user":
+        st.write("Você:", message["content"])
+    else:
+        st.write("Chatbot:", message["content"])
+
+# Obter input do usuário
+user_input = st.text_input("Digite sua mensagem:")
+
+# Processar a mensagem do usuário
+if user_input:
+    # Gerar resposta do chatbot
+    response = generate_response(user_input, st.session_state.chat_session)
+
+    # Adicionar a mensagem do usuário e a resposta ao histórico
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.messages.append({"role": "assistant", "content": response})
+
+    # Mostrar a resposta do chatbot
+    st.write("Chatbot:", response)

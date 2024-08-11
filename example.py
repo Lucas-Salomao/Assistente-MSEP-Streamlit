@@ -11,6 +11,7 @@ genai.configure(api_key=GOOGLE_API_KEY)
 new_chat_id = f'{time.time()}'
 MODEL_ROLE = 'ai'
 AI_AVATAR_ICON = '✨'
+STREAM_RESPONSE=False
 
 # Create a data/ folder if it doesn't already exist
 try:
@@ -63,7 +64,7 @@ except:
     st.session_state.messages = []
     st.session_state.gemini_history = []
     print('new_cache made')
-st.session_state.model = genai.GenerativeModel('gemini-pro')
+st.session_state.model = genai.GenerativeModel('gemini-1.5-flash')
 st.session_state.chat = st.session_state.model.start_chat(
     history=st.session_state.gemini_history,
 )
@@ -95,7 +96,7 @@ if prompt := st.chat_input('Your message here...'):
     ## Send message to AI
     response = st.session_state.chat.send_message(
         prompt,
-        stream=True,
+        stream=STREAM_RESPONSE,
     )
     # Display assistant response in chat message container
     with st.chat_message(
@@ -105,27 +106,41 @@ if prompt := st.chat_input('Your message here...'):
         message_placeholder = st.empty()
         full_response = ''
         assistant_response = response
-        # Streams in a chunk at a time
-        for chunk in response:
-            # Simulate stream of chunk
-            # TODO: Chunk missing `text` if API stops mid-stream ("safety"?)
-            for ch in chunk.text.split(' '):
-                full_response += ch + ' '
-                time.sleep(0.05)
-                # Rewrites with a cursor at end
-                message_placeholder.write(full_response + '▌')
-        # Write full message with placeholder
-        message_placeholder.write(full_response)
+        
+        if(STREAM_RESPONSE):
+            # Streams in a chunk at a time
+            for chunk in response:
+                # Simulate stream of chunk
+                # TODO: Chunk missing `text` if API stops mid-stream ("safety"?)
+                for ch in chunk.text.split(' '):
+                    full_response += ch + ' '
+                    time.sleep(0.05)
+                    # Rewrites with a cursor at end
+                    message_placeholder.markdown(full_response + '▌')
+            # Write full message with placeholder
+        else:
+            message_placeholder.markdown(assistant_response.text)
 
     # Add assistant response to chat history
-    st.session_state.messages.append(
-        dict(
-            role=MODEL_ROLE,
-            content=st.session_state.chat.history[-1].parts[0].text,
-            avatar=AI_AVATAR_ICON,
+    if(STREAM_RESPONSE):
+        st.session_state.messages.append(
+            dict(
+                role=MODEL_ROLE,
+                content=st.session_state.chat.history[-1].parts[0].text,
+                avatar=AI_AVATAR_ICON,
+            )
         )
-    )
-    st.session_state.gemini_history = st.session_state.chat.history
+        st.session_state.gemini_history = st.session_state.chat.history
+    else:
+        st.session_state.messages.append(
+            dict(
+                role=MODEL_ROLE,
+                content=full_response,
+                avatar=AI_AVATAR_ICON,
+            )
+        )
+        
+    
     # Save to file
     joblib.dump(
         st.session_state.messages,

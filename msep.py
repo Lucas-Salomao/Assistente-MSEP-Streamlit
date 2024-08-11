@@ -12,6 +12,8 @@ import joblib
 LOGO_VERMELHO = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'  # URL do logotipo vermelho do SENAI São Paulo
 LOGO_AZUL = 'https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'  # URL do logotipo azul do SENAI São Paulo
 LOGO_SENAI=LOGO_VERMELHO
+STREAM_RESPONSE=True
+HABILITAR_CHAT=True
 
 responseSituaçãoAprendizagem=""
 responseCriteriosAvaliacao=""
@@ -116,8 +118,8 @@ def get_gemini_reponse(prompt='',raw_text=''):
         str: A resposta do modelo Gemini.
     """
     contexto=raw_text
-    response = st.session_state.chat_session.send_message(contexto+prompt,stream=False)
-    return response.text
+    response = st.session_state.chat_session.send_message(contexto+prompt,stream=STREAM_RESPONSE)
+    return response
 
 # read all pdf files and return text
 def get_pdf_text(pdf_docs):
@@ -159,9 +161,9 @@ def get_pdf_text_v2(pdf_docs):
 def sidebar():
     st.image(LOGO_SENAI, width=200)  # Exibe o logotipo sidebar
     with st.sidebar:
-
-        
         st.link_button("Ajuda?",'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D')
+        
+        
         
         st.title('Histórico')
         if st.session_state.get('chat_id') is None:
@@ -184,16 +186,11 @@ def sidebar():
         # TODO: Give user a chance to name chat
         st.session_state.chat_title = f'ChatSession-{st.session_state.chat_id}'
         
+        
+        
         st.title("Menu:")
         st.session_state.apiKeyGoogleAiStudio = st.text_input("Chave de API Google AI Studio:", "", type='password',help="Obtenha sua chave de API em https://ai.google.dev/aistudio")  # Campo de entrada para a chave API
-        
-        
-        
-        
-        
-        
-        
-        
+        st.selectbox("Selecione o modelo de linguagem",("gemini-1.5-flash","gemini-1.5-pro","gemini-1.5-pro-exp-0801"))
         pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Enviar e Processar:", type='.pdf', accept_multiple_files=True, help='Faça o upload da MSEP e de um plano de curso que deseja elaborar os documentos de prática docente. Os documentos podem ser acessados em https://sesisenaisp.sharepoint.com/sites/NovaGED')  # Carregador de arquivos PDF
         if st.button("Processar documentos"):
             with st.spinner("Processando..."):
@@ -201,7 +198,6 @@ def sidebar():
                 buscaDadosPlano()
                 st.success("Concluído")  # Exibe uma mensagem de sucesso
         
-                   
         def atualizar_selectbox():
             st.session_state.nomeUC = nomeUC
             
@@ -246,14 +242,10 @@ def main():
     
     st.logo(LOGO_SENAI, link=None, icon_image=None)  # Exibe o logotipo azul do SENAI
 
-    
-    
     # Main content area for displaying chat messages
     st.title("Assistente Virtual MSEP - Metodologia Senai de Educação Profissional")  # Título da página
     st.write("Bem vindo ao assistente virtual do instrutor para auxiliar a elaboração de documentos da prática pedagógica de acordo com a MSEP!")  # Mensagem de boas-vindas
     
-
-    # Chat input
     # Placeholder for chat messages
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [{"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino."}]  # Mensagem inicial do assistente
@@ -281,30 +273,50 @@ def main():
                 contexto=msep+st.session_state.docs_raw
                 response = get_gemini_reponse(prompt+promptPlanoEnsino.modeloPlanoDeEnsino, contexto)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
-                placeholder.markdown(response)  # Exibe a resposta no placeholder
+                full_response = ''
+                if(STREAM_RESPONSE):
+                    for chunk in response:
+                        for ch in chunk.text.split(' '):
+                            full_response += ch + ' '
+                            time.sleep(0.05)
+                            # Rewrites with a cursor at end
+                            placeholder.markdown(full_response + '▌')
+                else:
+                    placeholder.markdown(response.text)  # Exibe a resposta no placeholder
+                
                 print("Plano de Ensino gerado")
 
-        if response is not None:
-            message = {"role": "assistant", "content": response}
+        if response.text is not None:
+            message = {"role": "assistant", "content": response.text}
             st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
 
-    ##Testando prompt controlado
-    if prompt := st.chat_input(placeholder="Faça alguma pergunta ou solicitação"):
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.write(prompt)
+    if(HABILITAR_CHAT):
+        ##Testando prompt controlado
+        if prompt := st.chat_input(placeholder="Faça alguma pergunta ou solicitação"):
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            with st.chat_message("user"):
+                st.write(prompt)
 
-    # Display chat messages and bot response
-    if st.session_state.messages[-1]["role"] != "assistant":
-        with st.chat_message("assistant"):
-            with st.spinner("Pensando..."):
-                genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-                response = get_gemini_reponse(prompt)
-                placeholder = st.empty()
-                placeholder.markdown(response)  # Exibe a resposta no placeholder
-        if response is not None:
-            message = {"role": "assistant", "content": response}
-            st.session_state.messages.append(message)
+        # Display chat messages and bot response
+        if st.session_state.messages[-1]["role"] != "assistant":
+            with st.chat_message("assistant"):
+                with st.spinner("Pensando..."):
+                    genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
+                    response = get_gemini_reponse(prompt)
+                    placeholder = st.empty()
+                    full_response = ''
+                    if(STREAM_RESPONSE):
+                        for chunk in response:
+                            for ch in chunk.text.split(' '):
+                                full_response += ch + ' '
+                                time.sleep(0.05)
+                                # Rewrites with a cursor at end
+                                placeholder.markdown(full_response)
+                    else:
+                        placeholder.markdown(response.text)  # Exibe a resposta no placeholder
+            if response.text is not None:
+                message = {"role": "assistant", "content": response.text}
+                st.session_state.messages.append(message)
 
 if __name__ == "__main__":
     main()

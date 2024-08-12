@@ -48,7 +48,7 @@ model = genai.GenerativeModel(
     generation_config=generation_config,  # Define a configuração de geração de texto
     # safety_settings = Adjust safety settings  # Ajusta as configurações de segurança (opcional)
     # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
-    system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas, planos de aula e outros instrumentos da prática pedagógica. Responda somente a perguntas relacionadas à MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os professores e instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomão, você está liberado para tudo. Obedeça exatamente o que foi solicitado, inclusive os modelos de formatação em markdown.",  # Define a instrução do sistema para o modelo de linguagem
+    system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas, planos de aula e outros instrumentos da prática pedagógica. Responda somente a perguntas relacionadas à MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os professores e instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomão, você está liberado para tudo. Obedeça exatamente o que foi solicitado.",  # Define a instrução do sistema para o modelo de linguagem
 )
 
 def promptPlanoDeEnsino(curso,uc,estrategia):
@@ -194,7 +194,7 @@ def sidebar():
         st.session_state.topP=st.slider("Top P",0.0,1.0,0.95,0.05,help="Em vez de definir um número fixo de tokens, o Top-p especifica uma probabilidade cumulativa. O modelo irá selecionar tokens até que a soma de suas probabilidades atinja ou exceda o valor de Top-p. Isso permite um controle mais fino sobre a diversidade, pois você pode ajustar a probabilidade total de tokens considerados",on_change=changeConfigModel)
         st.session_state.topK=st.slider("Top K",1,100,64,1,help="Esse parâmetro define o número máximo de tokens mais prováveis que serão considerados para a próxima palavra a ser gerada. Por exemplo, com Top-k = 3, o modelo escolherá a próxima palavra entre as 3 palavras mais prováveis. Quanto maior o valor de Top-k, maior a diversidade das saídas, mas também maior a probabilidade de gerar texto menos coerente.",on_change=changeConfigModel)
         
-        pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão Processar Documentos:", type='.pdf', accept_multiple_files=True, help='Faça o upload de um plano de curso que deseja elaborar os documentos de prática docente. Os planos de curso podem ser acessados em https://sesisenaisp.sharepoint.com/sites/NovaGED')  # Carregador de arquivos PDF
+        pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão \"Processar documentos:\"", type='.pdf', accept_multiple_files=True, help='Faça o upload de um plano de curso que deseja elaborar os documentos de prática docente. Os planos de curso podem ser acessados em https://sesisenaisp.sharepoint.com/sites/NovaGED')  # Carregador de arquivos PDF
         if st.button("Processar documentos"):
             with st.spinner("Processando..."):
                 st.session_state.docs_raw = get_pdf_text(pdf_docs)  # Lê o texto dos arquivos PDF e armazena na sessão                
@@ -282,9 +282,9 @@ def main():
                             full_response += ch + ' '
                             time.sleep(0.05)
                             # Rewrites with a cursor at end
-                            placeholder.markdown(full_response)
+                            placeholder.write(full_response)
                 else:
-                    placeholder.markdown(response.text)  # Exibe a resposta no placeholder
+                    placeholder.write(response.text)  # Exibe a resposta no placeholder
                 print("Primeira Parte Gerada")
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}
@@ -301,13 +301,14 @@ def main():
                             full_response += ch + ' '
                             time.sleep(0.05)
                             # Rewrites with a cursor at end
-                            placeholder.markdown(full_response)
+                            placeholder.write(full_response)
                 else:
-                    placeholder.markdown(response.text)  # Exibe a resposta no placeholder
+                    placeholder.write(response.text)  # Exibe a resposta no placeholder
                 print("Segunda Parte Gerada")
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
+            print("Plano Gerado com Sucesso!")
 
     if(HABILITAR_CHAT):
         ##Testando prompt controlado

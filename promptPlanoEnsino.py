@@ -140,15 +140,15 @@ modeloPlanoDeEnsino="""
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
 
-[Escolha no máximo 5 capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado o limite máximo de 5] 
+[Escolha no máximo cinco capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de cinco capacidades] 
 
 ### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
 
-[Escolha no máximo 5 técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado o limite máximo de 5]
+[Escolha no máximo cinco técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de cinco capacidades]
 
 ### 2.2 Capacidades Socioemocionais:
 
-[Escolha no máximo 3 capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado o limite máximo de 3]
+[Escolha no máximo três capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de três capacidades]
 
 [
     - Nesse campo, precisamos selecionar algumas (não todas) capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
@@ -161,17 +161,14 @@ modeloPlanoDeEnsino="""
 ## 3. Conhecimentos:
 
 [
-    De acordo com a situação de aprendizagem proposta, selecionar da unidade curricular somente alguns (NÃO TODOS) os conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
-    Obedecer a seguinte formatação, preservando a numeração da unidade curricular, listando somente os conhecimentos necessários e nada mais, conforme exemplo:
-        1. Conhecimento Primeiro Nível
-            1.1 Conhecimento Segundo Nível
-                1.1.1 Conhecimento Terceiro Nível
+    - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
+    - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
 [
-    Propor uma Situação de Aprendizagem de acordo com as capacidades escolhidas no item 2. 
+    Propor uma Situação de Aprendizagem de acordo com as capacidades escolhidas no item 2 e com os conhecimentos escolhidos no item 3.
     Esse texto não deve conter no plano é apenas a referência de como elaborar a situação de aprendizagem.
 ]
 
@@ -206,14 +203,19 @@ modeloPlanoDeEnsino="""
     - Descrição detalhada dos resultados esperados dos alunos.
     - A MSEP nos orienta que, ao redigir a estratégia de aprendizagem desafiadora, o docente deve informar claramente o que espera do aluno como um produto final: relatório, trabalho escrito, projeto, protótipo, produto (bem ou serviço), maquete, softwares, vídeos, manuais, pareceres, leiaute, entre outros. Esses resultados devem ser adequados e proporcionais à contextualização e ao nível de exigência do desafio proposto. (p.138 MSEP)
 ]
-        
-Observações:
-- Utilize a linguagem clara e objetiva.
-- Inclua exemplos e informações relevantes para cada item.
-- Mantenha a coerência entre as diferentes etapas do plano de ensino.
-- Use a MSEP para entender como elaborar cada item solicitado.
-- A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
-- Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
+
+NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
+[
+    Observações:
+    - Utilize a linguagem clara e objetiva.
+    - Inclua exemplos e informações relevantes para cada item.
+    - Mantenha a coerência entre as diferentes etapas do plano de ensino.
+    - Use a MSEP para entender como elaborar cada item solicitado.
+    - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
+    - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
+]
+          
+
 
 """
 
@@ -257,12 +259,17 @@ modeloAvaliacao="""
 ]
 
 """
+# [
+#     - Criar uma lista numerada com alguns conhecimentos para propor a situação de aprendizagem
+#     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
+#     - Preciso desses conhecimentos organizados obedecendo o formado abaixo:
+#         1. [Tópico  de conhecimento principal]
+#             1.1 [Subtópico]
+#                 1.1.1 [Sub-subtópico]
+#             1.2 [Subtópico]
+#         2. [Próximo tópico  de conhecimento principal]
+#             2.1 [Subtópico]
+#                 2.1.1 [Sub-subtópico]
+# ]
 
-#Sendo assim, cada célula de critério de avaliação deve conter um critério elaborado, ou seja, para cada uma célula de capacidade existirão quatro células de critérios. Sendo possível mescle a célula de capacidade.
-#Formatar a capacidade da seguinte forma
-                #     :blue[capacidade]
-                # pular três células para escrever a próxima capacidade.
-                #     Formatar os critérios da seguinte forma:
-                #     :red[critério crítico]
-                #     :green[critério desejável]            
-                
+# [Conhecimentos de acordo com o plano de curso e unidade curricular necessários para propor a situação de aprendizagem. Não selecionar todos os conhecimentos, apenas alguns para construir a situação de aprendizagem.]

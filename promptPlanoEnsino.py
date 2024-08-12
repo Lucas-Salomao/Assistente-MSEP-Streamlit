@@ -118,7 +118,7 @@ modeloPlanoDeEnsino="""
 
 ## 1. Informações do Curso
 
-**Título:** [Titulo da situação de aprendizagem em vermelho(usar a sintaxe :red[**título**])]
+**Título:** [Titulo da situação de aprendizagem (usar a sintaxe :red[**título**])]
 
 **Curso:** [Nome do curso]
 
@@ -128,7 +128,7 @@ modeloPlanoDeEnsino="""
 
 **Carga Horária total na UC:** [Carga horária total do curso]
 
-**Nº de aulas previstas para desenvolver a situação de aprendizagem:** [Número de aulas]
+**Nº de aulas previstas para desenvolver a situação de aprendizagem:** [Número de aulas para desenvolver a situação de aprendizagem]
 
 **Carga horária prevista para o desenvolvimento da Situação de Aprendizagem:** [Carga horária prevista para o desenvolvimento da Situação de Aprendizagem]
 
@@ -140,15 +140,15 @@ modeloPlanoDeEnsino="""
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
 
-[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais.] 
+[Escolha no máximo 5 capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado o limite máximo de 5] 
 
 ### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
 
-[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais.]
+[Escolha no máximo 5 técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado o limite máximo de 5]
 
 ### 2.2 Capacidades Socioemocionais:
 
-[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais.]
+[Escolha no máximo 3 capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado o limite máximo de 3]
 
 [
     - Nesse campo, precisamos selecionar algumas (não todas) capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
@@ -161,33 +161,40 @@ modeloPlanoDeEnsino="""
 ## 3. Conhecimentos:
 
 [
-    - De acordo com a situação de aprendizagem proposta, selecionar do plano de curso alguns (não todos) conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta. Liste somente os conhecimentos selecionados, incluindo os subitens, e nada mais.
+    De acordo com a situação de aprendizagem proposta, selecionar da unidade curricular somente alguns (NÃO TODOS) os conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
+    Obedecer a seguinte formatação, preservando a numeração da unidade curricular, listando somente os conhecimentos necessários e nada mais, conforme exemplo:
+        1. Conhecimento Primeiro Nível
+            1.1 Conhecimento Segundo Nível
+                1.1.1 Conhecimento Terceiro Nível
 ]
 
-## Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
+## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
-[Propor uma Situação de Aprendizagem de acordo com as capacidades escolhidas no item 2.]
+[
+    Propor uma Situação de Aprendizagem de acordo com as capacidades escolhidas no item 2. 
+    Esse texto não deve conter no plano é apenas a referência de como elaborar a situação de aprendizagem.
+]
 
 ### Contextualização:
 
 [ 
-    - Descrição da contextualização da Situação de Aprendizagem
+    - Descrição da contextualização da Situação de Aprendizagem.
     - Nesse campo, a abordagem contextualizada é pensada para construir cenários reais da situação de trabalho que o aluno vai enfrentar. Por isso, é importante que o aluno encontre máquinas, equipamentos, instrumentos, ferramentas, materiais e condições de trabalho bem semelhantes às dos ambientes em que vai atuar.
     - Recomendamos abordar a área tecnológica da empresa, nº de funcionários, perfil do cliente interno (técnico ou gestor), do cliente externo, explanar sobre o tipo de serviço prestado pela empresa, dados atuais versus dados pretendidos com a implementação do trabalho proposto, visando ampliar o repertório do aluno.
     - Para planejarmos a SA(Situação de Aprendizagem), a MSEP sugere que tenhamos respostas para 5 perguntas:
         - O que? Para que? Como? Com o que? Onde?
     - Com as respostas às essas perguntas, precisamos considerar 3 requisitos para o planejamento:
-        - Mobilização
-        - Resolução de problemas com tomada de decisão
+        - Mobilização.
+        - Resolução de problemas com tomada de decisão.
         - Máximo de circulação de informações possíveis.
     - Estimulamos as competências de visão sistêmica e de criatividade com a Situação de Aprendizagem?
     - Indicar a necessidade de inclusão de figuras, esquemas, desenhos, leiaute, formulários, etc, para complementar a sitação de aprendizagem.
 ]
 
-## Desafio:
+### Desafio:
 
 [
-    - Descrição do desafio proposto na Situação de Aprendizagem
+    - Descrição do desafio proposto na Situação de Aprendizagem.
     - A MSEP recomenda que o desafio da SA precisa ser diferente do que o aluno já realizou, mas isso não significa que precisa ser inédito.
     - Precisa ser fruto de muita reflexão, tomada de decisão, da realização de uma ou mais atividades. Precisamos ficar atentos ao que chamamos de “resposta pronta”.
     - Quando as capacidades e conhecimentos requerem análise de dados, comparação ou correlação de soluções alternativas, como a escola propôs, é interessante abordar na perspectiva do estudo de caso e os alunos precisam trazer soluções de sucesso ou insucesso.
@@ -196,134 +203,65 @@ modeloPlanoDeEnsino="""
 ### Resultados Esperados:
 
 [
-    - Descrição detalhada dos resultados esperados
+    - Descrição detalhada dos resultados esperados dos alunos.
     - A MSEP nos orienta que, ao redigir a estratégia de aprendizagem desafiadora, o docente deve informar claramente o que espera do aluno como um produto final: relatório, trabalho escrito, projeto, protótipo, produto (bem ou serviço), maquete, softwares, vídeos, manuais, pareceres, leiaute, entre outros. Esses resultados devem ser adequados e proporcionais à contextualização e ao nível de exigência do desafio proposto. (p.138 MSEP)
 ]
-
-
-            
-**Observações:**
-
+        
+Observações:
 - Utilize a linguagem clara e objetiva.
 - Inclua exemplos e informações relevantes para cada item.
 - Mantenha a coerência entre as diferentes etapas do plano de ensino.
-- Siga as diretrizes da MSEP.
+- Use a MSEP para entender como elaborar cada item solicitado.
 - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
+- Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 
 """
 
-cabecalhoPlano='''
-# Plano de Ensino segundo a MSEP
+modeloAvaliacao="""
 
-## 1. Informações do Curso
-
-**Título:** [Titulo da situação de aprendizagem em vermelho(usar a sintaxe :red[**título**])]
-
-**Curso:** [Nome do curso]
-
-**Unidade Curricular (UC):** [Nome da unidade curricular]
-
-**Módulo:** [Básico ou Específico]
-
-**Carga Horária total na UC:** [Carga horária total do curso]
-
-**Nº de aulas previstas para desenvolver a situação de aprendizagem:** [Número de aulas]
-
-**Carga horária prevista para o desenvolvimento da Situação de Aprendizagem:** [Carga horária prevista para o desenvolvimento da Situação de Aprendizagem]
-
-**Objetivo da Unidade Curricular:** [Objetivo geral da unidade curricular de acordo com o plano de curso]
-
-**Modalidade de ensino:** [Presencial, EAD ou Híbrida]
-'''
-
-capacidadesPlano='''
-## 2. Capacidades a serem desenvolvidas:
-
-### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
-
-[Escolha algumas (não todas) capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta] 
-
-### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
-
-[Escolha algumas (não todas) capacidades técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta]
-
-### 2.2 Capacidades Socioemocionais:
-
-[Escolha algumas (não todas) capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta]
-
+## 5. Critérios de Avaliação:
 [
-    - Nesse campo, precisamos selecionar algumas (não todas) capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
-    - Ao selecionarmos as capacidades que serão desenvolvidas, precisamos cuidar da gradualidade das capacidades, trabalhando com propostas que contemplem capacidades de menor complexidade para maior complexidade.
-    - Importante: não podemos alterar as capacidades previstas no plano de curso.
-    - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
-    - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
+    Tabela contendo como título "### Instrumento de Registro"
+    Subtítulo da tabela: 
+        Nome do aluno:
+        Turma:
+    Colunas:
+        Capacidades básicas/técnicas e socioemocionais
+            [
+                Colocar uma capacidades basicas ou técnicas e socioemocionais selecionadas para a situação de aprendizagem por linha.
+            ]
+        Critérios de Avaliação:
+            [
+                Para cada capacidade, elaborar dois critérios críticos e dois critérios desejáveis.
+                Os critérios críticos garantem que a capacidade foi atendida minimamente e os critérios desejáveis sinalizam um desempenho complementar aos critérios críticos.
+            ]
+        Autoavaliação: [célula em branco]
+        Avaliação Professor: [célula em branco]
+    - Legenda:
+        S=Atingiu/N=Não Atingiu [não preencher na tabela]
+        :red[**critério crítico**] / :green[**critério desejável**]
+    
+    Obedecer a seguinte formatação da tabela e adequar seguindo o modelo para a quantidade de capacidades:
+    
+    | Capacidade básica/técnica e socioemocional | Critério de avaliação      | Autoavaliação | Avaliação Professor |
+    | ------------------------------------------ | -------------------------- | ------------- | ------------------- |
+    | :blue[capacidade]                          | :red[criterio crítico]     |               |                     |
+    |                                            | :red[criterio crítico]     |               |                     |
+    |                                            | :green[criterio desejável] |               |                     |
+    |                                            | :green[criterio desejável] |               |                     |
+    | :blue[capacidade]                          | :red[criterio crítico]     |               |                     |
+    |                                            | :red[criterio crítico]     |               |                     |
+    |                                            | :green[criterio desejável] |               |                     |
+    |                                            | :green[criterio desejável] |               |                     |
 ]
-'''
 
-conhecimentosPlano='''
-## 3. Conhecimentos:
+"""
 
-[
-    - De acordo com a situação de aprendizagem proposta, selecionar do plano de curso alguns (não todos) conhecimentos necessários e que estão relacionados com a situação de aprendizagem proposta.
-    - Essa lista não pode conter todos os conhecimentos do plano de curso, somente os necessários de acordo com a situação de aprendizagem.
-    - Essa lista deve ser numerada de acordo com a numeração do item de conhecimento do plano de ensino.
-]
-'''
-
-
-
-# import os
-# import streamlit as st
-# import google.generativeai as genai
-
-# # Configurar a API Key do Gemini
-# #os.environ["GEMINI_API_KEY"] = st.secrets["GEMINI_API_KEY"]  # Buscar a chave de API do Streamlit Secrets
-# genai.configure(api_key="AIzaSyCtP4Sqh2NGpZOFjdnfTzxBKka7nhKQBIQ")
-
-# # Configurar o modelo Gemini
-# generation_config = {
-#     "temperature": 0.7,  # Ajuste este valor para controlar a criatividade (0 a 1)
-#     "top_p": 0.95,
-#     "top_k": 64,
-#     "max_output_tokens": 1024,  # Ajuste este valor para controlar o tamanho da resposta
-#     "response_mime_type": "text/plain",
-# }
-# model = genai.GenerativeModel(model_name="gemini-1.5-flash", generation_config=generation_config)
-
-# # Inicializar a sessão de chat (fora da função para ser persistente)
-# if "chat_session" not in st.session_state:
-#     st.session_state.chat_session = model.start_chat()
-
-# # Função para gerar resposta do chatbot
-# def generate_response(user_input, chat_session):
-#     response = chat_session.send_message(user_input)
-#     return response.text
-
-# # Interface do Streamlit
-# st.title("Chatbot com Gemini e Streamlit")
-
-# # Armazenar o histórico da conversa
-# if "messages" not in st.session_state:
-#     st.session_state.messages = []
-
-# # Mostrar o histórico da conversa
-# for message in st.session_state.messages:
-#     if message["role"] == "user":
-#         st.write("Você:", message["content"])
-#     else:
-#         st.write("Chatbot:", message["content"])
-
-# # Obter input do usuário
-# user_input = st.text_input("Digite sua mensagem:")
-
-# # Processar a mensagem do usuário
-# if user_input:
-#     # Gerar resposta do chatbot
-#     response = generate_response(user_input, st.session_state.chat_session)
-
-#     # Adicionar a mensagem do usuário e a resposta ao histórico
-#     st.session_state.messages.append({"role": "user", "content": user_input})
-#     st.session_state.messages.append({"role": "assistant", "content": response})
-
-#     # Mostrar a resposta do chatbot
-#     st.write("Chatbot:", response)
+#Sendo assim, cada célula de critério de avaliação deve conter um critério elaborado, ou seja, para cada uma célula de capacidade existirão quatro células de critérios. Sendo possível mescle a célula de capacidade.
+#Formatar a capacidade da seguinte forma
+                #     :blue[capacidade]
+                # pular três células para escrever a próxima capacidade.
+                #     Formatar os critérios da seguinte forma:
+                #     :red[critério crítico]
+                #     :green[critério desejável]            
+                

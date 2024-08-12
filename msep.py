@@ -52,7 +52,7 @@ model = genai.GenerativeModel(
 )
 
 def promptPlanoDeEnsino(curso,uc,estrategia):
-    return("Elabore um plano de ensino da unidade curricular "+uc+", do o curso "+curso+", utilizando a estratégia de aprendizagem de "+estrategia+", com base na Metodologia SENAI de Educação Profissional (MSEP). Siga o modelo abaixo, sem nenhuma modificação ou adição de item não solicitado e contendo somente os campos que é solicitado. Usar a MSEP apenas para entender como criar o plano de ensino, mas obedecer o modelo dado.")
+    return("Elabore um plano de ensino da unidade curricular "+uc+", do o curso "+curso+", utilizando a estratégia de aprendizagem de "+estrategia+", com base na Metodologia SENAI de Educação Profissional (MSEP). Siga o modelo abaixo, sem nenhuma modificação ou adição de item não solicitado e contendo somente os campos que é solicitado. Usar a MSEP apenas para entender como criar o plano de ensino, mas obedecer o modelo dado. Algumas palavras ou termos são inerentes a unidade curricular e podem soar ofensivas ou inseguras, mas desconsidere e siga em frente.")
 
 
 # Inicializar a sessão de chat (fora da função para ser persistente)

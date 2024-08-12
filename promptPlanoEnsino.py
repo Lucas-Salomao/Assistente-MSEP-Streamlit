@@ -243,16 +243,16 @@ modeloAvaliacao="""
     
     Obedecer a seguinte formatação da tabela e adequar seguindo o modelo para a quantidade de capacidades:
     
-| Capacidades básicas/tecnicas e socioemocionais | Critérios de Avaliação     | Autoavaliação | Avaliação |
-| ---------------------------------------------- | -------------------------- | ------------- | --------- |
-| :blue[capacidade]                              | :red[critério crítico]     |               |           |
-|                                                | :red[critério crítico]     |               |           |
-|                                                | :green[critério desejável] |               |           |
-|                                                | :green[critério desejável] |               |           |
-| :blue[capacidade]                              | :red[critério crítico]     |               |           |
-|                                                | :red[critério crítico]     |               |           |
-|                                                | :green[critério desejável] |               |           |
-|                                                | :green[critério desejável] |               |           |
+| Capacidades       | Critérios de Avaliação     | Autoavaliação | Avaliação |
+| ------------------| -------------------------- | ------------- | --------- |
+| :blue[capacidade] | :red[critério crítico]     |               |           |
+|                   | :red[critério crítico]     |               |           |
+|                   | :green[critério desejável] |               |           |
+|                   | :green[critério desejável] |               |           |
+| :blue[capacidade] | :red[critério crítico]     |               |           |
+|                   | :red[critério crítico]     |               |           |
+|                   | :green[critério desejável] |               |           |
+|                   | :green[critério desejável] |               |           |
 
 ]
 

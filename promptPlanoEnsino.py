@@ -243,16 +243,17 @@ modeloAvaliacao="""
     
     Obedecer a seguinte formatação da tabela e adequar seguindo o modelo para a quantidade de capacidades:
     
-    | Capacidade básica/técnica e socioemocional | Critério de avaliação      | Autoavaliação | Avaliação Professor |
-    | ------------------------------------------ | -------------------------- | ------------- | ------------------- |
-    | :blue[capacidade]                          | :red[criterio crítico]     |               |                     |
-    |                                            | :red[criterio crítico]     |               |                     |
-    |                                            | :green[criterio desejável] |               |                     |
-    |                                            | :green[criterio desejável] |               |                     |
-    | :blue[capacidade]                          | :red[criterio crítico]     |               |                     |
-    |                                            | :red[criterio crítico]     |               |                     |
-    |                                            | :green[criterio desejável] |               |                     |
-    |                                            | :green[criterio desejável] |               |                     |
+    | Capacidades básicas/tecnicas e socioemocionais | Critérios de Avaliação     | Autoavaliação | Avaliação |
+| ---------------------------------------------- | -------------------------- | ------------- | --------- |
+| :blue[capacidade]                              | :red[critério crítico]     |               |           |
+|                                                | :red[critério crítico]     |               |           |
+|                                                | :green[critério desejável] |               |           |
+|                                                | :green[critério desejável] |               |           |
+| :blue[capacidade]                              | :red[critério crítico]     |               |           |
+|                                                | :red[critério crítico]     |               |           |
+|                                                | :green[critério desejável] |               |           |
+|                                                | :green[critério desejável] |               |           |
+
 ]
 
 """

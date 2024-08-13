@@ -109,7 +109,16 @@ def clear_chat_history():
     st.session_state.messages = [
         {"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino."}]
     print(st.session_state.messages)
-    st.session_state.chat_session=model.start_chat()
+    st.session_state.chat_session=model.start_chat(
+        history=[
+            {
+            "role": "user",
+            "parts": [
+                st.session_state.msep
+            ],
+            },
+        ]
+    )
     print(st.session_state.chat_session)
     
 def get_gemini_reponse(prompt='',raw_text=''):
@@ -239,8 +248,11 @@ def main():
         st.session_state.tipoDocumento = "Plano de Ensino"
     if 'estrategiaAprendizagem' not in st.session_state:
         st.session_state.estrategiaAprendizagem = ["Situação-Problema"]
+    if 'msep' not in st.session_state:
+        st.session_state.msep = ler_arquivo_txt('msep.txt')
 
     sidebar()
+    clear_chat_history()
     
     st.logo(LOGO_SENAI, link=None, icon_image=None)  # Exibe o logotipo azul do SENAI
 
@@ -271,8 +283,7 @@ def main():
         with st.chat_message("assistant"):
             with st.spinner("Pensando..."):
                 genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-                msep=ler_arquivo_txt('msep.txt')
-                contexto=msep+st.session_state.docs_raw
+                contexto=st.session_state.msep+st.session_state.docs_raw
                 response = get_gemini_reponse(prompt+promptPlanoEnsino.modeloPlanoDeEnsino, contexto)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 full_response = ''

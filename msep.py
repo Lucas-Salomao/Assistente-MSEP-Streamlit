@@ -253,7 +253,6 @@ def main():
 
     sidebar()
     clear_chat_history()
-    
     st.logo(LOGO_SENAI, link=None, icon_image=None)  # Exibe o logotipo azul do SENAI
 
     # Main content area for displaying chat messages
@@ -270,13 +269,16 @@ def main():
 
     st.session_state.text_btn="Gerar "+st.session_state.tipoDocumento  # Define o texto do botão
     if st.button(st.session_state.text_btn):
-        if (st.session_state.text_btn=="Gerar Plano de Ensino"):
-            print("Gerando Plano de Ensino")
-            prompt=promptPlanoDeEnsino(st.session_state.nomeCurso,st.session_state.nomeUC,st.session_state.estrategiaAprendizagem)
-            print(prompt)
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.write("Gerar Plano de Ensino da Unidade Curricular "+ st.session_state.nomeUC + " do curso " + st.session_state.nomeCurso)
+        if(st.session_state.apiKeyGoogleAiStudio==""):
+            st.warning("Por favor insira a chave de API",icon="🚨")
+        else:
+            if (st.session_state.text_btn=="Gerar Plano de Ensino"):
+                print("Gerando Plano de Ensino")
+                prompt=promptPlanoDeEnsino(st.session_state.nomeCurso,st.session_state.nomeUC,st.session_state.estrategiaAprendizagem)
+                print(prompt)
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.write("Gerar Plano de Ensino da Unidade Curricular "+ st.session_state.nomeUC + " do curso " + st.session_state.nomeCurso)
 
     # Display chat messages and bot response
     if st.session_state.messages[-1]["role"] != "assistant":
@@ -324,9 +326,12 @@ def main():
     if(HABILITAR_CHAT):
         ##Testando prompt controlado
         if prompt := st.chat_input(placeholder="Faça alguma pergunta ou solicitação"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.write(prompt)
+            if(st.session_state.apiKeyGoogleAiStudio==""):
+                st.warning("Por favor insira a chave de API",icon="🚨")
+            else:
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.write(prompt)
 
         # Display chat messages and bot response
         if st.session_state.messages[-1]["role"] != "assistant":

@@ -48,39 +48,39 @@
 #                     - Considere o valor padrão em branco pois será preenchido posteriormente
 #         - Legenda:[A=Atingiu/N=Não Atingiu]
         
-#     - Tabela contendo como título "Plano de Aula"
-#         - Colulas:
-#             -Nº horas/aula e data:
-#                 [Ex. 4 aulas 10/08/2023]
-#             -Capacidades a serem desenvolvidas:
-#                 [ Por exemplo:
-#                     - Correlacionar os itens exigidos na legislação, nas normas e notas técnicas ao ramo de atuação e/ou atividade identificadas in loco.
-#                     - Cumprir normas e procedimentos de segurança estabelecidos pela empresa para a realização das atividades de inspeção, a fim de garantir a saúde e integridade física.
-#                 ]
-#             -Conhecimentos relacionados:
-#                 [ Por exemplo:
-#                     - Legislação aplicada à saúde, segurança do trabalho e meio ambiente:
-#                     - Normas Regulamentadoras do Ministério do Trabalho.
-#                     - Notas Técnicas aplicadas à saúde, segurança do trabalho e meio ambiente.
-#                 ]
-#             -Estratégias de ensino e instrumentos de avaliação:
-#                 [ Por exemplo:
-#                     - Exposição dialogada: explorar sobre os principais conhecimentos associados ao mercado no que tange às normas e legislações.
-#                     - Simulação: elaboração e aplicação de ficha de análise de investigação de acidentes.
-#                     - Dinâmica de grupo: conversando com as famílias das vítimas de acidente de trabalho.
-#                 ]
-#             -Recursos e ambientes pedagógicos:
-#             [
-#                 Computador, internet, notion, Microsoft Teams, Microsoft Learn, Plataforma de Gamificação Quizziz, Forms, Mentimeter, Kahoot
-#             ]
-#             -Critérios de Avaliação:
-#             [
-#                 Para a formulação dos critérios de avaliação, a MSEP recomenda algumas características estruturais essenciais. São elas: objetividade, mensuração, granularidade e transparência.
-#                 Quanto ao tipo de critérios de avaliação a serem observados, deve estar direcionado em duas vertentes: processo de execução e produto.
-#                 Utilizar os critérios críticos e desejáveis levantados anteriormente, iniciando os critérios críticos com "(C)" e os desejáveis iniciando com "(D)"
-#                 A célula deve conter todos os crítérios criticos e desejáveis de acordo com as capacidades escolhidas para a avaliação.
-#             ]
-#         - Referências:[livros, apostilas, sites, blogs, etc]
+    # - Tabela contendo como título "Plano de Aula"
+    #     - Colulas:
+    #         -Nº horas/aula e data:
+    #             [Ex. 4 aulas 10/08/2023]
+    #         -Capacidades a serem desenvolvidas:
+    #             [ Por exemplo:
+    #                 - Correlacionar os itens exigidos na legislação, nas normas e notas técnicas ao ramo de atuação e/ou atividade identificadas in loco.
+    #                 - Cumprir normas e procedimentos de segurança estabelecidos pela empresa para a realização das atividades de inspeção, a fim de garantir a saúde e integridade física.
+    #             ]
+    #         -Conhecimentos relacionados:
+    #             [ Por exemplo:
+    #                 - Legislação aplicada à saúde, segurança do trabalho e meio ambiente:
+    #                 - Normas Regulamentadoras do Ministério do Trabalho.
+    #                 - Notas Técnicas aplicadas à saúde, segurança do trabalho e meio ambiente.
+    #             ]
+    #         -Estratégias de ensino e instrumentos de avaliação:
+    #             [ Por exemplo:
+    #                 - Exposição dialogada: explorar sobre os principais conhecimentos associados ao mercado no que tange às normas e legislações.
+    #                 - Simulação: elaboração e aplicação de ficha de análise de investigação de acidentes.
+    #                 - Dinâmica de grupo: conversando com as famílias das vítimas de acidente de trabalho.
+    #             ]
+    #         -Recursos e ambientes pedagógicos:
+    #         [
+    #             Computador, internet, notion, Microsoft Teams, Microsoft Learn, Plataforma de Gamificação Quizziz, Forms, Mentimeter, Kahoot
+    #         ]
+    #         -Critérios de Avaliação:
+    #         [
+    #             Para a formulação dos critérios de avaliação, a MSEP recomenda algumas características estruturais essenciais. São elas: objetividade, mensuração, granularidade e transparência.
+    #             Quanto ao tipo de critérios de avaliação a serem observados, deve estar direcionado em duas vertentes: processo de execução e produto.
+    #             Utilizar os critérios críticos e desejáveis levantados anteriormente, iniciando os critérios críticos com "(C)" e os desejáveis iniciando com "(D)"
+    #             A célula deve conter todos os crítérios criticos e desejáveis de acordo com as capacidades escolhidas para a avaliação.
+    #         ]
+    #     - Referências:[livros, apostilas, sites, blogs, etc]
         
 #     - Tabela contendo como título "Tabela de Nível de Desempenho"
 #         -Colunas:
@@ -214,8 +214,6 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-          
-
 
 """
 
@@ -227,7 +225,7 @@ modeloAvaliacao="""
     Subtítulo da tabela: 
         Nome do aluno:
         Turma:
-    Colunas:
+    - Colunas:
         Capacidades básicas/técnicas e socioemocionais
             [
                 Colocar uma capacidades basicas ou técnicas e socioemocionais selecionadas para a situação de aprendizagem por linha.
@@ -255,6 +253,45 @@ modeloAvaliacao="""
 |                   | :red[critério crítico]     |               |           |
 |                   | :green[critério desejável] |               |           |
 |                   | :green[critério desejável] |               |           |
+
+]
+"""
+modeloPlanoAula="""
+
+## 6. Plano de Aula:
+[
+    Tabela contendo como título "Plano de Aula"
+    - Colulas:
+        -Nº horas/aula e data:
+            [carga horária em horas e data da aula no formato (DD/MM/AAAA)]
+        -Capacidades a serem desenvolvidas:
+            [ Listar as capacidades selecionadas anteriormente para a situação de aprendizagem.]
+        -Conhecimentos relacionados:
+            [ Listar os conhecimentos selecionados anteriormente para o desenvolvimento da situação de aprendizagem.]
+        -Estratégias de ensino e instrumentos de avaliação:
+            [ Por exemplo:
+                - Exposição dialogada: explorar sobre os principais conhecimentos associados ao mercado no que tange às normas e legislações.
+                - Simulação: elaboração e aplicação de ficha de análise de investigação de acidentes.
+                - Dinâmica de grupo: conversando com as famílias das vítimas de acidente de trabalho.
+            ]
+        -Recursos e ambientes pedagógicos:
+            [Computador, internet, notion, Microsoft Teams, Microsoft Learn, Plataforma de Gamificação Quizziz, Forms, Mentimeter, Kahoot, entre outros.]
+        -Critérios de Avaliação:
+            [ Listar os critérios de avaliação, críticos e desejáveis, elaborados anteriormente no item 5 necessários para a avaliação da situação de aprendizagem proposta.]
+        -Referências bibliográficas de acordo com o plano de curso:
+            [livros, apostilas, sites, blogs, artigos, etc]
+    
+    O Plano de Aula deve contemplar toda a carga horária e número de aulas previstas para o desenvolvimento da Situação de Aprendizagem. O plano deve conter exatamente a quantidade de carga horária e aulas previstas no Item 1. Informações do Curso. 
+                
+    Obedecer a seguinte formatação da tabela e adequar seguindo o modelo para a quantidade de capacidades:
+    
+| Horas/Aulas e Data    | Capacidades     | Conhecimentos | Estratégias | Recursos e ambientes pedagógicos | Critérios de Avaliação   | Referências |
+|-----------------------|-----------------|---------------|-------------|----------------------------------|--------------------------|-------------|
+| XX horas - DD/MM/AAAA |:blue[capacidade]|               |             |                                  |:red[critério crítico]    |             |
+|                       |                 |               |             |                                  |:green[critério desejável]|             |
+| XX horas - DD/MM/AAAA |:blue[capacidade]|               |             |                                  |:red[critério crítico]    |             |
+|                       |                 |               |             |                                  |:green[critério desejável]|             |
+
 
 ]
 

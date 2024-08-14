@@ -309,16 +309,16 @@ def main():
                             full_response += ch + ' '
                             time.sleep(0.05)
                             # Rewrites with a cursor at end
-                            placeholder.markdown(full_response)
+                            placeholder.write(full_response)
                 else:
-                    placeholder.markdown(response.text)  # Exibe a resposta no placeholder
+                    placeholder.write(response.text)  # Exibe a resposta no placeholder
                 print("Primeira Parte Gerada")
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
                     
                 
-                prompt="Elaborar somente o item 5. Critérios de Avaliação de acordo com a situação de aprendizagem proposta. Não preciso o restante, somente o item 5."
+                prompt="Elaborar somente o item 5. Critérios de Avaliação de acordo com a situação de aprendizagem proposta. Não preciso do restante, somente o item 5."
                 response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloAvaliacao)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 full_response = ''
@@ -335,6 +335,25 @@ def main():
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
+                
+                prompt="Elaborar somente o item 6. Plano de Aula de acordo com a situação de aprendizagem proposta e com os critérios de avaliação. Não preciso do restante, somente o item 6."
+                response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloPlanoAula)  # Obtém a resposta do modelo Gemini
+                placeholder = st.empty()  # Cria um placeholder para a resposta
+                full_response = ''
+                if(STREAM_RESPONSE):
+                    for chunk in response:
+                        for ch in chunk.text.split(' '):
+                            full_response += ch + ' '
+                            time.sleep(0.05)
+                            # Rewrites with a cursor at end
+                            placeholder.write(full_response)
+                else:
+                    placeholder.write(response.text)  # Exibe a resposta no placeholder
+                print("Terceira Parte Gerada")
+                if response.text is not None:
+                    message = {"role": "assistant", "content": response.text}
+                    st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
+                    
             print("Plano Gerado com Sucesso!")
 
     if(HABILITAR_CHAT):
@@ -352,7 +371,7 @@ def main():
             with st.chat_message("assistant"):
                 with st.spinner("Pensando..."):
                     genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-                    response = get_gemini_reponse(prompt)
+                    response = get_gemini_reponse(prompt,st.session_state.docs_raw)
                     placeholder = st.empty()
                     full_response = ''
                     if(STREAM_RESPONSE):

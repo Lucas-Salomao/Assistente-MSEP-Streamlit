@@ -60,17 +60,21 @@ if "chat_session" not in st.session_state:
     st.session_state.chat_session = model.start_chat()
 
 def buscaDadosPlano():
-    temp_model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",  # Define o modelo de linguagem a ser usado (Gemini 1.5 Flash)
-        generation_config=generation_config,  # Define a configuração de geração de texto
-        # safety_settings = Adjust safety settings  # Ajusta as configurações de segurança (opcional)
-        # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
-        system_instruction="Execute apenas o que foi solicitado, dando o resultado pedido e nada mais além disso.",  # Define a instrução do sistema para o modelo de linguagem
-    )
-    genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-    st.session_state.nomeCurso=temp_model.generate_content(st.session_state.docs_raw+"Qual o nome do curso?").text
-    st.session_state.UCs_list=temp_model.generate_content(st.session_state.docs_raw+"Liste apenas as unidades curriculares. Não insira nenhum bullet ou marcador").text.splitlines()
-    return None
+    try:
+        temp_model = genai.GenerativeModel(
+            model_name="gemini-1.5-flash",  # Define o modelo de linguagem a ser usado (Gemini 1.5 Flash)
+            generation_config=generation_config,  # Define a configuração de geração de texto
+            # safety_settings = Adjust safety settings  # Ajusta as configurações de segurança (opcional)
+            # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
+            system_instruction="Execute apenas o que foi solicitado, dando o resultado pedido e nada mais além disso.",  # Define a instrução do sistema para o modelo de linguagem
+        )
+        genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
+        st.session_state.nomeCurso=temp_model.generate_content(st.session_state.docs_raw+"Qual o nome do curso?").text
+        st.session_state.UCs_list=temp_model.generate_content(st.session_state.docs_raw+"Liste apenas as unidades curriculares. Não insira nenhum bullet ou marcador").text.splitlines()
+        return None
+    except:
+        st.warning("Erro ao ler informações do Plano de Curso, tente novamente.",icon="❌")
+        
 
 def ler_arquivo_txt(nome_do_arquivo):
     """
@@ -106,20 +110,24 @@ def clear_chat_history():
     """
     Limpa o histórico de mensagens do chat.
     """
-    st.session_state.messages = [
-        {"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino."}]
-    print(st.session_state.messages)
-    st.session_state.chat_session=model.start_chat(
-        history=[
-            {
-            "role": "user",
-            "parts": [
-                st.session_state.msep
-            ],
-            },
-        ]
-    )
-    print(st.session_state.chat_session)
+    try:
+        st.session_state.messages = [
+            {"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino."}]
+        print(st.session_state.messages)
+        st.session_state.chat_session=model.start_chat(
+            history=[
+                {
+                "role": "user",
+                "parts": [
+                    st.session_state.msep
+                ],
+                },
+            ]
+        )
+        print(st.session_state.chat_session)
+    except:
+        st.warning("Erro ao limpar o histórico do chat.",icon="❌")
+    
     
 def get_gemini_reponse(prompt='',raw_text=''):
     """
@@ -147,12 +155,15 @@ def get_pdf_text(pdf_docs):
     Returns:
         str: O texto extraído de todos os arquivos PDF.
     """
-    text = ""
-    for pdf in pdf_docs:
-        pdf_reader = PyPDF2.PdfReader(pdf)
-        for page in pdf_reader.pages:
-            text += page.extract_text()
-    return text
+    try:
+        text = ""
+        for pdf in pdf_docs:
+            pdf_reader = PyPDF2.PdfReader(pdf)
+            for page in pdf_reader.pages:
+                text += page.extract_text()
+        return text
+    except:
+        st.warning("Erro ao converter arquivo PDF para texto",icon="❌")
 
 def get_pdf_text_v2(pdf_docs):
     """
@@ -202,13 +213,16 @@ def sidebar():
         st.session_state.temperatura=st.slider("Temperatura",0.0,2.0,1.0,0.05,help="**Temperatura**: Imagine a temperatura como um controle de criatividade do modelo. Em temperaturas mais altas, o Gemini se torna mais aventureiro, explorando respostas menos óbvias e mais criativas. Já em temperaturas mais baixas, ele se torna mais conservador, fornecendo respostas mais diretas e previsíveis. É como ajustar o termostato de um forno: quanto mais alto, mais quente e mais chances de algo queimar; quanto mais baixo, mais frio e mais seguro.",on_change=changeConfigModel)
         st.session_state.topP=st.slider("Top P",0.0,1.0,0.95,0.05,help="Pense no **TopP** como um filtro que controla a variedade das palavras que o Gemini pode usar. Um valor de TopP mais baixo significa que o modelo se concentrará em um conjunto menor de palavras mais prováveis, resultando em respostas mais coerentes e focadas. Por outro lado, um valor mais alto permite que o modelo explore um vocabulário mais amplo, o que pode levar a respostas mais diversas e inesperadas. É como escolher um dicionário: um dicionário menor oferece menos opções, mas as palavras são mais conhecidas; um dicionário maior oferece mais opções, mas pode ser mais difícil encontrar a palavra certa.",on_change=changeConfigModel)
         st.session_state.topK=st.slider("Top K",1,100,64,1,help="O **TopK** é semelhante ao TopP, mas funciona de uma forma ligeiramente diferente. Em vez de filtrar as palavras com base em suas probabilidades cumulativas, o TopK simplesmente seleciona as K palavras mais prováveis a cada passo da geração de texto. Isso significa que o TopK pode levar a resultados mais imprevisíveis, especialmente para valores baixos de K. É como escolher um número limitado de opções de um menu: um número menor de opções restringe suas escolhas, enquanto um número maior oferece mais flexibilidade.",on_change=changeConfigModel)
-        
+        pdf_docs=None
         pdf_docs = st.file_uploader("Carregue seus arquivos PDF e clique no botão \"Processar documentos:\"", type='.pdf', accept_multiple_files=True, help='Faça o upload de um plano de curso que deseja elaborar os documentos de prática docente. Os planos de curso podem ser acessados em https://sesisenaisp.sharepoint.com/sites/NovaGED')  # Carregador de arquivos PDF
         if st.button("Processar documentos"):
-            with st.spinner("Processando..."):
-                st.session_state.docs_raw = get_pdf_text(pdf_docs)  # Lê o texto dos arquivos PDF e armazena na sessão                
-                buscaDadosPlano()
-                st.success("Concluído")  # Exibe uma mensagem de sucesso
+            if pdf_docs == []:  
+                st.warning("Insira um Plano de Curso para análise", icon="⚠️")
+            else:
+                with st.spinner("Processando..."):
+                    st.session_state.docs_raw = get_pdf_text(pdf_docs)  # Lê o texto dos arquivos PDF e armazena na sessão                
+                    buscaDadosPlano()
+                    st.success("Concluído")  # Exibe uma mensagem de sucesso
         
         def atualizar_selectbox():
             st.session_state.nomeUC = nomeUC
@@ -295,9 +309,9 @@ def main():
                             full_response += ch + ' '
                             time.sleep(0.05)
                             # Rewrites with a cursor at end
-                            placeholder.write(full_response)
+                            placeholder.markdown(full_response)
                 else:
-                    placeholder.write(response.text)  # Exibe a resposta no placeholder
+                    placeholder.markdown(response.text)  # Exibe a resposta no placeholder
                 print("Primeira Parte Gerada")
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}

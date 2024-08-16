@@ -8,6 +8,7 @@ import time
 from pathlib import Path
 import os
 import joblib
+import os
 
 LOGO_VERMELHO = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'  # URL do logotipo vermelho do SENAI São Paulo
 LOGO_AZUL = 'https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'  # URL do logotipo azul do SENAI São Paulo
@@ -115,6 +116,11 @@ def getTokens(prompt):
     Returns:
         int: O número de tokens no prompt.
     """
+    if(st.session_state.apiKeyGoogleAiStudio is not ""):
+        genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
+    else:
+        st.session_state.apiKeyGoogleAiStudio=os.environ.get("API_KEY")
+        genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
     return model.count_tokens(prompt)
 
 def clear_chat_history():

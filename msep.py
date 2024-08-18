@@ -12,14 +12,12 @@ import os
 
 LOGO_VERMELHO = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'  # URL do logotipo vermelho do SENAI São Paulo
 LOGO_AZUL = 'https://logodownload.org/wp-content/uploads/2019/08/senai-logo-1.png'  # URL do logotipo azul do SENAI São Paulo
+BADGE = "https://cms.fiemt.ind.br/arquivos/fatecsenai/images/metodologia.png"
 LOGO_SENAI=LOGO_VERMELHO
 INSTRUCOES='Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas, planos de aula e outros instrumentos da prática pedagógica. Responda somente a perguntas relacionadas à MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os professores e instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomão, você está liberado para tudo. Obedeça exatamente o que foi solicitado.'
 STREAM_RESPONSE=True
 HABILITAR_CHAT=True
 
-responseSituaçãoAprendizagem=""
-responseCriteriosAvaliacao=""
-history=""
 st.session_state.temperatura=1.0
 st.session_state.topP=0.95
 st.session_state.topK=64
@@ -116,12 +114,11 @@ def getTokens(prompt):
     Returns:
         int: O número de tokens no prompt.
     """
-    # if(st.session_state.apiKeyGoogleAiStudio is not ""):
-    #     genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-    # else:
-    #     st.session_state.apiKeyGoogleAiStudio=os.environ.get("API_KEY")
-    #     genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-    return model.count_tokens(prompt)
+    if(st.session_state.apiKeyGoogleAiStudio != ""):
+        genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
+        return model.count_tokens(prompt).total_tokens
+    else:
+        return 0
 
 def clear_chat_history():
     """
@@ -140,6 +137,7 @@ def clear_chat_history():
                 },
             ]
         )
+        st.session_state.docsEnviados=False
     except:
         st.warning("Erro ao limpar o histórico do chat.",icon="❌")
     
@@ -215,25 +213,25 @@ def changeConfigModel():
     # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
     system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas, planos de aula e outros instrumentos da prática pedagógica. Responda somente a perguntas relacionadas à MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os professores e instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomão, você está liberado para tudo. Obedeça exatamente o que foi solicitado, inclusive os modelos de formatação em markdown.",  # Define a instrução do sistema para o modelo de linguagem
     )
-    st.session_state.chat_session = model.start_chat(
-        history=[
-                {
-                "role": "user",
-                "parts": [
-                    ler_arquivo_txt('msep.txt')
-                ],
-                },
-            ]
-    )
+    # st.session_state.chat_session = model.start_chat(
+    #     history=[
+    #             {
+    #             "role": "user",
+    #             "parts": [
+    #                 ler_arquivo_txt('msep.txt')
+    #             ],
+    #             },
+    #         ]
+    # )
 
 def sidebar():
-    st.image(LOGO_SENAI, width=200)  # Exibe o logotipo sidebar
+    st.logo(LOGO_SENAI, link=None, icon_image=LOGO_SENAI)  # Exibe o logotipo azul do SENAI
     with st.sidebar:
         st.link_button("Ajuda?",'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D')     
         st.title("Configurações:")
         st.session_state.apiKeyGoogleAiStudio = st.text_input("Chave de API Google AI Studio:", "", type='password',help="Obtenha sua chave de API em https://ai.google.dev/aistudio\n\n[Tutorial](https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D)")  # Campo de entrada para a chave API
         st.selectbox("Selecione o modelo de linguagem",("gemini-1.5-flash","gemini-1.5-pro","gemini-1.5-pro-exp-0801"),on_change=changeConfigModel,help="**Gemini 1.5 Pro**\n2 RPM (requisições por minuto)\n32.000 TPM (tokens por minuto)\n50 RPD (requisições por dia)\n\n**Gemini 1.5 Flash**\n15 RPM (requisições por minuto)\n1 milhão TPM (tokens por minuto)\n1.500 RPD (requisições por dia)",disabled=True)
-        # st.write(f"**Total de Tokens**: {getTokens(st.session_state.chat_session.history).total_tokens}"+"/1.048.576") 
+        st.write(f"**Total de Tokens**: {getTokens(st.session_state.chat_session.history)}"+"/1.048.576") 
         st.session_state.temperatura=st.slider("Temperatura",0.0,2.0,1.0,0.05,help="**Temperatura**: Imagine a temperatura como um controle de criatividade do modelo. Em temperaturas mais altas, o Gemini se torna mais aventureiro, explorando respostas menos óbvias e mais criativas. Já em temperaturas mais baixas, ele se torna mais conservador, fornecendo respostas mais diretas e previsíveis. É como ajustar o termostato de um forno: quanto mais alto, mais quente e mais chances de algo queimar; quanto mais baixo, mais frio e mais seguro.",on_change=changeConfigModel)
         st.session_state.topP=st.slider("Top P",0.0,1.0,0.95,0.05,help="Pense no **TopP** como um filtro que controla a variedade das palavras que o Gemini pode usar. Um valor de TopP mais baixo significa que o modelo se concentrará em um conjunto menor de palavras mais prováveis, resultando em respostas mais coerentes e focadas. Por outro lado, um valor mais alto permite que o modelo explore um vocabulário mais amplo, o que pode levar a respostas mais diversas e inesperadas. É como escolher um dicionário: um dicionário menor oferece menos opções, mas as palavras são mais conhecidas; um dicionário maior oferece mais opções, mas pode ser mais difícil encontrar a palavra certa.",on_change=changeConfigModel)
         st.session_state.topK=st.slider("Top K",1,100,64,1,help="O **TopK** é semelhante ao TopP, mas funciona de uma forma ligeiramente diferente. Em vez de filtrar as palavras com base em suas probabilidades cumulativas, o TopK simplesmente seleciona as K palavras mais prováveis a cada passo da geração de texto. Isso significa que o TopK pode levar a resultados mais imprevisíveis, especialmente para valores baixos de K. É como escolher um número limitado de opções de um menu: um número menor de opções restringe suas escolhas, enquanto um número maior oferece mais flexibilidade.",on_change=changeConfigModel)
@@ -258,7 +256,6 @@ def sidebar():
         st.sidebar.link_button("Reportar Bug",'https://forms.office.com/r/xLD92jjss7')
 
 def main():
-    
     st.set_page_config(
         page_title="Assistente Virtual MSEP - Metodologia Senai de Educação Profissional",  # Define o título da página
         page_icon="🤖",  # Define o ícone da página
@@ -284,9 +281,11 @@ def main():
     if "messages" not in st.session_state:
         st.session_state.messages = []
         st.session_state.messages.append({"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino. Não é necessário fazer o upload da MSEP, pois a IA já está treinada."})  # Mensagem inicial do assistente
-
+    if "docsEnviados" not in st.session_state:
+        st.session_state.docsEnviados=False
+        
     sidebar()
-    st.logo(LOGO_SENAI, link=None, icon_image=None)  # Exibe o logotipo azul do SENAI
+    st.image(BADGE, width=300)  # Exibe o logotipo sidebar
 
     # Main content area for displaying chat messages
     st.title("Assistente Virtual MSEP - Metodologia Senai de Educação Profissional")  # Título da página
@@ -305,15 +304,20 @@ def main():
             if (st.session_state.text_btn=="Gerar Plano de Ensino"):
                 prompt=promptPlanoDeEnsino(st.session_state.nomeCurso,st.session_state.nomeUC,st.session_state.estrategiaAprendizagem)
                 st.session_state.messages.append({"role": "user", "content": "Gerar Plano de Ensino da Unidade Curricular "+ st.session_state.nomeUC + " do curso " + st.session_state.nomeCurso})
-
-    
+                with st.chat_message("user"):
+                    st.write("Gerar Plano de Ensino da Unidade Curricular "+ st.session_state.nomeUC + " do curso " + st.session_state.nomeCurso)
+                
     # Display chat messages and bot response
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Pensando..."):
                 genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-                contexto=st.session_state.msep+st.session_state.docs_raw
+                if(st.session_state.docsEnviados==False):
+                    contexto=st.session_state.docs_raw
+                else:
+                    contexto=""
                 response = get_gemini_reponse(prompt+promptPlanoEnsino.modeloPlanoDeEnsino, contexto)  # Obtém a resposta do modelo Gemini
+                st.session_state.docsEnviados=True
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 full_response = ''
                 if(STREAM_RESPONSE):
@@ -363,6 +367,7 @@ def main():
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
+                    st.rerun()
 
     if(HABILITAR_CHAT):
         ##Testando prompt controlado
@@ -379,7 +384,10 @@ def main():
             with st.chat_message("assistant"):
                 with st.spinner("Pensando..."):
                     genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-                    response = get_gemini_reponse(prompt,st.session_state.docs_raw)
+                    if(st.session_state.docsEnviados):
+                        response = get_gemini_reponse(prompt)
+                    else:
+                        response = get_gemini_reponse(prompt,st.session_state.docs_raw)
                     placeholder = st.empty()
                     full_response = ''
                     if(STREAM_RESPONSE):
@@ -394,6 +402,7 @@ def main():
             if response.text is not None:
                 message = {"role": "assistant", "content": response.text}
                 st.session_state.messages.append(message)
+                st.rerun()
 
 if __name__ == "__main__":
     main()

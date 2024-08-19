@@ -256,6 +256,46 @@ modeloAvaliacao="""
 
 ]
 """
+modeloAvaliacaoAtual="""
+
+## 5. Critérios de Avaliação:
+[
+    Tabela contendo como título "### Instrumento de Registro"
+    Subtítulo da tabela: 
+        Nome do aluno:
+        Turma:
+    - Colunas:
+        Capacidades básicas/técnicas e socioemocionais
+            [
+                Colocar uma capacidades basicas ou técnicas e socioemocionais selecionadas para a situação de aprendizagem por linha.
+            ]
+        Critérios de Avaliação:
+            [
+                Para cada capacidade, elaborar dois critérios de avaliação pelo método Dicotômico.
+                A MSEP enfatiza a importância de critérios objetivos que:
+                    - Sejam específicos para cada tarefa, produto ou comportamento a ser avaliado: Os critérios devem ser elaborados de forma precisa, indicando exatamente o que se espera do aluno.
+                    - Descrevam níveis de desempenho esperados: Os critérios devem detalhar diferentes níveis de proficiência, permitindo que o docente avalie o progresso do aluno em relação aos objetivos de aprendizagem.
+                    - Representem, no conjunto, um resultado que permita concluir se a capacidade foi desenvolvida: A combinação dos critérios deve fornecer uma visão completa sobre o desenvolvimento da capacidade do aluno.
+            ]
+        Autoavaliação: [célula em branco]
+        Avaliação Professor: [célula em branco]
+    - Legenda:
+        S=Atingiu/N=Não Atingiu [não preencher na tabela]
+    
+    Obedecer a seguinte formatação da tabela e adequar seguindo o modelo para a quantidade de capacidades:
+    
+| Capacidades       | Critérios de Avaliação    | Autoavaliação | Avaliação |
+| ------------------| ------------------------- | ------------- | --------- |
+| :blue[capacidade] | :red[Critério Dicotômico] |               |           |
+|                   | :red[Critério Dicotômico] |               |           |
+| :blue[capacidade] | :red[Critério Dicotômico] |               |           |
+|                   | :red[Critério Dicotômico] |               |           |
+| :blue[capacidade] | :red[Critério Dicotômico] |               |           |
+|                   | :red[Critério Dicotômico] |               |           |
+    Para acrescentar a quebra de linha entre as capacidades utilize a marcação "\n\n". Não utilizar em nenhuma hipótese <br>
+
+]
+"""
 modeloPlanoAula="""
 
 ## 6. Plano de Aula:
@@ -307,17 +347,58 @@ modeloPlanoAula="""
 ]
 
 """
-# [
-#     - Criar uma lista numerada com alguns conhecimentos para propor a situação de aprendizagem
-#     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
-#     - Preciso desses conhecimentos organizados obedecendo o formado abaixo:
-#         1. [Tópico  de conhecimento principal]
-#             1.1 [Subtópico]
-#                 1.1.1 [Sub-subtópico]
-#             1.2 [Subtópico]
-#         2. [Próximo tópico  de conhecimento principal]
-#             2.1 [Subtópico]
-#                 2.1.1 [Sub-subtópico]
-# ]
+modeloPlanoAulaAtual="""
 
-# [Conhecimentos de acordo com o plano de curso e unidade curricular necessários para propor a situação de aprendizagem. Não selecionar todos os conhecimentos, apenas alguns para construir a situação de aprendizagem.]
+## 6. Plano de Aula:
+[
+    Tabela contendo como título "Plano de Aula"
+    - Colulas:
+        -Nº horas/aula e data:
+            [carga horária em horas e data da aula no formato (DD/MM/AAAA)]
+        -Capacidades a serem desenvolvidas:
+            [ Listar as capacidades selecionadas anteriormente para a situação de aprendizagem.]
+        -Conhecimentos relacionados:
+            [ Listar os conhecimentos selecionados anteriormente para o desenvolvimento da situação de aprendizagem.]
+        -Estratégias de ensino e instrumentos de avaliação:
+            [ Por exemplo:
+                - Exposição dialogada: explorar sobre os principais conhecimentos associados ao mercado no que tange às normas e legislações.
+                - Simulação: elaboração e aplicação de ficha de análise de investigação de acidentes.
+                - Dinâmica de grupo: conversando com as famílias das vítimas de acidente de trabalho.
+            ]
+        -Recursos e ambientes pedagógicos:
+            [Computador, internet, notion, Microsoft Teams, Microsoft Learn, Plataforma de Gamificação Quizziz, Forms, Mentimeter, Kahoot, entre outros.]
+        -Critérios de Avaliação:
+            [ Listar os critérios de avaliação, elaborados anteriormente no item 5 necessários para a avaliação da situação de aprendizagem proposta.]
+        -Referências bibliográficas de acordo com o plano de curso:
+            [livros, apostilas, sites, blogs, artigos, etc]
+    
+    O Plano de Aula deve contemplar toda a carga horária e número de aulas previstas para o desenvolvimento da Situação de Aprendizagem. O plano deve conter exatamente a quantidade de carga horária e aulas previstas no Item 1. Informações do Curso. 
+    Obedecer a seguinte formatação da tabela e adequar seguindo o modelo para a quantidade de capacidades:
+    
+| Horas/Aulas e Data    | Capacidades     | Conhecimentos | Estratégias | Recursos e ambientes pedagógicos | Critérios de Avaliação   | Referências |
+|-----------------------|-----------------|---------------|-------------|----------------------------------|--------------------------|-------------|
+| XX horas - DD/MM/AAAA |:blue[capacidade]|               |             |                                  |:red[Critério Dicotômico] |             |
+|                       |                 |               |             |                                  |:red[Critério Dicotômico] |             |
+| XX horas - DD/MM/AAAA |:blue[capacidade]|               |             |                                  |:red[Critério Dicotômico] |             |
+|                       |                 |               |             |                                  |:red[Critério Dicotômico] |             |
+| XX horas - DD/MM/AAAA |:blue[capacidade]|               |             |                                  |:red[Critério Dicotômico] |             |
+|                       |                 |               |             |                                  |:red[Critério Dicotômico] |             |
+| XX horas - DD/MM/AAAA |:blue[capacidade]|               |             |                                  |:red[Critério Dicotômico] |             |
+|                       |                 |               |             |                                  |:red[Critério Dicotômico] |             |
+    Para acrescentar a quebra de linha entre as capacidades utilize a marcação "\n\n". Não utilizar em nenhuma hipótese <br>
+
+
+]
+
+## 7. Perguntas Mediadoras:
+[
+    - Elabore 5 pergundas mediadoras de acordo com a situação de aprendizagem propostas.
+    - Considere as seguintes diretrizes para a elaboração de perguntas mediadoras, usando como base a Metodologia SENAI de Educação Profissional:
+        Contextualização: As perguntas devem ser relacionadas ao contexto real de trabalho da ocupação, fazendo ligações com o que o aluno irá vivenciar no seu dia a dia profissional.
+        Desafio: As perguntas devem desafiar o aluno a pensar além do básico, a buscar soluções criativas, a analisar diferentes perspectivas e a conectar os conhecimentos aprendidos com novas situações.
+        Integração: As perguntas devem promover a integração entre teoria e prática, incentivando o aluno a aplicar o conhecimento em situações concretas.
+        Abordagem: As perguntas devem ter uma abordagem que estimule o diálogo, a participação ativa e a colaboração entre os alunos.
+        Níveis Cognitivos: As perguntas devem ser formuladas de forma a atingir diferentes níveis cognitivos da taxonomia de Bloom (lembrar, entender, aplicar, analisar, avaliar e criar).
+]
+
+"""

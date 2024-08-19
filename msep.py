@@ -336,7 +336,7 @@ def main():
                     
                 
                 prompt="Elaborar somente o item 5. Critérios de Avaliação de acordo com a situação de aprendizagem proposta. Não preciso do restante, somente o item 5."
-                response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloAvaliacao)  # Obtém a resposta do modelo Gemini
+                response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloAvaliacaoAtual)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 full_response = ''
                 if(STREAM_RESPONSE):
@@ -353,7 +353,7 @@ def main():
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
                 
                 prompt="Elaborar somente o item 6. Plano de Aula de acordo com a situação de aprendizagem proposta e com os critérios de avaliação. Não preciso do restante, somente o item 6."
-                response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloPlanoAula)  # Obtém a resposta do modelo Gemini
+                response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloPlanoAulaAtual)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 full_response = ''
                 if(STREAM_RESPONSE):

@@ -69,7 +69,7 @@ def ler_arquivo_txt(nome_do_arquivo):
             conteudo = arquivo.read()
             return conteudo
     except FileNotFoundError:
-        st.warning("Erro ao ler informações da MSEP, tente novamente.",icon="❌")
+        st.error("Erro ao ler informações da MSEP, tente novamente.",icon="❌")
         return None
 
 # Inicializar a sessão de chat (fora da função para ser persistente)
@@ -97,9 +97,13 @@ def buscaDadosPlano():
         genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
         st.session_state.nomeCurso=temp_model.generate_content(st.session_state.docs_raw+"Qual o nome do curso?").text
         st.session_state.UCs_list=temp_model.generate_content(st.session_state.docs_raw+"Liste apenas as unidades curriculares. Não insira nenhum bullet ou marcador").text.splitlines()
-        return None
+        return True
     except:
-        st.warning("Erro ao ler informações do Plano de Curso, tente novamente.",icon="❌")
+        if(st.session_state.apiKeyGoogleAiStudio==""):
+            st.warning("Por favor insira a chave de API para processar o documento e tente novamente.",icon="⚠️")
+        else:
+            st.error("Erro ao ler informações do Plano de Curso.",icon="❌")
+        return False
         
 
 
@@ -139,7 +143,7 @@ def clear_chat_history():
         )
         st.session_state.docsEnviados=False
     except:
-        st.warning("Erro ao limpar o histórico do chat.",icon="❌")
+        st.error("Erro ao limpar o histórico do chat.",icon="❌")
     
     
 def get_gemini_reponse(prompt='',raw_text=''):
@@ -176,7 +180,7 @@ def get_pdf_text(pdf_docs):
                 text += page.extract_text()
         return text
     except:
-        st.warning("Erro ao converter arquivo PDF para texto",icon="❌")
+        st.error("Erro ao converter arquivo PDF para texto",icon="❌")
 
 def get_pdf_text_v2(pdf_docs):
     """
@@ -244,8 +248,10 @@ def sidebar():
             else:
                 with st.spinner("Processando..."):
                     st.session_state.docs_raw = get_pdf_text(pdf_docs)  # Lê o texto dos arquivos PDF e armazena na sessão                
-                    buscaDadosPlano()
-                st.success("Concluído")  # Exibe uma mensagem de sucesso
+                    if(buscaDadosPlano()):
+                        st.success("Concluído",icon="✅")  # Exibe uma mensagem de sucesso
+                    else:
+                        st.error("Falha ao processar documentos",icon="❌")
         
         def atualizar_selectbox():
             st.session_state.nomeUC = nomeUC
@@ -352,7 +358,7 @@ def main():
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
                 
-                prompt="Elaborar somente o item 6. Plano de Aula de acordo com a situação de aprendizagem proposta e com os critérios de avaliação. Não preciso do restante, somente o item 6."
+                prompt="Elaborar somente o item 6. Plano de Aula  e item 7. Perguntas Mediadoras de acordo com a situação de aprendizagem proposta e com os critérios de avaliação. Não preciso do restante, somente o item 6 e 7."
                 response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloPlanoAulaAtual)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 full_response = ''

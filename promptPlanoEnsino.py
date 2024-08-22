@@ -185,7 +185,7 @@ modeloPlanoDeEnsino="""
         - Resolução de problemas com tomada de decisão.
         - Máximo de circulação de informações possíveis.
     - Estimulamos as competências de visão sistêmica e de criatividade com a Situação de Aprendizagem?
-    - Indicar a necessidade de inclusão de figuras, esquemas, desenhos, leiaute, formulários, etc, para complementar a sitação de aprendizagem.
+    - Sugerir a necessidade de inclusão de figuras, esquemas, desenhos, leiaute, formulários, etc, para complementar a sitação de aprendizagem e descrever que imagem deve ser incluída, se for o caso.
 ]
 
 ### Desafio:
@@ -260,10 +260,11 @@ modeloAvaliacaoAtual="""
 
 ## 5. Critérios de Avaliação:
 [
-    Tabela contendo como título "### Instrumento de Registro"
-    Subtítulo da tabela: 
-        Nome do aluno:
-        Turma:
+### 5.1 Critérios Dicotômicos
+    
+    Tabela contendo como título "### Instrumento de Registro" 
+        Nome do aluno:_____________ \n\n
+        Turma:_____________
     - Colunas:
         Capacidades básicas/técnicas e socioemocionais
             [
@@ -293,6 +294,28 @@ modeloAvaliacaoAtual="""
 | :blue[capacidade] | :red[Critério Dicotômico] |               |           |
 |                   | :red[Critério Dicotômico] |               |           |
     Para acrescentar a quebra de linha entre as capacidades utilize a marcação "\n\n". Não utilizar em nenhuma hipótese <br>
+    
+### 5.2 Critérios Graduais
+
+    Tabela contendo como título "### Instrumento de Registro"
+        Nome do aluno:_____________ \n\n
+        Turma:_____________
+    - Colunas:
+        Capacidades básicas/técnicas e socioemocionais
+            [
+                Colocar uma capacidades basicas ou técnicas e socioemocionais selecionadas para a situação de aprendizagem por linha. Devem ser as mesmas selecionadas no item 5.1 Critérios Dicotômicos.
+            ]
+        Nível 1: Descreve o desempenho mínimo esperado do aluno, com características de falta de conhecimento ou domínio.
+        Nível 2: Descreve o desempenho do aluno que demonstra alguma compreensão da capacidade, mas ainda precisa de auxílio.
+        Nível 3: Descreve o desempenho do aluno que demonstra domínio da capacidade, realizando a tarefa com autonomia e segurança.
+        Nível 4: Descreve o desempenho do aluno que demonstra excelência na capacidade, com iniciativa, criatividade e domínio aprofundado.
+        
+    Obedecer a seguinte formatação da tabela e adequar seguindo o modelo para a quantidade de capacidades:
+        
+| **Capacidades**   | **Nível 1** | **Nível 2** | **Nível 3** | **Nível 4** |
+|:-----------------:|:-----------:|:-----------:|:-----------:|:-----------:|
+| :blue[capacidade] |             |             |             |             |
+| :blue[capacidade] |             |             |             |             |
 
 ]
 """

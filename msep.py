@@ -416,7 +416,7 @@ def main():
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
                 
-                prompt="Elaborar somente o item 6. Plano de Aula  e item 7. Perguntas Mediadoras de acordo com a situação de aprendizagem proposta e com os critérios de avaliação. Não preciso do restante, somente o item 6 e 7."
+                prompt="Elaborar somente o item 6. Plano de Aula  de acordo com a situação de aprendizagem proposta e com os critérios de avaliação. Não preciso do restante, somente o item 6."
                 response = get_gemini_reponse(prompt,promptPlanoEnsino.modeloPlanoAulaAtual)  # Obtém a resposta do modelo Gemini
                 placeholder = st.empty()  # Cria um placeholder para a resposta
                 full_response = ''

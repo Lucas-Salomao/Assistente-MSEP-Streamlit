@@ -778,17 +778,6 @@ modeloPlanoAulaAtual="""
 
 ]
 
-## 7. Perguntas Mediadoras:
-[
-    - Elabore 5 pergundas mediadoras de acordo com a situação de aprendizagem propostas.
-    - Considere as seguintes diretrizes para a elaboração de perguntas mediadoras, usando como base a Metodologia SENAI de Educação Profissional:
-        Contextualização: As perguntas devem ser relacionadas ao contexto real de trabalho da ocupação, fazendo ligações com o que o aluno irá vivenciar no seu dia a dia profissional.
-        Desafio: As perguntas devem desafiar o aluno a pensar além do básico, a buscar soluções criativas, a analisar diferentes perspectivas e a conectar os conhecimentos aprendidos com novas situações.
-        Integração: As perguntas devem promover a integração entre teoria e prática, incentivando o aluno a aplicar o conhecimento em situações concretas.
-        Abordagem: As perguntas devem ter uma abordagem que estimule o diálogo, a participação ativa e a colaboração entre os alunos.
-        Níveis Cognitivos: As perguntas devem ser formuladas de forma a atingir diferentes níveis cognitivos da taxonomia de Bloom (lembrar, entender, aplicar, analisar, avaliar e criar).
-]
-
 """
 
 modeloEstudoDeCaso="""

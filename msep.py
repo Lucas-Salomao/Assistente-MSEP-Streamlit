@@ -66,6 +66,10 @@ def markdown_to_pdf(markdown_text, filename="output.pdf", page_height=500):
     # Renderiza o Markdown como HTML
     from markdown import markdown
     html = markdown(markdown_text)
+    
+    # Abre o arquivo em modo escrita (w)
+    with open("meu_arquivo.txt", "w") as arquivo:
+        arquivo.write(html)
 
     # Divide o HTML em blocos de texto para cada página
     html_blocks = html.split("<h2>")
@@ -430,11 +434,19 @@ def main():
                 else:
                     placeholder.markdown(response.text,unsafe_allow_html=True)  # Exibe a resposta no placeholder
                     response_full+=response.text
-    
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
                     st.rerun()
+                    
+    # if st.button("Generate PDF"):
+    #     print(response_full)
+    #     pdf_filename = markdown_to_pdf(response_full)
+    #     st.download_button(
+    #         label="Download PDF",
+    #         data=open(pdf_filename, "rb").read(),
+    #         file_name=pdf_filename,
+    #         mime="application/pdf")
 
     if(HABILITAR_CHAT):
         ##Testando prompt controlado

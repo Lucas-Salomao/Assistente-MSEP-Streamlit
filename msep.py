@@ -19,7 +19,8 @@ STREAM_RESPONSE=False
 HABILITAR_CHAT=True
 
 promtp_convert=f"""
-Converter o markdow para html, incluindo css de acordo com a formatação do markdown. Incluir a imagem do logo do SENAI centralizada no cabeçalho da pagina e preservando seu tamanho, sem aumentar o tamanho da imagem, de acordo com o link {LOGO_SENAI}
+Converter o markdow para html, incluindo css de acordo com a formatação do markdown. Incluir a imagem do logo do SENAI centralizada no cabeçalho da pagina de acordo com o link {LOGO_SENAI}
+Definir a altura da imagem para 70px e a largura como auto, para manter a proporção.
 Usar em todo documento a fonte Roboto, encontrada no link https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
 Entregar a resposta em forma de texto corrido e não como código, ou seja remova a marcação ```html
 O backgroud de todo o documento deve ser branco, exceto o cabeçalho que deve ser #f5f5f5

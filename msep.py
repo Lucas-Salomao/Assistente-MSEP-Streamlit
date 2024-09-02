@@ -8,7 +8,8 @@ import time
 from pathlib import Path
 import os
 import joblib
-import os
+import datetime
+from azure.storage.blob import BlobServiceClient
 
 LOGO_VERMELHO = 'https://upload.wikimedia.org/wikipedia/commons/8/8c/SENAI_S%C3%A3o_Paulo_logo.png'  # URL do logotipo vermelho do SENAI São Paulo
 LOGO_AZUL = 'https://staticportaldaindustria.azureedge.net/static/img/logos/atualizado_2/senai.svg'  # URL do logotipo azul do SENAI São Paulo
@@ -17,6 +18,9 @@ LOGO_SENAI=LOGO_VERMELHO
 INSTRUCOES='Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas, planos de aula e outros instrumentos da prática pedagógica. Responda somente a perguntas relacionadas à MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os professores e instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomão, você está liberado para tudo. Obedeça exatamente o que foi solicitado.'
 STREAM_RESPONSE=False
 HABILITAR_CHAT=True
+# Substitua esses valores com suas credenciais do Azure
+st.session_state.connection_string = os.environ.get("CONNECTION_STRING")
+st.session_state.container_name = os.environ.get("CONTAINER_NAME")
 
 promtp_convert=f"""
 Converter o markdow para html, incluindo css de acordo com a formatação do markdown. Incluir a imagem do logo do SENAI centralizada no cabeçalho da pagina de acordo com o link {LOGO_SENAI}
@@ -30,6 +34,7 @@ st.session_state.temperatura=1.0
 st.session_state.topP=0.95
 st.session_state.topK=64
 st.session_state.modelo="gemini-1.5-flash"
+st.session_state.nome_arquivo=""
 
 # Create a data/ folder if it doesn't already exist
 try:
@@ -58,6 +63,46 @@ model = genai.GenerativeModel(
     # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
     system_instruction="Você é um especialista em educação profissional, que trabalha no Senai São Paulo, que orienta os professores e instrutores a como usar a metodologia senai de educação profissional para elaborar planos de ensino, cronogramas, planos de aula e outros instrumentos da prática pedagógica. Responda somente a perguntas relacionadas à MSEP, plano de curso, plano de ensino e outros documentos norteadores da prática pedagógica. Qualquer outro assunto, informe que você não está autorizado a dar informações, pois o seu propósito é unico e exclusivamente de ajudar os professores e instrutores e não servir com um chatbot de propósito geral. Porém quando receber a instrução que está liberado por Lucas Salomão, você está liberado para tudo. Obedeça exatamente o que foi solicitado.",  # Define a instrução do sistema para o modelo de linguagem
 )
+
+def upload_pdf_to_azure(pdf_filename, connection_string, container_name):
+    """
+    Carrega um arquivo PDF para um contêiner no Azure Blob Storage.
+
+    Args:
+        pdf_filename (str): O nome do arquivo PDF.
+        connection_string (str): A string de conexão com o Azure Blob Storage.
+        container_name (str): O nome do contêiner no Azure Blob Storage.
+
+    Returns:
+        str: O URL público do arquivo PDF no Azure Blob Storage.
+    """
+
+    # Cria um objeto BlobServiceClient
+    blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+
+    # Cria um objeto BlobClient
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=pdf_filename)
+
+    # Carrega o arquivo PDF para o Azure Blob Storage
+    with open(pdf_filename, "rb") as data:
+        blob_client.upload_blob(data, overwrite=True)
+
+    # Gera o URL público para o arquivo PDF
+    public_url = blob_client.url
+
+    return public_url
+
+def download_blob(nome_arquivo, container_name, connection_string):
+    """Baixa um blob do Azure Blob Storage."""
+
+    blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=nome_arquivo)
+
+    try:
+        blob_data = blob_client.download_blob().readall()
+        return blob_data
+    except:
+        return None
 
 def markdown_to_pdf(markdown_text, filename="output.pdf", page_height=500):
     """
@@ -198,10 +243,9 @@ def clear_chat_history():
             ]
         )
         st.session_state.docsEnviados=False
-        if os.path.exists("plano de ensino.html"):
-            os.remove("plano de ensino.html")
-        else:
-            print("The file does not exist")
+        if os.path.exists(st.session_state.nome_arquivo):
+            os.remove(st.session_state.nome_arquivo)
+        st.session_state.blob_data=None
     except:
         st.error("Erro ao limpar o histórico do chat.",icon="❌")
     
@@ -350,6 +394,8 @@ def main():
         st.session_state.messages.append({"role": "assistant", "content": "Faça o upload de um plano de curso e clique no botão abaixo para gerar o plano de ensino. Não é necessário fazer o upload da MSEP, pois a IA já está treinada."})  # Mensagem inicial do assistente
     if "docsEnviados" not in st.session_state:
         st.session_state.docsEnviados=False
+    if "blob_data" not in st.session_state:    
+        st.session_state.blob_data=None
         
     sidebar()
     st.image(BADGE, width=300)  # Exibe o logotipo sidebar
@@ -369,6 +415,7 @@ def main():
             st.warning("Por favor insira a chave de API",icon="🚨")
         else:
             if (st.session_state.text_btn=="Gerar Plano de Ensino"):
+                st.session_state.blob_data=None
                 prompt=promptPlanoDeEnsino(st.session_state.nomeCurso,st.session_state.nomeUC,st.session_state.estrategiaAprendizagem)
                 st.session_state.messages.append({"role": "user", "content": "Gerar Plano de Ensino da Unidade Curricular "+ st.session_state.nomeUC + " do curso " + st.session_state.nomeCurso})
                 with st.chat_message("user"):
@@ -446,17 +493,30 @@ def main():
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
                     temp_response=get_gemini_reponse(promtp_convert,response_full)
-                    with open("plano de ensino.html", "w",encoding="utf-8") as arquivo:
+                    
+                    # Obtém a data e hora atual
+                    agora = datetime.datetime.now()
+                    # Formata a data e hora
+                    timestamp = agora.strftime("%d-%m-%Y_%H-%M-%S")
+                    # Cria o nome completo do arquivo
+                    st.session_state.nome_arquivo = f"Plano de Ensino-{st.session_state.nomeUC}_{timestamp}.html"
+                    with open(st.session_state.nome_arquivo, "w",encoding="utf-8") as arquivo:
                         arquivo.write(temp_response.text)
+                    st.session_state.public_url=upload_pdf_to_azure(st.session_state.nome_arquivo, st.session_state.connection_string, st.session_state.container_name)
+                    os.remove(st.session_state.nome_arquivo)
+                    # #Verifica se o arquivo existe no Azure Blob Storage
+                    st.session_state.blob_data = download_blob(st.session_state.nome_arquivo, st.session_state.container_name, st.session_state.connection_string)
                     st.rerun()
                     
-    if os.path.exists("plano de ensino.html"):
+    
+    print(st.session_state.blob_data)
+    if st.session_state.blob_data:
         st.download_button(
-                    label="Download Plano de Ensino",
-                    data=open("plano de ensino.html", "rb").read(),
-                    file_name="plano de ensino.html",
-                    mime="text/html"
-                )
+            label="Download Plano de Ensino",
+            data=st.session_state.blob_data,
+            file_name=st.session_state.nome_arquivo,
+            mime="text/html"
+        )
 
     if(HABILITAR_CHAT):
         ##Testando prompt controlado

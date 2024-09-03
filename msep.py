@@ -23,11 +23,19 @@ st.session_state.connection_string = os.environ.get("CONNECTION_STRING")
 st.session_state.container_name = os.environ.get("CONTAINER_NAME")
 
 promtp_convert=f"""
-Converter o markdow para html, incluindo css de acordo com a formatação do markdown. Incluir a imagem do logo do SENAI centralizada no cabeçalho da pagina de acordo com o link {LOGO_SENAI}
+Converter o markdow para html, incluindo css de acordo com a formatação do markdown.
+Incluir a imagem do logo do SENAI centralizada no cabeçalho da pagina de acordo com o link {LOGO_SENAI}
+Incluir imagem somente no cabeçalho.
 Definir a altura da imagem para 70px e a largura como auto, para manter a proporção.
 Usar em todo documento a fonte Roboto, encontrada no link https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
 Entregar a resposta em forma de texto corrido e não como código, ou seja remova a marcação ```html
 O backgroud de todo o documento deve ser branco, exceto o cabeçalho que deve ser #f5f5f5
+Usar font-size 40px para h1.
+Usar font-size 30px para h2.
+Usar font-size 25px para h3.
+Para o restante do conteúdo usar font-size 18px.
+O bloco "1. Introdução do Curso" deve ser em formato de tabela.
+
 """
 
 st.session_state.temperatura=1.0
@@ -365,6 +373,12 @@ def sidebar():
         st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)  # Botão para limpar o histórico do chat
         st.sidebar.link_button("Reportar Bug",'https://forms.office.com/r/xLD92jjss7')
 
+@st.dialog("Assistente MSEP informa:")
+def dialogbox(mensagem):
+    st.write(mensagem)
+    if st.button("Fechar"):
+        st.rerun()
+
 def main():
     st.set_page_config(
         page_title="Assistente Virtual MSEP - Metodologia Senai de Educação Profissional",  # Define o título da página
@@ -507,7 +521,8 @@ def main():
                     os.remove(st.session_state.nome_arquivo)
                     # #Verifica se o arquivo existe no Azure Blob Storage
                     st.session_state.blob_data = download_blob(st.session_state.nome_arquivo, st.session_state.container_name, st.session_state.connection_string)
-                    st.rerun()
+                    dialogbox("Plano de Ensino gerado com sucesso!")
+                    #st.rerun()
                     
     if st.session_state.blob_data:
         st.download_button(

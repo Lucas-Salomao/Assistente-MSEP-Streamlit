@@ -509,7 +509,7 @@ def main():
                     st.session_state.blob_data = download_blob(st.session_state.nome_arquivo, st.session_state.container_name, st.session_state.connection_string)
                     st.rerun()
                     
-    if st.session_state.blob_data is not None:
+    if st.session_state.blob_data:
         st.download_button(
             label="Download Plano de Ensino",
             data=st.session_state.blob_data,

@@ -23,10 +23,9 @@ st.session_state.connection_string = os.environ.get("CONNECTION_STRING")
 st.session_state.container_name = os.environ.get("CONTAINER_NAME")
 
 promtp_convert=f"""
-Converter o markdow para html, incluindo css de acordo com a formatação do markdown.
-Incluir a imagem do logo do SENAI centralizada no cabeçalho da pagina de acordo com o link {LOGO_SENAI}
-Incluir imagem somente no cabeçalho.
-Definir a altura da imagem para 70px e a largura como auto, para manter a proporção.
+Converter o markdow para html incluindo folha de estilos css.
+Incluir logo do SENAI centralizada no cabeçalho da pagina de acordo com o link {LOGO_SENAI} Definir a altura da imagem para 70px e a largura como auto, para manter a proporção.
+Não incluir outras imagens.
 Usar em todo documento a fonte Roboto, encontrada no link https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
 Entregar a resposta em forma de texto corrido e não como código, ou seja remova a marcação ```html
 O backgroud de todo o documento deve ser branco, exceto o cabeçalho que deve ser #f5f5f5

@@ -62,6 +62,14 @@ generation_config = {
     "response_mime_type": "text/plain",  # Define o tipo de mídia da resposta
 }
 
+generation_config_restricted = {
+    "temperature": 0.05,  # Define a temperatura para a geração de texto (menor = mais previsível)
+    "top_p": st.session_state.topP,  # Define a probabilidade de escolha das palavras (maior = mais palavras prováveis)
+    "top_k": st.session_state.topK,  # Define o número de palavras candidatas para escolher (maior = mais opções)
+    "max_output_tokens": 8192,  # Define o número máximo de tokens na saída
+    "response_mime_type": "text/plain",  # Define o tipo de mídia da resposta
+}
+
 model = genai.GenerativeModel(
     model_name=st.session_state.modelo,  # Define o modelo de linguagem a ser usado (Gemini 1.5 Flash)
     generation_config=generation_config,  # Define a configuração de geração de texto
@@ -196,7 +204,7 @@ def buscaDadosPlano():
     try:
         temp_model = genai.GenerativeModel(
             model_name="gemini-1.5-flash",  # Define o modelo de linguagem a ser usado (Gemini 1.5 Flash)
-            generation_config=generation_config,  # Define a configuração de geração de texto
+            generation_config=generation_config_restricted,  # Define a configuração de geração de texto
             # safety_settings = Adjust safety settings  # Ajusta as configurações de segurança (opcional)
             # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
             system_instruction="Execute apenas o que foi solicitado, dando o resultado pedido e nada mais além disso.",  # Define a instrução do sistema para o modelo de linguagem
@@ -213,7 +221,29 @@ def buscaDadosPlano():
         return False
         
 
-
+def buscaCapacidades(uc=""):
+    try:
+        temp_model = genai.GenerativeModel(
+            model_name="gemini-1.5-flash",  # Define o modelo de linguagem a ser usado (Gemini 1.5 Flash)
+            generation_config=generation_config_restricted,  # Define a configuração de geração de texto
+            # safety_settings = Adjust safety settings  # Ajusta as configurações de segurança (opcional)
+            # See https://ai.google.dev/gemini-api/docs/safety-settings  # Link para a documentação das configurações de segurança
+            system_instruction="Execute apenas o que foi solicitado, dando o resultado pedido e nada mais além disso.",  # Define a instrução do sistema para o modelo de linguagem
+        )
+        genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
+        print("entrou nessa merda3")
+        st.session_state.CapacidadesTecnicas_list=temp_model.generate_content(st.session_state.docs_raw+f"Liste as capacidades básicas ou técnicas da unidade curricular {uc}. Não inclua bullets ou marcadores, mas separe cada capacidade em novas linhas.").text.splitlines()
+        print(st.session_state.CapacidadesTecnicas_list)
+        print("entrou nessa merda4")
+        st.session_state.CapacidadesSocioemocionais_list=temp_model.generate_content(st.session_state.docs_raw+f"Liste as capacidades socioemocionais da unidade curricular {uc}. Não inclua bullets ou marcadores, mas separe cada capacidade em novas linhas.").text.splitlines()
+        print(st.session_state.CapacidadesSocioemocionais_list)
+        return True
+    except:
+        if(st.session_state.apiKeyGoogleAiStudio==""):
+            st.warning("Por favor insira a chave de API para processar o documento e tente novamente.",icon="⚠️")
+        else:
+            st.error("Erro ao ler informações do Plano de Curso.",icon="❌")
+    return False
 
 def getTokens(prompt):
     """
@@ -365,8 +395,21 @@ def sidebar():
         
         def atualizar_selectbox():
             st.session_state.nomeUC = nomeUC
+            buscaCapacidades(nomeUC)
+            
+        def atualizar_selectbox_CapacidadesTecnicas():
+            print("entrou nessa merda")
+            st.session_state.CapacidadesTecnicas = CapacidadesTecnicas
+            
+        def atualizar_selectbox_CapacidadesSocioemocionais():
+            print("entrou nessa merda2")
+            st.session_state.CapacidadesSocioemocionais = CapacidadesSocioemocionais
+            
         st.text_input("Nome do Curso:", st.session_state.nomeCurso,disabled=True)   
         nomeUC=st.session_state.nomeUC = st.selectbox("Selecione a Unidade Curricular:", st.session_state.UCs_list, on_change=atualizar_selectbox, key="uc_selectbox")
+        CapacidadesTecnicas=st.session_state.CapacidadesTecnicas=st.multiselect("Selecione as Capacidades Básicas/Técnicas:",options=st.session_state.CapacidadesTecnicas_list, key="capacidadestecnicas_selectbox",placeholder="Selecione as Capacidades Básicas/Técnicas",on_change=atualizar_selectbox_CapacidadesTecnicas)       
+        CapacidadesSocioemocionais=st.session_state.CapacidadesSocioemocionais=st.multiselect("Selecione as Capacidades Socioemocionais:",options=st.session_state.CapacidadesSocioemocionais_list, key="capacidadessocioemocionais_selectbox",placeholder="Selecione as Capacidades Socioemocionais",on_change=atualizar_selectbox_CapacidadesSocioemocionais)
+        
         st.session_state.tipoDocumento="Plano de Ensino"
         st.session_state.estrategiaAprendizagem = st.selectbox("Selecione a estratégia de aprendizagem:", ("Situação-Problema", "Estudo de Caso", "Projetos","Pesquisa Aplicada"))  # Menu dropdown para selecionar a estratégia de aprendizagem
         st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)  # Botão para limpar o histórico do chat
@@ -410,7 +453,15 @@ def main():
         st.session_state.blob_data=None
     if "nome_arquivo" not in st.session_state:  
         st.session_state.nome_arquivo=""
-        
+    if "Capacidades_list" not in st.session_state:
+        st.session_state.CapacidadesTecnicas_list=[]
+    if "CapacidadesSocioemocionais_list" not in st.session_state:
+        st.session_state.CapacidadesSocioemocionais_list=[]
+    if "CapacidadesTecnicas" not in st.session_state:
+        st.session_state.CapacidadesTecnicas=[]
+    if "CapacidadesSocioemocionais" not in st.session_state:
+        st.session_state.CapacidadesSocioemocionais=[]
+                
     sidebar()
     st.image(BADGE, width=300)  # Exibe o logotipo sidebar
 

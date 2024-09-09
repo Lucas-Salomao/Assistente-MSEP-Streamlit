@@ -231,12 +231,8 @@ def buscaCapacidades(uc=""):
             system_instruction="Execute apenas o que foi solicitado, dando o resultado pedido e nada mais além disso.",  # Define a instrução do sistema para o modelo de linguagem
         )
         genai.configure(api_key=st.session_state.apiKeyGoogleAiStudio)
-        print("entrou nessa merda3")
         st.session_state.CapacidadesTecnicas_list=temp_model.generate_content(st.session_state.docs_raw+f"Liste as capacidades básicas ou técnicas da unidade curricular {uc}. Não inclua bullets ou marcadores, mas separe cada capacidade em novas linhas.").text.splitlines()
-        print(st.session_state.CapacidadesTecnicas_list)
-        print("entrou nessa merda4")
         st.session_state.CapacidadesSocioemocionais_list=temp_model.generate_content(st.session_state.docs_raw+f"Liste as capacidades socioemocionais da unidade curricular {uc}. Não inclua bullets ou marcadores, mas separe cada capacidade em novas linhas.").text.splitlines()
-        print(st.session_state.CapacidadesSocioemocionais_list)
         return True
     except:
         if(st.session_state.apiKeyGoogleAiStudio==""):
@@ -369,6 +365,7 @@ def changeConfigModel():
     # )
 
 def sidebar():
+    nomeUC=""
     st.logo(LOGO_SENAI, link=None, icon_image=LOGO_SENAI)  # Exibe o logotipo azul do SENAI
     with st.sidebar:
         st.link_button("Ajuda?",'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D')     
@@ -395,18 +392,18 @@ def sidebar():
         
         def atualizar_selectbox():
             st.session_state.nomeUC = nomeUC
-            buscaCapacidades(nomeUC)
+            print(st.session_state.nomeUC)
             
         def atualizar_selectbox_CapacidadesTecnicas():
-            print("entrou nessa merda")
             st.session_state.CapacidadesTecnicas = CapacidadesTecnicas
             
         def atualizar_selectbox_CapacidadesSocioemocionais():
-            print("entrou nessa merda2")
             st.session_state.CapacidadesSocioemocionais = CapacidadesSocioemocionais
             
-        st.text_input("Nome do Curso:", st.session_state.nomeCurso,disabled=True)   
-        nomeUC=st.session_state.nomeUC = st.selectbox("Selecione a Unidade Curricular:", st.session_state.UCs_list, on_change=atualizar_selectbox, key="uc_selectbox")
+        st.text_input("Nome do Curso:", st.session_state.nomeCurso,disabled=True)
+        nomeUC=st.session_state.nomeUC=st.selectbox("Selecione a Unidade Curricular:", st.session_state.UCs_list, on_change=atualizar_selectbox, key="uc_selectbox",index=0)
+        # if(nomeUC!=""):
+        #     buscaCapacidades(nomeUC)
         CapacidadesTecnicas=st.session_state.CapacidadesTecnicas=st.multiselect("Selecione as Capacidades Básicas/Técnicas:",options=st.session_state.CapacidadesTecnicas_list, key="capacidadestecnicas_selectbox",placeholder="Selecione as Capacidades Básicas/Técnicas",on_change=atualizar_selectbox_CapacidadesTecnicas)       
         CapacidadesSocioemocionais=st.session_state.CapacidadesSocioemocionais=st.multiselect("Selecione as Capacidades Socioemocionais:",options=st.session_state.CapacidadesSocioemocionais_list, key="capacidadessocioemocionais_selectbox",placeholder="Selecione as Capacidades Socioemocionais",on_change=atualizar_selectbox_CapacidadesSocioemocionais)
         
@@ -453,7 +450,7 @@ def main():
         st.session_state.blob_data=None
     if "nome_arquivo" not in st.session_state:  
         st.session_state.nome_arquivo=""
-    if "Capacidades_list" not in st.session_state:
+    if "CapacidadesTecnicas_list" not in st.session_state:
         st.session_state.CapacidadesTecnicas_list=[]
     if "CapacidadesSocioemocionais_list" not in st.session_state:
         st.session_state.CapacidadesSocioemocionais_list=[]

@@ -41,6 +41,7 @@ st.session_state.temperatura=1.0
 st.session_state.topP=0.95
 st.session_state.topK=64
 st.session_state.modelo="gemini-1.5-flash"
+st.session_state.mudouUC=False
 
 # Create a data/ folder if it doesn't already exist
 try:
@@ -392,7 +393,7 @@ def sidebar():
         
         def atualizar_selectbox():
             st.session_state.nomeUC = nomeUC
-            print(st.session_state.nomeUC)
+            st.session_state.mudouUC=True
             
         def atualizar_selectbox_CapacidadesTecnicas():
             st.session_state.CapacidadesTecnicas = CapacidadesTecnicas
@@ -402,8 +403,11 @@ def sidebar():
             
         st.text_input("Nome do Curso:", st.session_state.nomeCurso,disabled=True)
         nomeUC=st.session_state.nomeUC=st.selectbox("Selecione a Unidade Curricular:", st.session_state.UCs_list, on_change=atualizar_selectbox, key="uc_selectbox",index=0)
-        # if(nomeUC!=""):
-        #     buscaCapacidades(nomeUC)
+        if(st.session_state.apiKeyGoogleAiStudio!= ""):
+            if(st.session_state.nomeUC!=""):
+                if(st.session_state.mudouUC):
+                    buscaCapacidades(nomeUC)
+                    st.session_state.mudouUC=False
         CapacidadesTecnicas=st.session_state.CapacidadesTecnicas=st.multiselect("Selecione as Capacidades Básicas/Técnicas:",options=st.session_state.CapacidadesTecnicas_list, key="capacidadestecnicas_selectbox",placeholder="Selecione as Capacidades Básicas/Técnicas",on_change=atualizar_selectbox_CapacidadesTecnicas)       
         CapacidadesSocioemocionais=st.session_state.CapacidadesSocioemocionais=st.multiselect("Selecione as Capacidades Socioemocionais:",options=st.session_state.CapacidadesSocioemocionais_list, key="capacidadessocioemocionais_selectbox",placeholder="Selecione as Capacidades Socioemocionais",on_change=atualizar_selectbox_CapacidadesSocioemocionais)
         

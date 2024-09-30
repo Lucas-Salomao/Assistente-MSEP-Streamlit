@@ -23,7 +23,7 @@ st.session_state.connection_string = os.environ.get("CONNECTION_STRING")
 st.session_state.container_name = os.environ.get("CONTAINER_NAME")
 
 promtp_convert=f"""
-Converter o markdow para html incluindo folha de estilos css.
+Converter o markdown em html incluindo folha de estilos css.
 Incluir logo do SENAI centralizada no cabeçalho da pagina de acordo com o link {LOGO_SENAI} Definir a altura da imagem para 70px e a largura como auto, para manter a proporção.
 Não incluir outras imagens.
 Usar em todo documento a fonte Roboto, encontrada no link https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
@@ -34,7 +34,9 @@ Usar font-size 30px para h2.
 Usar font-size 25px para h3.
 Para o restante do conteúdo usar font-size 18px.
 O bloco "1. Introdução do Curso" deve ser em formato de tabela.
-
+Onde encontrar a tag ":red[]", remover a tag e formatar o texto entre colchetes de vermelho.
+Onde encontrar a tag ":blue[]", remover a tag e formatar o texto entre colchetes de azul.
+Onde encontrar a tag ":green[]", remover a tag e formatar o texto entre colchetes de verde.
 """
 
 st.session_state.temperatura=1.0

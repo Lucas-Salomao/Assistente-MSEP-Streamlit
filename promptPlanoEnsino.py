@@ -22,6 +22,12 @@ modeloPlanoDeEnsinoSP="""
 
 **Modalidade de ensino:** [Presencial, EAD ou Híbrida]
 
+**Professor Titular:** [Nome do professor titular]
+
+**Unidade:** [Escola Senai]
+
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
 ## 2. Capacidades a serem desenvolvidas:
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
@@ -43,6 +49,7 @@ modeloPlanoDeEnsinoSP="""
     - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
     - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 3. Conhecimentos:
 
@@ -100,7 +107,7 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloPlanoDeEnsinoEC="""
@@ -127,6 +134,12 @@ modeloPlanoDeEnsinoEC="""
 
 **Modalidade de ensino:** [Presencial, EAD ou Híbrida]
 
+**Professor Titular:** [Nome do professor titular]
+
+**Unidade:** [Escola Senai]
+
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
 ## 2. Capacidades a serem desenvolvidas:
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
@@ -148,6 +161,7 @@ modeloPlanoDeEnsinoEC="""
     - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
     - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 3. Conhecimentos:
 
@@ -155,6 +169,7 @@ modeloPlanoDeEnsinoEC="""
     - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
@@ -225,7 +240,7 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - Inclua questões para estimular o debate.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloPlanoDeEnsinoP="""
@@ -251,6 +266,12 @@ modeloPlanoDeEnsinoP="""
 **Objetivo da Unidade Curricular:** [Objetivo geral da unidade curricular de acordo com o plano de curso]
 
 **Modalidade de ensino:** [Presencial, EAD ou Híbrida]
+
+**Professor Titular:** [Nome do professor titular]
+
+**Unidade:** [Escola Senai]
+
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 2. Capacidades a serem desenvolvidas:
 
@@ -280,6 +301,7 @@ modeloPlanoDeEnsinoP="""
     - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
@@ -331,7 +353,7 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - O projeto deve incentivar a autonomia, a criatividade e a colaboração entre os alunos.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloPlanoDeEnsinoPA="""
@@ -357,6 +379,12 @@ modeloPlanoDeEnsinoPA="""
 **Objetivo da Unidade Curricular:** [Objetivo geral da unidade curricular de acordo com o plano de curso]
 
 **Modalidade de ensino:** [Presencial, EAD ou Híbrida]
+
+**Professor Titular:** [Nome do professor titular]
+
+**Unidade:** [Escola Senai]
+
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 2. Capacidades a serem desenvolvidas:
 
@@ -386,6 +414,7 @@ modeloPlanoDeEnsinoPA="""
     - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
@@ -463,7 +492,7 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloAvaliacao="""
@@ -504,6 +533,7 @@ modeloAvaliacao="""
 |                   | :green[critério desejável] |               |           |
 
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 modeloAvaliacaoAtual="""
 
@@ -544,10 +574,9 @@ modeloAvaliacaoAtual="""
 |                   | :red[Critério Dicotômico] |               |           |
 | :blue[capacidade] | :red[Critério Dicotômico] |               |           |
 |                   | :red[Critério Dicotômico] |               |           |
-    
-
 
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 modeloPlanoAula="""
 
@@ -589,6 +618,7 @@ modeloPlanoAula="""
 |                       |                 |               |             |                                  |:green[critério desejável]|                          |             |
 
 ]
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 7. Perguntas Mediadoras:
 [
@@ -600,7 +630,6 @@ modeloPlanoAula="""
         Abordagem: As perguntas devem ter uma abordagem que estimule o diálogo, a participação ativa e a colaboração entre os alunos.
         Níveis Cognitivos: As perguntas devem ser formuladas de forma a atingir diferentes níveis cognitivos da taxonomia de Bloom (lembrar, entender, aplicar, analisar, avaliar e criar).
 ]
-
 """
 modeloPlanoAulaAtual="""
 
@@ -653,10 +682,8 @@ modeloPlanoAulaAtual="""
 | XX horas - DD/MM/AAAA |:blue[capacidade]|               |             |                                  |:red[Critério Dicotômico]&nbsp; |                           |             |
 |                       |                 |               |             |                                  |:red[Critério Dicotômico]&nbsp; |                           |             |
     
-
-
 ]
-
+⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 # ### 5.2 Critérios Graduais
 

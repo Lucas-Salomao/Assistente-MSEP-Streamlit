@@ -272,6 +272,7 @@ def clear_chat_history():
         if os.path.exists(st.session_state.nome_arquivo):
             os.remove(st.session_state.nome_arquivo)
         st.session_state.blob_data=None
+        st.session_state.plano_gerado=False
     except:
         st.error("Erro ao limpar o histórico do chat.",icon="❌")
     
@@ -399,6 +400,13 @@ def dialogbox(mensagem):
     st.write(mensagem)
     if st.button("Fechar"):
         st.rerun()
+        
+@st.dialog("Assistente MSEP informa:")
+def alertbox(mensagem):
+    st.write(mensagem)
+    if st.button("Estou ciente!"):
+        st.session_state.concordou=True
+        st.rerun()
 
 def main():
     st.set_page_config(
@@ -406,7 +414,7 @@ def main():
         page_icon="🤖",  # Define o ícone da página
         menu_items={'Get Help': 'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D',  # Define os itens do menu
                    'Report a bug': "https://forms.office.com/r/xLD92jjss7",
-                   'About': "SENAI São Paulo - Gerência de Educação\n\nSupervisão de Tecnologias Educacionais - Guilherme Dias\n\nCriado por Lucas Salomão"}
+                   'About': "SENAI São Paulo - Gerência de Educação\n\nSupervisão de Tecnologias Educacionais\n\nDesenvolvido por Lucas Salomão"}
     )
     
     if 'docs_raw' not in st.session_state:
@@ -432,13 +440,24 @@ def main():
         st.session_state.blob_data=None
     if "nome_arquivo" not in st.session_state:  
         st.session_state.nome_arquivo=""
+    if "public_url" not in st.session_state:
+        st.session_state.public_url=""
+    if "plano_gerado" not in st.session_state:
+        st.session_state.plano_gerado=False
+    if "plano_completo" not in st.session_state:
+        st.session_state.plano_completo=""
+    if "concordou" not in st.session_state:
+        st.session_state.concordou=False
+        
+    if(st.session_state.concordou==False):
+        alertbox("Bem vindo ao assistente virtual do docente para auxiliar a elaboração de documentos da prática pedagógica de acordo com a MSEP!\n\n⚠️ Este assistente utiliza inteligência artificial generativa para criar planos de ensino e seu conteúdo necessita revisão pelo docente. Ele não substitui a ação do docente na elaboração do plano, mas serve como auxílio para uma construção organizada, contextualizada e seguindo os padrões da MSEP.")
         
     sidebar()
     st.image(BADGE, width=300)  # Exibe o logotipo sidebar
 
     # Main content area for displaying chat messages
     st.title("Assistente Virtual MSEP - Metodologia Senai de Educação Profissional")  # Título da página
-    st.write("Bem vindo ao assistente virtual do instrutor para auxiliar a elaboração de documentos da prática pedagógica de acordo com a MSEP!")  # Mensagem de boas-vindas
+    st.write("Bem vindo ao assistente virtual do docente para auxiliar a elaboração de documentos da prática pedagógica de acordo com a MSEP!\n\n⚠️ Este assistente utiliza inteligência artificial generativa para criar planos de ensino e seu conteúdo necessita revisão pelo docente. Ele não substitui a ação do docente na elaboração do plano, mas serve como auxílio para uma construção organizada, contextualizada e seguindo os padrões da MSEP.")  # Mensagem de boas-vindas
     
     
     for message in st.session_state.messages:
@@ -457,6 +476,7 @@ def main():
                     st.warning("Por favor insira a chave de API",icon="🚨")
                 else:
                     if (st.session_state.text_btn=="Gerar Plano de Ensino"):
+                        st.session_state.plano_gerado=False
                         st.session_state.blob_data=None
                         prompt=promptPlanoDeEnsino(st.session_state.nomeCurso,st.session_state.nomeUC,st.session_state.estrategiaAprendizagem,st.session_state.unidade,st.session_state.nomeDocente)
                         st.session_state.messages.append({"role": "user", "content": "Gerar Plano de Ensino da Unidade Curricular "+ st.session_state.nomeUC + " do curso " + st.session_state.nomeCurso})
@@ -531,25 +551,31 @@ def main():
                 else:
                     placeholder.markdown(response.text,unsafe_allow_html=True)  # Exibe a resposta no placeholder
                     response_full+=response.text
+                    st.session_state.plano_completo=response_full
                 if response.text is not None:
                     message = {"role": "assistant", "content": response.text}
                     st.session_state.messages.append(message)  # Adiciona a resposta ao histórico de mensagens
-                    temp_response=convert_markdown_to_html(promtp_convert,response_full)
-                    
-                    # Obtém a data e hora atual
-                    agora = datetime.datetime.now()
-                    # Formata a data e hora
-                    timestamp = agora.strftime("%d-%m-%Y_%H-%M-%S")
-                    # Cria o nome completo do arquivo
-                    st.session_state.nome_arquivo = f"{st.session_state.unidade}-{st.session_state.nomeDocente}-{st.session_state.nomeUC}_{timestamp}.html"
-                    with open(st.session_state.nome_arquivo, "w",encoding="utf-8") as arquivo:
-                        arquivo.write(temp_response.text)
-                    st.session_state.public_url=upload_pdf_to_azure(st.session_state.nome_arquivo, st.session_state.connection_string, st.session_state.container_name)
-                    os.remove(st.session_state.nome_arquivo)
-                    # #Verifica se o arquivo existe no Azure Blob Storage
-                    st.session_state.blob_data = download_blob(st.session_state.nome_arquivo, st.session_state.container_name, st.session_state.connection_string)
+                    st.session_state.plano_gerado=True
                     dialogbox("Plano de Ensino gerado com sucesso!")
-                    #st.rerun()
+                    
+    if st.session_state.plano_gerado:
+        if st.button("Gerar Arquivo"):
+            with st.spinner("Gerando arquivo"):            
+                temp_response=convert_markdown_to_html(promtp_convert,st.session_state.plano_completo)
+                # Obtém a data e hora atual
+                agora = datetime.datetime.now()
+                # Formata a data e hora
+                timestamp = agora.strftime("%d-%m-%Y_%H-%M-%S")
+                # Cria o nome completo do arquivo
+                st.session_state.nome_arquivo = f"{st.session_state.unidade}-{st.session_state.nomeDocente}-{st.session_state.nomeUC}_{timestamp}.html"
+                with open(st.session_state.nome_arquivo, "w",encoding="utf-8") as arquivo:
+                    arquivo.write(temp_response.text)
+                st.session_state.public_url=upload_pdf_to_azure(st.session_state.nome_arquivo, st.session_state.connection_string, st.session_state.container_name)
+                os.remove(st.session_state.nome_arquivo)
+                # #Verifica se o arquivo existe no Azure Blob Storage
+                st.session_state.blob_data = download_blob(st.session_state.nome_arquivo, st.session_state.container_name, st.session_state.connection_string)
+                dialogbox("Plano de Ensino convertido com sucesso!")
+                #st.rerun()
                     
     if st.session_state.blob_data:
         st.download_button(

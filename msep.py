@@ -393,6 +393,7 @@ def sidebar():
         st.session_state.tipoDocumento="Plano de Ensino"
         st.session_state.estrategiaAprendizagem = st.selectbox("Selecione a estratégia de aprendizagem:", ("Situação-Problema", "Estudo de Caso", "Projetos","Pesquisa Aplicada"))  # Menu dropdown para selecionar a estratégia de aprendizagem
         st.sidebar.button('Limpar histórico do chat', on_click=clear_chat_history)  # Botão para limpar o histórico do chat
+        st.sidebar.link_button("Dê seu Feedback","https://forms.office.com/r/yX7Yah0ry9")
         st.sidebar.link_button("Reportar Bug",'https://forms.office.com/r/xLD92jjss7')
 
 @st.dialog("Assistente MSEP informa:")

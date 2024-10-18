@@ -394,6 +394,7 @@ def sidebar():
         def atualizar_selectbox():
             st.session_state.nomeUC = nomeUC
             st.session_state.mudouUC=True
+            print(st.session_state.mudouUC)
             
         def atualizar_selectbox_CapacidadesTecnicas():
             st.session_state.CapacidadesTecnicas = CapacidadesTecnicas
@@ -403,11 +404,18 @@ def sidebar():
             
         st.text_input("Nome do Curso:", st.session_state.nomeCurso,disabled=True)
         nomeUC=st.session_state.nomeUC=st.selectbox("Selecione a Unidade Curricular:", st.session_state.UCs_list, on_change=atualizar_selectbox, key="uc_selectbox",index=0)
+        print('passou aqui')
         if(st.session_state.apiKeyGoogleAiStudio!= ""):
             if(st.session_state.nomeUC!=""):
                 if(st.session_state.mudouUC):
                     buscaCapacidades(nomeUC)
                     st.session_state.mudouUC=False
+                else:
+                    print('erro3')
+            else:
+                print('erro2')
+        else:
+            print('erro1')
         CapacidadesTecnicas=st.session_state.CapacidadesTecnicas=st.multiselect("Selecione as Capacidades Básicas/Técnicas:",options=st.session_state.CapacidadesTecnicas_list, key="capacidadestecnicas_selectbox",placeholder="Selecione as Capacidades Básicas/Técnicas",on_change=atualizar_selectbox_CapacidadesTecnicas)       
         CapacidadesSocioemocionais=st.session_state.CapacidadesSocioemocionais=st.multiselect("Selecione as Capacidades Socioemocionais:",options=st.session_state.CapacidadesSocioemocionais_list, key="capacidadessocioemocionais_selectbox",placeholder="Selecione as Capacidades Socioemocionais",on_change=atualizar_selectbox_CapacidadesSocioemocionais)
         
@@ -462,6 +470,8 @@ def main():
         st.session_state.CapacidadesTecnicas=[]
     if "CapacidadesSocioemocionais" not in st.session_state:
         st.session_state.CapacidadesSocioemocionais=[]
+    if 'apiKeyGoogleAiStudio' not in st.session_state:
+        st.session_state.apiKeyGoogleAiStudio=""
                 
     sidebar()
     st.image(BADGE, width=300)  # Exibe o logotipo sidebar

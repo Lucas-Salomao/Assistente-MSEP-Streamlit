@@ -1,7 +1,7 @@
-streamlit
-google-generativeai
-PyPDF2
-pymupdf
-joblib
-azure-storage-blob
-azure-identity
+streamlit==1.39
+google-generativeai==0.8.3
+PyPDF2==3.0.1
+pymupdf==1.24.11
+joblib==1.4.2
+azure-storage-blob==12.23.1
+azure-identity==1.19.0

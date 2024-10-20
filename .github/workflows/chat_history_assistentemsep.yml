@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - assistentemsep
 on:
   push:
     branches:
-      - chat_history
+      - selecionar-capacidades
   workflow_dispatch:
 
 jobs:

@@ -26,21 +26,33 @@ modeloPlanoDeEnsinoSP="""
 
 **Unidade:** [Escola Senai]
 
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 2. Capacidades a serem desenvolvidas:
 
 ### 2.1 Capacidades Básicas [Somente para Módulo Básico]:
 
-[Escolha no máximo cinco capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de cinco capacidades] 
+[
+    -Liste aqui todas as capacidades Básicas que foram passadas para o prompt, escolhidas pelo professor, independente da quantidade.
+    -Caso não tenha sido passado nenhuma capacidade, escolha no máximo cinco capacidades básicas que são necessárias o desenvolvimento da situação de aprendizagem proposta.
+    -Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de cinco capacidades, quando escolhidas de forma automática e aleatória.
+] 
 
 ### 2.1 Capacidades Técnicas [Somente para Módulo Específico]:
 
-[Escolha no máximo cinco técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de cinco capacidades]
+[
+    -Liste aqui todas as capacidades Técnicas que foram passadas para o prompt, escolhidas pelo professor, independente da quantidade.
+    -Caso não tenha sido passado nenhuma capacidade, escolha no máximo cinco técnicas que são necessárias o desenvolvimento da situação de aprendizagem proposta.
+    -Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de cinco capacidades, quando escolhidas de forma automática e aleatória.
+]
 
 ### 2.2 Capacidades Socioemocionais:
 
-[Escolha no máximo três capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta. Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de três capacidades]
+[
+    -Liste aqui todas as capacidades Socioemocionais que foram passadas para o prompt, escolhidas pelo professor, independente da quantidade.
+    -Caso não tenha sido passado nenhuma capacidade, escolha no máximo três capacidades socioemocionais que são necessárias para o desenvolvimento da situação de aprendizagem proposta.
+    Liste somente as capacidades escolhidas e nada mais, respeitado a quantiadade máximo de três capacidades, quando escolhidas de forma automática e aleatória.
+]
 
 [
     - Nesse campo, precisamos selecionar algumas (não todas) capacidades que serão desenvolvidas na Situação de Aprendizagem (sejam básicas, técnicas e socioemocionais).
@@ -49,7 +61,8 @@ modeloPlanoDeEnsinoSP="""
     - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
     - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco: ⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 3. Conhecimentos:
 
@@ -57,6 +70,8 @@ modeloPlanoDeEnsinoSP="""
     - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
@@ -107,7 +122,8 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloPlanoDeEnsinoEC="""
@@ -138,7 +154,7 @@ modeloPlanoDeEnsinoEC="""
 
 **Unidade:** [Escola Senai]
 
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 2. Capacidades a serem desenvolvidas:
 
@@ -161,7 +177,8 @@ modeloPlanoDeEnsinoEC="""
     - Exemplo: do verbo identificar para o verbo configurar, temos uma diferença grande na complexidade da capacidade preterida.
     - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 3. Conhecimentos:
 
@@ -169,7 +186,8 @@ modeloPlanoDeEnsinoEC="""
     - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
@@ -240,7 +258,8 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - Inclua questões para estimular o debate.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloPlanoDeEnsinoP="""
@@ -271,7 +290,7 @@ modeloPlanoDeEnsinoP="""
 
 **Unidade:** [Escola Senai]
 
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 2. Capacidades a serem desenvolvidas:
 
@@ -295,13 +314,16 @@ modeloPlanoDeEnsinoP="""
     - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
 ]
 
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
 ## 3. Conhecimentos:
 
 [
     - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
@@ -353,7 +375,8 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - O projeto deve incentivar a autonomia, a criatividade e a colaboração entre os alunos.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloPlanoDeEnsinoPA="""
@@ -384,7 +407,7 @@ modeloPlanoDeEnsinoPA="""
 
 **Unidade:** [Escola Senai]
 
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 2. Capacidades a serem desenvolvidas:
 
@@ -408,13 +431,16 @@ modeloPlanoDeEnsinoPA="""
     - Escolher somente as capacidades que são necessárias para o desenvolvimento da situação de aprendizagem, de acordo com a unidade curricular do plano de curso, se atentando para não escolher todas as capacidades da unidade curricular.
 ]
 
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
 ## 3. Conhecimentos:
 
 [
     - Lista numerada com hierarquia de tópicos e sub-tópicos com alguns conhecimentos para propor a situação de aprendizagem.
     - É muito importante que a lista não tenha todos os conhecimentos da unidade curricular, pois outras situações de aprendizagem podem ser criadas com os conhecimentos não selecionados.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 4. Estratégia de  aprendizagem desafiadora: [Indicar o tipo de estratégia de aprendizagem escolhida em itálico]
 
@@ -492,7 +518,8 @@ NÃO INCLUIR ESSA SESSÃO NO PLANO DE ENSINO, APENAS PARA USO DO PROMPT
     - A contextualização da estratégia de aprendizagem deve ser de acordo com o perfil profissional e trazer situações reais do mundo do trabalho.
     - Esta obeservação é apenas para o prompt, não deve conter no plano de ensino.
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 
 modeloAvaliacao="""
@@ -533,7 +560,8 @@ modeloAvaliacao="""
 |                   | :green[critério desejável] |               |           |
 
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 modeloAvaliacaoAtual="""
 
@@ -576,7 +604,8 @@ modeloAvaliacaoAtual="""
 |                   | :red[Critério Dicotômico] |               |           |
 
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 modeloPlanoAula="""
 
@@ -618,7 +647,8 @@ modeloPlanoAula="""
 |                       |                 |               |             |                                  |:green[critério desejável]|                          |             |
 
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 
 ## 7. Perguntas Mediadoras:
 [
@@ -665,6 +695,8 @@ modeloPlanoAulaAtual="""
             ]
         -Referências bibliográficas de acordo com o plano de curso:
             [livros, apostilas, sites, blogs, artigos, etc]
+            [incluir referências de acordo com as indicadas na Unidade Curricular e também indicar referências externas, que sejam pertinentes ao plano de aula e a unidade curricular.]
+            [toda aula deve ter pelo menos uma referência bibliográfica.]
     
     O Plano de Aula deve contemplar toda a carga horária e número de aulas previstas para o desenvolvimento da Situação de Aprendizagem. O plano deve conter exatamente a quantidade de carga horária e aulas previstas no Item 1. Informações do Curso. 
     
@@ -683,7 +715,8 @@ modeloPlanoAulaAtual="""
 |                       |                 |               |             |                                  |:red[Critério Dicotômico]&nbsp; |                           |             |
     
 ]
-⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
+
+Incluir ao final deste bloco:⚠️ Este Plano de Ensino foi gerado por IA e deve ser avaliado por um docente
 """
 # ### 5.2 Critérios Graduais
 

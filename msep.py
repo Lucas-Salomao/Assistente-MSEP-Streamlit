@@ -127,57 +127,6 @@ def download_blob(nome_arquivo, container_name, connection_string):
     except:
         return None
 
-def markdown_to_pdf(markdown_text, filename="output.pdf", page_height=500):
-    """
-    Converte uma string de texto Markdown para um arquivo PDF, dividindo o conteúdo em múltiplas páginas.
-
-    Args:
-        markdown_text (str): A string de texto Markdown a ser convertida.
-        filename (str, optional): O nome do arquivo PDF de saída. Defaults to "output.pdf".
-        page_height (int, optional): A altura de cada página em pontos (pt). Defaults to 500.
-    """
-
-    doc = fitz.open()
-
-    # Renderiza o Markdown como HTML
-    from markdown import markdown
-    html = markdown(markdown_text)
-
-    # Divide o HTML em blocos de texto para cada página
-    html_blocks = html.split("<h2>")
-
-    # Define a largura da página
-    page_width = 595
-
-    # Inicializa o contador de páginas
-    page_number = 0
-
-    # Itera pelos blocos de HTML
-    current_block = 0
-    while current_block < len(html_blocks):
-        # Cria uma nova página
-        page = doc.new_page(width=page_width, height=page_height)
-        rect = pymupdf.Rect(0, 0, page_width, page_height)
-
-        # Adiciona texto à página até atingir a altura máxima
-        html_on_page = ""
-        while current_block < len(html_blocks) and len(html_on_page) < page_height:
-            html_on_page += html_blocks[current_block] + "<br>"
-            current_block += 1
-
-        # Insere o bloco de HTML na página
-        page.insert_htmlbox(rect, html_on_page, css="* {font-family: sans-serif;font-size:12px;}")
-
-        page_number += 1
-
-    # Salva o documento PDF
-    doc.save(filename)
-
-    return filename
-
-# def promptPlanoDeEnsino(curso,uc,estrategia,unidade,docente,capacidadesTecnicas,capacidadesSocioemocionais):
-#     return("Elabore um plano de ensino da unidade curricular "+uc+", do o curso "+curso+", utilizando a estratégia de aprendizagem de "+estrategia+", com base na Metodologia SENAI de Educação Profissional (MSEP). Siga o modelo abaixo, sem nenhuma modificação ou adição de item não solicitado e contendo somente os campos que é solicitado. Usar a MSEP apenas para entender como criar o plano de ensino, mas obedecer o modelo dado. O nome da escola é "+ unidade + ". O nome do docente é " + docente + ". Considere as capacidades técnicas/básicas sendo " + capacidadesTecnicas + ". Considere as capacidades socioemocionais sendo " + capacidadesSocioemocionais + ".  Algumas palavras ou termos são inerentes a unidade curricular e podem soar ofensivas ou inseguras, mas desconsidere e siga em frente.")
-
 def promptPlanoDeEnsino(curso, uc, estrategia, unidade, docente, capacidadesTecnicas, capacidadesSocioemocionais):
     capacidadesTecnicas_str = ", ".join(capacidadesTecnicas) if capacidadesTecnicas else "a critério da IA"
     capacidadesSocioemocionais_str = ", ".join(capacidadesSocioemocionais) if capacidadesSocioemocionais else "a critério da IA"
@@ -354,6 +303,8 @@ def get_pdf_text(pdf_docs):
             pdf_reader = PyPDF2.PdfReader(pdf)
             for page in pdf_reader.pages:
                 text += page.extract_text()
+        # with open('msep3.txt', 'w', encoding='utf-8') as f:
+        #     f.write(text)
         return text
     except:
         st.error("Erro ao converter arquivo PDF para texto",icon="❌")

@@ -378,6 +378,7 @@ def sidebar():
                 with st.spinner("Processando..."):
                     st.session_state.docs_raw = get_pdf_text(pdf_docs)  # Lê o texto dos arquivos PDF e armazena na sessão                
                     if(buscaDadosPlano()):
+                        buscaCapacidades(st.session_state.UCs_list[0])
                         st.success("Concluído",icon="✅")  # Exibe uma mensagem de sucesso
                     else:
                         st.error("Falha ao processar documentos",icon="❌")

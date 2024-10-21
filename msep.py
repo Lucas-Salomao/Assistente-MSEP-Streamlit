@@ -585,7 +585,7 @@ def main():
                 if(STREAM_RESPONSE):
                     for chunk in response:
                         for ch in chunk.text.split(' '):
-                            full_response += ch + ''
+                            full_response += ch + ' '
                             time.sleep(0.05)
                             # Rewrites with a cursor at end
                             placeholder.markdown(full_response,unsafe_allow_html=True)
@@ -604,7 +604,7 @@ def main():
                 if(STREAM_RESPONSE):
                     for chunk in response:
                         for ch in chunk.text.split(' '):
-                            full_response += ch + ''
+                            full_response += ch + ' '
                             time.sleep(0.05)
                             # Rewrites with a cursor at end
                             placeholder.markdown(full_response,unsafe_allow_html=True)
@@ -622,7 +622,7 @@ def main():
                 if(STREAM_RESPONSE):
                     for chunk in response:
                         for ch in chunk.text.split(' '):
-                            full_response += ch + ''
+                            full_response += ch + ' '
                             time.sleep(0.05)
                             # Rewrites with a cursor at end
                             placeholder.markdown(full_response,unsafe_allow_html=True)
@@ -687,7 +687,7 @@ def main():
                     if(STREAM_RESPONSE):
                         for chunk in response:
                             for ch in chunk.text.split(' '):
-                                full_response += ch + ''
+                                full_response += ch + ' '
                                 time.sleep(0.05)
                                 # Rewrites with a cursor at end
                                 placeholder.markdown(full_response,unsafe_allow_html=True)

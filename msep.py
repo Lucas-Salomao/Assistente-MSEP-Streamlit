@@ -434,7 +434,8 @@ def main():
         page_icon="🤖",  # Define o ícone da página
         menu_items={'Get Help': 'https://sesisenaisp.sharepoint.com/:fl:/g/contentstorage/CSP_dffdcd74-ac6a-4a71-a09f-0ea299fe0911/EV9ykg9ssJhGrnX4TB58NyQBSsXBN2QKNoQP-pYjM9ucAQ?e=nVB4ya&nav=cz0lMkZjb250ZW50c3RvcmFnZSUyRkNTUF9kZmZkY2Q3NC1hYzZhLTRhNzEtYTA5Zi0wZWEyOTlmZTA5MTEmZD1iJTIxZE0zOTMycXNjVXFnbnc2aW1mNEpFVTFUeVBYQmF2QklrSzlOZFY3NW1CaWFlSTNNVWJBZlNaVmVlaXF0MUlaeSZmPTAxV1M1M0VCQzdPS0pBNjNGUVRCREs0NVBZSlFQSFlOWkUmYz0lMkYmYT1Mb29wQXBwJnA9JTQwZmx1aWR4JTJGbG9vcC1wYWdlLWNvbnRhaW5lciZ4PSU3QiUyMnclMjIlM0ElMjJUMFJUVUh4elpYTnBjMlZ1WVdsemNDNXphR0Z5WlhCdmFXNTBMbU52Ylh4aUlXUk5Nemt6TW5GelkxVnhaMjUzTm1sdFpqUktSVlV4VkhsUVdFSmhka0pKYTBzNVRtUldOelZ0UW1saFpVa3pUVlZpUVdaVFdsWmxaV2x4ZERGSldubDhNREZYVXpVelJVSkRUVTFQTXpNM1V6VlVRMFpITWtzMVZrMVBWMUZGTmxKWU5BJTNEJTNEJTIyJTJDJTIyaSUyMiUzQSUyMjFkN2M1ZjRiLWU0ZWQtNDBlMS04ZmE2LWM4YjQ4MjFkOTRmZCUyMiU3RA%3D%3D',  # Define os itens do menu
                    'Report a bug': "https://forms.office.com/r/xLD92jjss7",
-                   'About': "SENAI São Paulo - Gerência de Educação\n\nSupervisão de Tecnologias Educacionais\n\nDesenvolvido por Lucas Salomão"}
+                   'About': "SENAI São Paulo - Gerência de Educação\n\nSupervisão de Tecnologias Educacionais\n\nDesenvolvido por Lucas Salomão"},
+        layout="wide"
     )
     
     if 'docs_raw' not in st.session_state:
